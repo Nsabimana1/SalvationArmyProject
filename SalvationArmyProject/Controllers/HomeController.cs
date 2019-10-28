@@ -20,6 +20,10 @@ namespace SalvationArmyProject.Controllers
             return View();
         }
 
+        public IActionResult Settings() {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
