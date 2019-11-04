@@ -44,7 +44,7 @@ namespace SalvationArmyProject
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, DBcontext cityInfoContext)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, DBcontext databasecontext)
         {
 
             if (env.IsDevelopment())
@@ -58,9 +58,7 @@ namespace SalvationArmyProject
                 app.UseHsts();
             }
 
-
-
-            cityInfoContext.EnsureSeedDataForContext();
+            databasecontext.EnsureSeedDataForContext();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
