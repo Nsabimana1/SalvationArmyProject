@@ -7,8 +7,12 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SalvationArmyProject.Entities;
+using SalvationArmyProject.SeedData;
+using SalvationArmyProject.Services;
 
 namespace SalvationArmyProject
 {
@@ -19,7 +23,7 @@ namespace SalvationArmyProject
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+        public static IConfiguration Configuration { get; set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -33,11 +37,16 @@ namespace SalvationArmyProject
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddScoped<IUserInfoRepository, UserInfoRepository>();
+
+            string connectionString = Startup.Configuration["connectionStrings:DBConnectionString"];
+            services.AddDbContext<DBcontext>(o => o.UseSqlServer(connectionString));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, DBcontext databasecontext)
         {
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -48,6 +57,8 @@ namespace SalvationArmyProject
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            databasecontext.EnsureSeedDataForContext();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
