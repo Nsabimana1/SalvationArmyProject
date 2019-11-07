@@ -1,3 +1,4 @@
+using System;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
@@ -31,3 +32,17 @@ using System.Runtime.InteropServices;
 //
 // [assembly: AssemblyVersion("1.0.0.0")]
 // [assembly: AssemblyFileVersion("1.0.0.0")]
+
+namespace SalvationArmyProject.Models
+{
+
+    public class Events
+    {
+        public Guid id { get; set; }
+
+        public string eventName { get; set; }
+
+
+
+    }
+}
