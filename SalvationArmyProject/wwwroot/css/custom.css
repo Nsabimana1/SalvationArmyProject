@@ -1,0 +1,15 @@
+﻿.navbar {
+    background-color: rgb(52,70,95);
+
+}
+
+.navbar-brand{
+    color: white;
+}
+
+#button {
+    float: right;
+    position: absolute;
+    top: 30%;
+    right: 5%;
+}
