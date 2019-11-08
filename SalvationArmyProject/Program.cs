@@ -27,40 +27,48 @@ namespace SalvationArmyProject
         {
             CreateWebHostBuilder(args).Build().Run();
 
-            UserCredential credential;
+            string jsonFile = "Salvation Army-33c414fbeac1.json";
+            string calanderId = @"ac45ulatk4h62rs7kaab5em18c@group.calendar.google.com";
+
+            string[] Scopes = { CalendarService.Scope.Calendar };
+
+            ServiceAccountCredential credential;
 
             using (var stream =
-                new FileStream("credentials.json", FileMode.Open, FileAccess.Read))
+                new FileStream(jsonFile, FileMode.Open, FileAccess.Read))
             {
-                // The file token.json stores the user's access and refresh tokens, and is created
-                // automatically when the authorization flow completes for the first time.
-                string credPath = "token.json";
-                credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
-                    GoogleClientSecrets.Load(stream).Secrets,
-                    Scopes,
-                    "user",
-                    CancellationToken.None,
-                    new FileDataStore(credPath, true)).Result;
-                Console.WriteLine("Credential file saved to: " + credPath);
+                var confg = Google.Apis.Json.NewtonsoftJsonSerializer.Instance.Deserialize<JsonCredentialParameters>(stream);
+                credential = new ServiceAccountCredential(
+                   new ServiceAccountCredential.Initializer(confg.ClientEmail)
+                   {
+                       Scopes = Scopes
+                   }.FromPrivateKey(confg.PrivateKey));
             }
 
-            // Create Google Calendar API service.
             var service = new CalendarService(new BaseClientService.Initializer()
             {
                 HttpClientInitializer = credential,
-                ApplicationName = ApplicationName,
+                ApplicationName = "Calendar API Sample",
             });
 
+            var calander = service.Calendars.Get(calanderId).Execute();
+            Console.WriteLine("Calander Name :");
+            Console.WriteLine(calander.Summary);
+
+            Console.WriteLine("click for more .. ");
+            Console.Read();
+
+
             // Define parameters of request.
-            EventsResource.ListRequest request = service.Events.List("primary");
-            request.TimeMin = DateTime.Now;
-            request.ShowDeleted = false;
-            request.SingleEvents = true;
-            request.MaxResults = 10;
-            request.OrderBy = EventsResource.ListRequest.OrderByEnum.StartTime;
+            EventsResource.ListRequest listRequest = service.Events.List(calanderId);
+            listRequest.TimeMin = DateTime.Now;
+            listRequest.ShowDeleted = false;
+            listRequest.SingleEvents = true;
+            listRequest.MaxResults = 10;
+            listRequest.OrderBy = EventsResource.ListRequest.OrderByEnum.StartTime;
 
             // List events.
-            Events events = request.Execute();
+            Events events = listRequest.Execute();
             Console.WriteLine("Upcoming events:");
             if (events.Items != null && events.Items.Count > 0)
             {
@@ -78,14 +86,39 @@ namespace SalvationArmyProject
             {
                 Console.WriteLine("No upcoming events found.");
             }
+            Console.WriteLine("click for more .. ");
             Console.Read();
 
+            var myevent = DB.Find(x => x.Id == "eventid" + 1);
+
+            var InsertRequest = service.Events.Insert(myevent, calanderId);
+
+            try
+            {
+                InsertRequest.Execute();
+            }
+            catch (Exception)
+            {
+                try
+                {
+                    service.Events.Update(myevent, calanderId, myevent.Id).Execute();
+                    Console.WriteLine("Insert/Update new Event ");
+                    Console.Read();
+
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("can't Insert/Update new Event ");
+
+                }
+
+            }
+
+
+
+            public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+                WebHost.CreateDefaultBuilder(args)
+                    .UseStartup<Startup>();
         }
-
-
-
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
     }
 }
