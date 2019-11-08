@@ -1,4 +1,8 @@
-﻿.navbar {
+﻿body{
+    background-image:url(/Users/silasmyane/Desktop/SalvationArmyProject/SalvationArmyProject/SalvationArmyProject/images/dot-grid.png);
+
+}
+.navbar {
     background-color: rgb(52,70,95);
 
 }
@@ -8,8 +12,30 @@
 }
 
 #button {
-    float: right;
+    overflow:hidden;
     position: absolute;
     top: 30%;
     right: 5%;
+}
+.grid{
+    position:relative;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    grid-gap:1em;
+    grid-auto-rows:minmax(300px,auto);
+}
+.grid > div{
+    background-color:#AEA4A4;
+}
+.event{
+    text-align:center;
+    color:white;
+    font-family: 'McLaren', cursive;
+}
+#Register{
+    float:inherit;
+}
+.description{
+    padding-left:5px;
+    color:white;
 }

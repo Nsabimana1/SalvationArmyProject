@@ -7,39 +7,17 @@
 
 
   <ItemGroup>
-<<<<<<< HEAD
-=======
-    <PackageReference Include="AutoMapper" Version="9.0.0" />
-<<<<<<< HEAD
->>>>>>> eed87d12f110c598ec5ea2783c6c988aa1aeb682
     <PackageReference Include="Microsoft.AspNetCore.App">
       <PrivateAssets Condition="'%(PackageReference.Version)' == ''">all</PrivateAssets>
       <Publish Condition="'%(PackageReference.Version)' == ''">true</Publish>
     </PackageReference>
-<<<<<<< HEAD
-=======
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Views\Home\Test.cshtml" />
+    <Compile Remove="images.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Home\Test.cshtml" />
+    <Folder Include="images\" />
   </ItemGroup>
-=======
-    <PackageReference Include="Google.Apis.Calendar.v3" Version="1.42.0.1753" />
-    <PackageReference Include="Microsoft.AspNetCore.App" />
->>>>>>> eed87d12f110c598ec5ea2783c6c988aa1aeb682
-    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
-  </ItemGroup>
-
-
-  <ItemGroup>
-    <Content Update="credentials.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-
->>>>>>> 569fa16a688e41fe341f7c4b56427e26e00bef35
 </Project>
