@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="9.0.0" />
+<<<<<<< HEAD
     <PackageReference Include="Microsoft.AspNetCore.App">
       <PrivateAssets Condition="'%(PackageReference.Version)' == ''">all</PrivateAssets>
       <Publish Condition="'%(PackageReference.Version)' == ''">true</Publish>
@@ -21,4 +22,18 @@
   <ItemGroup>
     <Content Include="Views\Home\Test.cshtml" />
   </ItemGroup>
+=======
+    <PackageReference Include="Google.Apis.Calendar.v3" Version="1.42.0.1753" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Content Update="credentials.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+>>>>>>> 569fa16a688e41fe341f7c4b56427e26e00bef35
 </Project>

@@ -15,12 +15,17 @@ namespace SalvationArmyProject.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Help()
         {
             return View();
         }
 
-        public IActionResult Settings() {
+        public IActionResult Volunteers() {
+            return View();
+        }
+
+        public IActionResult Contact()
+        {
             return View();
         }
 
