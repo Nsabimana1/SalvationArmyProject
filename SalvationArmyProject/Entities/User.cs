@@ -14,6 +14,7 @@ namespace SalvationArmyProject.Entities
         public DateTime birthDate { get; set; }
         public string phoneNumber { get; set; }
         public string userPrivilage { get; set; }
-
     }
+
+
 }

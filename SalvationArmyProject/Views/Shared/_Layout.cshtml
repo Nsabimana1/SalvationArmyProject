@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿
+@inject SignInManager<IdentityUser> signInManager;
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -21,14 +23,10 @@
 <body>
     <header>        
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-<<<<<<< HEAD
-            <input id="button" type="button" value="Log In"></input>
-=======
-            <input id="button" type="button" value="Log In"/>
->>>>>>> eed87d12f110c598ec5ea2783c6c988aa1aeb682
+            @*<input id="button" type="button" value="Log In"/>*@
             <div class="navbar">
                 <div class="container">
-                    <img src="" />
+                    @*<img src="" />*@
                     <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Salvation Army Project</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
@@ -52,7 +50,33 @@
                                 <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Test">Locations</a>
                             </li>
                         </ul>
+
                     </div>
+                    <ul class="navbar-nav ml-auto ml-5">
+                        @if (signInManager.IsSignedIn(User))
+                        {
+                            <li class="nav-item">
+                                <form method="post" asp-action="logout" asp-controller="account">
+                                    <button type="submit" class="nav-link text-light" style="width:auto">
+                                        Logout @User.Identity.Name
+                                    </button>
+                                </form>
+                            </li>
+                        }
+                        else
+                        {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="account" asp-action="register">
+                                Register
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="account" asp-action="login">
+                                login
+                            </a>
+                        </li>
+                        }
+                    </ul>
                 </div>
             </div>
         </nav>
