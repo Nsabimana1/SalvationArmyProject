@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-=======
 using System;
->>>>>>> eed87d12f110c598ec5ea2783c6c988aa1aeb682
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
@@ -35,8 +32,7 @@ using System.Runtime.InteropServices;
 //
 // [assembly: AssemblyVersion("1.0.0.0")]
 // [assembly: AssemblyFileVersion("1.0.0.0")]
-<<<<<<< HEAD
-=======
+
 
 namespace SalvationArmyProject.Models
 {
@@ -51,4 +47,4 @@ namespace SalvationArmyProject.Models
 
     }
 }
->>>>>>> eed87d12f110c598ec5ea2783c6c988aa1aeb682
+

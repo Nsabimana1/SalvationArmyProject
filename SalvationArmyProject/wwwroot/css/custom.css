@@ -39,3 +39,16 @@
     padding-left:5px;
     color:white;
 }
+
+#logo {
+    height:2.5em;
+    width: 2.2em;
+}
+
+#maintitle {
+    color:white;
+}
+
+.customImage {
+    width: 600px;
+}

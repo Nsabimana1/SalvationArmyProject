@@ -21,13 +21,13 @@
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
-    <header>        
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+    <header class="bg-info">        
+        <nav class="topnav navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             @*<input id="button" type="button" value="Log In"/>*@
             <div class="navbar">
                 <div class="container">
-                    @*<img src="" />*@
-                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Salvation Army Project</a>
+                    <img id="logo" src="~/images/salvation_army_logo.png" />
+                    <a id="maintitle" class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Salvation Army Project</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
