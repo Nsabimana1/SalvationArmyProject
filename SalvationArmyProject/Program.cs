@@ -23,9 +23,15 @@ namespace SalvationArmyProject
         static string[] Scopes = { CalendarService.Scope.CalendarReadonly };
         static string ApplicationName = "Google Calendar API .NET Quickstart";
 
+        public static object DB { get; private set; }
+
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+                WebHost.CreateDefaultBuilder(args)
+                    .UseStartup<Startup>();
         public static void Main(string[] args)
         {
             CreateWebHostBuilder(args).Build().Run();
+
 
             string jsonFile = "Salvation Army-33c414fbeac1.json";
             string calanderId = @"ac45ulatk4h62rs7kaab5em18c@group.calendar.google.com";
@@ -89,36 +95,31 @@ namespace SalvationArmyProject
             Console.WriteLine("click for more .. ");
             Console.Read();
 
-            var myevent = DB.Find(x => x.Id == "eventid" + 1);
+            //var myevent = DB.Find(x => x.Id == "eventid" + 1);
 
-            var InsertRequest = service.Events.Insert(myevent, calanderId);
+            //var InsertRequest = service.Events.Insert(myevent, calanderId);
 
-            try
-            {
-                InsertRequest.Execute();
-            }
-            catch (Exception)
-            {
-                try
-                {
-                    service.Events.Update(myevent, calanderId, myevent.Id).Execute();
-                    Console.WriteLine("Insert/Update new Event ");
-                    Console.Read();
+            //    try
+            //    {
+            //        InsertRequest.Execute();
+            //    }
+            //    catch (Exception)
+            //    {
+            //        try
+            //        {
+            //            service.Events.Update(myevent, calanderId, myevent.Id).Execute();
+            //            Console.WriteLine("Insert/Update new Event ");
+            //            Console.Read();
 
-                }
-                catch (Exception)
-                {
-                    Console.WriteLine("can't Insert/Update new Event ");
+            //        }
+            //        catch (Exception)
+            //        {
+            //            Console.WriteLine("can't Insert/Update new Event ");
 
-                }
+            //        }
 
-            }
-
-
-
-            public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-                WebHost.CreateDefaultBuilder(args)
-                    .UseStartup<Startup>();
+            //    } 
+            //}
         }
     }
 }
