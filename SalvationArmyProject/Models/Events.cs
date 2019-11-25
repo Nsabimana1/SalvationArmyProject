@@ -43,7 +43,9 @@ namespace SalvationArmyProject.Models
 
         public string eventName { get; set; }
 
+        public string description { get; set; }
 
+        public DateTime startTime { get; set; }
 
     }
 }
