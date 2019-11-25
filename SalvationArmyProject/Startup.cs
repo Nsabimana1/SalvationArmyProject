@@ -44,6 +44,12 @@ namespace SalvationArmyProject
             string connectionString = Startup.Configuration["connectionStrings:DBConnectionString"];
             services.AddDbContext<DBcontext>(o => o.UseSqlServer(connectionString));
 
+            //string connectionString = Startup.Configuration["connectionStrings:DBConnectionString"];
+            //services.AddDbContext<DBcontext>(o =>
+            //{
+            //    o.UseSqlite(connectionString);
+            //});
+
             services.AddIdentity<IdentityUser, IdentityRole>()
                     .AddEntityFrameworkStores<DBcontext>();
         }
