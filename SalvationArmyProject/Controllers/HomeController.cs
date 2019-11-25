@@ -4,27 +4,38 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using SalvationArmyProject.Models;
 
 namespace SalvationArmyProject.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly ILogger<HomeController> _logger;
+
+        public HomeController(ILogger<HomeController> logger)
+        {
+            _logger = logger;
+        }
+
         public IActionResult Index()
         {
             return View();
         }
-
         public IActionResult Help()
         {
             return View();
         }
-
-        public IActionResult Volunteers() {
+        public IActionResult Volunteers()
+        {
             return View();
         }
 
         public IActionResult Contact()
+        {
+            return View();
+        }
+        public IActionResult Test()
         {
             return View();
         }

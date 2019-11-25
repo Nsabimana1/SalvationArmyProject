@@ -1,5 +1,4 @@
 ﻿
-@inject SignInManager<IdentityUser> signInManager;
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,7 +52,7 @@
 
                     </div>
                     <ul class="navbar-nav ml-auto ml-5">
-                        @if (signInManager.IsSignedIn(User))
+                        @if (false)
                         {
                             <li class="nav-item">
                                 <form method="post" asp-action="logout" asp-controller="account">
