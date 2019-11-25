@@ -1,36 +1,38 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
-    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>netcoreapp2.2</TargetFramework>
+		<AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+		<StartupObject>SalvationArmyProject.Program</StartupObject>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <None Include="wwwroot\images\salvation_army_logo.png" />
-  </ItemGroup>
+	<ItemGroup>
+		<None Include="wwwroot\images\salvation_army_logo.png" />
+	</ItemGroup>
 
 
-  <ItemGroup>
-    <PackageReference Include="Google.Apis.Calendar.v3" Version="1.42.0.1753" />
-    <PackageReference Include="Microsoft.AspNetCore.App">
-      <PrivateAssets Condition="'%(PackageReference.Version)' == ''">all</PrivateAssets>
-      <Publish Condition="'%(PackageReference.Version)' == ''">true</Publish>
-    </PackageReference>
-    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.App">
+			<PrivateAssets Condition="'%(PackageReference.Version)' == ''">all</PrivateAssets>
+			<Publish Condition="'%(PackageReference.Version)' == ''">true</Publish>
+		</PackageReference>
+		<PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+		<PackageReference Include="Microsoft.Data.Sqlite.Core" Version="2.2.2" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.2.2" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Compile Remove="images.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="images\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Update="credentials.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Update="Salvation Army-33c414fbeac1.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
+	<ItemGroup>
+		<Compile Remove="images.cs" />
+	</ItemGroup>
+	<ItemGroup>
+		<Folder Include="images\" />
+	</ItemGroup>
+	<ItemGroup>
+		<Content Update="credentials.json">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Salvation Army-33c414fbeac1.json">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
 </Project>
