@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using SalvationArmyProject.Entities;
+using SalvationArmyProject.Services;
 using SalvationArmyProject.ViewModels;
 
 namespace SalvationArmyProject.Controllers
@@ -12,11 +14,13 @@ namespace SalvationArmyProject.Controllers
     {
         private readonly UserManager<IdentityUser> userManager;
         private readonly SignInManager<IdentityUser> signInManager;
+        private IUserInfoRepository _userInfoRepository;
         public AccountController(UserManager<IdentityUser> userManager, 
-            SignInManager<IdentityUser> signInManager)
+            SignInManager<IdentityUser> signInManager, IUserInfoRepository userInfoRepository)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this._userInfoRepository = userInfoRepository;
         }
 
 
@@ -34,6 +38,10 @@ namespace SalvationArmyProject.Controllers
                 var result = await userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded) {
                     await signInManager.SignInAsync(user, isPersistent: false);
+                    var registeredUser = new User() {
+                        email = model.Email
+                    };
+                    _userInfoRepository.addUser(registeredUser);
                     return RedirectToAction("index", "home");
                 }
 
