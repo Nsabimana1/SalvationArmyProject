@@ -15,16 +15,6 @@ namespace SalvationArmyProject.Entities
             Database.EnsureCreated();
         }
 
-        //public DBcontext(new SQLiteConnection(@"Data Source=|DataDirectory|ComponentDatabase.sqlite"), true) : base(options)
-        //{
-
-        //}
-
-        //protected override void OnConfiguring(DbContextOptionsBuilder options)
-        //{
-        //    options.UseSqlite("Data Source=blogging.db");
-        //}
-
         public DbSet<User> Users { get; set; }
 
         //protected override void OnModelCreating(ModelBuilder modelBuilder) {
