@@ -18,6 +18,7 @@ namespace SalvationArmyProject.Entities
         public DbSet<User> Users { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<Feedback> Feedback { get; set; }
+        public DbSet<EventRequest> EventRequests { get; set; }
 
         //protected override void OnModelCreating(ModelBuilder modelBuilder) {
         //modelBuilder.Seed();
