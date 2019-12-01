@@ -1,16 +1,12 @@
 ﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SalvationArmyProject.Migrations
 {
-    public partial class addingidentity : Migration
+    public partial class initialmigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "ApplicationUsers");
-
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -51,11 +47,43 @@ namespace SalvationArmyProject.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Events",
+                columns: table => new
+                {
+                    eventId = table.Column<Guid>(nullable: false),
+                    eventDateTime = table.Column<DateTime>(nullable: false),
+                    eventName = table.Column<string>(nullable: true),
+                    eventDuration = table.Column<int>(nullable: false),
+                    eventDescription = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Events", x => x.eventId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(nullable: false),
+                    firstName = table.Column<string>(nullable: true),
+                    lastName = table.Column<string>(nullable: true),
+                    email = table.Column<string>(nullable: true),
+                    birthDate = table.Column<DateTime>(nullable: false),
+                    phoneNumber = table.Column<string>(nullable: true),
+                    userPrivilage = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Sqlite:Autoincrement", true),
                     RoleId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
@@ -76,7 +104,7 @@ namespace SalvationArmyProject.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Sqlite:Autoincrement", true),
                     UserId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
@@ -156,6 +184,83 @@ namespace SalvationArmyProject.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "EventResponses",
+                columns: table => new
+                {
+                    eventResponseId = table.Column<Guid>(nullable: false),
+                    eventResponseTime = table.Column<DateTime>(nullable: false),
+                    responseStatus = table.Column<bool>(nullable: false),
+                    eventResponseComent = table.Column<string>(nullable: true),
+                    eventRequestFK = table.Column<Guid>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EventResponses", x => x.eventResponseId);
+                    table.ForeignKey(
+                        name: "FK_EventResponses_Events_eventRequestFK",
+                        column: x => x.eventRequestFK,
+                        principalTable: "Events",
+                        principalColumn: "eventId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Feedbacks",
+                columns: table => new
+                {
+                    feedbackId = table.Column<Guid>(nullable: false),
+                    feedbackContent = table.Column<string>(nullable: true),
+                    userFK = table.Column<Guid>(nullable: false),
+                    Userid = table.Column<Guid>(nullable: true),
+                    eventFK = table.Column<Guid>(nullable: false),
+                    eventId = table.Column<Guid>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Feedbacks", x => x.feedbackId);
+                    table.ForeignKey(
+                        name: "FK_Feedbacks_Users_Userid",
+                        column: x => x.Userid,
+                        principalTable: "Users",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Feedbacks_Events_eventId",
+                        column: x => x.eventId,
+                        principalTable: "Events",
+                        principalColumn: "eventId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "EventRequests",
+                columns: table => new
+                {
+                    eventRequestId = table.Column<Guid>(nullable: false),
+                    eventRequestDate = table.Column<DateTime>(nullable: false),
+                    eventRequesterId = table.Column<Guid>(nullable: false),
+                    eventDescription = table.Column<string>(nullable: true),
+                    eventFK = table.Column<Guid>(nullable: false),
+                    eventReponseeventResponseId = table.Column<Guid>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EventRequests", x => x.eventRequestId);
+                    table.ForeignKey(
+                        name: "FK_EventRequests_Events_eventFK",
+                        column: x => x.eventFK,
+                        principalTable: "Events",
+                        principalColumn: "eventId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_EventRequests_EventResponses_eventReponseeventResponseId",
+                        column: x => x.eventReponseeventResponseId,
+                        principalTable: "EventResponses",
+                        principalColumn: "eventResponseId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -165,8 +270,7 @@ namespace SalvationArmyProject.Migrations
                 name: "RoleNameIndex",
                 table: "AspNetRoles",
                 column: "NormalizedName",
-                unique: true,
-                filter: "[NormalizedName] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUserClaims_UserId",
@@ -192,8 +296,32 @@ namespace SalvationArmyProject.Migrations
                 name: "UserNameIndex",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
-                unique: true,
-                filter: "[NormalizedUserName] IS NOT NULL");
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EventRequests_eventFK",
+                table: "EventRequests",
+                column: "eventFK");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EventRequests_eventReponseeventResponseId",
+                table: "EventRequests",
+                column: "eventReponseeventResponseId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EventResponses_eventRequestFK",
+                table: "EventResponses",
+                column: "eventRequestFK");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Feedbacks_Userid",
+                table: "Feedbacks",
+                column: "Userid");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Feedbacks_eventId",
+                table: "Feedbacks",
+                column: "eventId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -214,23 +342,25 @@ namespace SalvationArmyProject.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "EventRequests");
+
+            migrationBuilder.DropTable(
+                name: "Feedbacks");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
 
-            migrationBuilder.CreateTable(
-                name: "ApplicationUsers",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(nullable: false),
-                    Email = table.Column<string>(nullable: false),
-                    Password = table.Column<string>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ApplicationUsers", x => x.Id);
-                });
+            migrationBuilder.DropTable(
+                name: "EventResponses");
+
+            migrationBuilder.DropTable(
+                name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "Events");
         }
     }
 }

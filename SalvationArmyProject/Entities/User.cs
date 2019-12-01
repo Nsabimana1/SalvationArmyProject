@@ -10,6 +10,7 @@ namespace SalvationArmyProject.Entities
     public class User
     {
         [Key]
+        [Required]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid id { get; set; }
         public string firstName { get; set; }

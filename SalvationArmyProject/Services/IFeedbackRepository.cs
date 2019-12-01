@@ -11,8 +11,8 @@ namespace SalvationArmyProject.Services
         bool feedbackExists(Guid id);
         Feedback getFeedback(Guid id);
         string getContent(Guid id);
-        int getUserId(Guid id);
-        int getEventId(Guid id);
+        Guid getUserId(Guid id);
+        Guid getEventId(Guid id);
         IEnumerable<Feedback> allFeedback();
         void removeFeedback(Guid id);
         void updateFeedback(Feedback f);

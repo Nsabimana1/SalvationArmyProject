@@ -16,12 +16,12 @@ namespace SalvationArmyProject.Services
 
         public IEnumerable<Feedback> allFeedback()
         {
-            return _dBcontext.Feedback;
+            return _dBcontext.Feedbacks;
         }
 
         public bool feedbackExists(Guid id)
         {
-            var f = _dBcontext.Feedback.FirstOrDefault(u => u.feedbackId == id);
+            var f = _dBcontext.Feedbacks.FirstOrDefault(u => u.feedbackId == id);
             return f != null;
         }
 
@@ -30,17 +30,17 @@ namespace SalvationArmyProject.Services
             return this.getFeedback(id).feedbackContent;
         }
 
-        public int getEventId(Guid id)
+        public Guid getEventId(Guid id)
         {
             return this.getFeedback(id).eventFK;
         }
 
         public Feedback getFeedback(Guid id)
         {
-            return _dBcontext.Feedback.FirstOrDefault(u => u.feedbackId == id);
+            return _dBcontext.Feedbacks.FirstOrDefault(u => u.feedbackId == id);
         }
 
-        public int getUserId(Guid id)
+        public Guid getUserId(Guid id)
         {
             return this.getFeedback(id).userFK;
         }
@@ -48,7 +48,7 @@ namespace SalvationArmyProject.Services
         public void removeFeedback(Guid id)
         {
             var f = this.getFeedback(id);
-            _dBcontext.Feedback.Remove(f);
+            _dBcontext.Feedbacks.Remove(f);
         }
 
         public void updateFeedback(Feedback f)

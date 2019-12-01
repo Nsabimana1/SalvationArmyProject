@@ -10,16 +10,16 @@ namespace SalvationArmyProject.Entities
     public class Feedback
     {
         [Key]
+        [Required]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid feedbackId { get; set; }
-
         public string feedbackContent { get; set; }
-
         [ForeignKey("userFK")]
-        public int userFK { get; set; }
-        public User user { get; set; }
+        public Guid userFK { get; set; }
+        public User User { get; set; }
         
         [ForeignKey("eventFK")]
-        public int eventFK { get; set; }
-        public Event events { get; set; }
+        public Guid eventFK { get; set; }
+        public Event Event { get; set; }
     }
 }

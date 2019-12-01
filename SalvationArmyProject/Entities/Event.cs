@@ -10,10 +10,13 @@ namespace SalvationArmyProject.Entities
     public class Event
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Required]
         public Guid eventId { get; set; }
         public DateTime eventDateTime { get; set; }
         public string  eventName { get; set; }
+        public int eventDuration { get; set; }
         public string eventDescription { get; set; }
-        public ICollection<EventRequest> Books { get; set; }
+        public ICollection<EventRequest> eventRequests { get; set; }
     }
 }
