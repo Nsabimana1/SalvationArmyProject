@@ -62,3 +62,63 @@
     height: 450px;
     color: rgb(200,90,0);
 }
+body{
+    background-image:url(/Users/silasmyane/Desktop/SalvationArmyProject/SalvationArmyProject/SalvationArmyProject/images/dot-grid.png);
+
+}
+
+#Register{
+    float:inherit;
+}
+.description{
+    padding-left:5px;
+    color:white;
+}
+
+#logo {
+    height:2.5em;
+    width: 2.2em;
+}
+
+#maintitle {
+    color:white;
+}
+
+.customImage {
+    width: 600px;
+}
+#login_header{
+    float: left;
+    font-size: 40px;
+    border-bottom: 6px solid red;
+    margin-bottom: 20px;
+}
+
+.form-group{
+  width: 50%;
+  overflow: hidden;
+  font-size: 20px;
+  padding: 8px 0;
+  margin: 8px 0;
+  border-bottom: 2px solid red;
+  
+}
+.form-control{
+  outline:none;
+  background: none;
+  font-size: 18px;
+  width: 50%;
+  margin: 0 10px;
+  color: black;
+}
+.nav-item{
+   -webkit-transition-duration: 0.4s; 
+  transition-duration: 0.4s;
+}
+.nav-item:hover{
+  background-color: #49648a;
+}
+#button1{
+  background-color: white;
+  color: black;
+}
