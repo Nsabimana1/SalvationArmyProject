@@ -39,9 +39,11 @@ namespace SalvationArmyProject.Controllers
                 if (result.Succeeded) {
                     await signInManager.SignInAsync(user, isPersistent: false);
                     var registeredUser = new User() {
+                        id = new Guid(),
                         email = model.Email
                     };
                     _userInfoRepository.addUser(registeredUser);
+
                     return RedirectToAction("index", "home");
                 }
 
