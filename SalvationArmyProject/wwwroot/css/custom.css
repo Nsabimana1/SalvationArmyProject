@@ -52,3 +52,13 @@
 .customImage {
     width: 600px;
 }
+
+.jumbotron {
+    font-family: 'Open Sans Condensed', sans-serif;
+    display: flex;
+    align-items: center;
+    background-image: url("../images/redketlle.png");
+    background-size: cover;
+    height: 450px;
+    color: rgb(200,90,0);
+}

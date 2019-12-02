@@ -14,5 +14,6 @@ namespace SalvationArmyProject.Services
         void deleteUser(Guid userId);
         void addUser(User user);
         void updateUser(User user);
+
     }
 }

@@ -7,6 +7,13 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Remove="images\**" />
+	  <Content Remove="images\**" />
+	  <EmbeddedResource Remove="images\**" />
+	  <None Remove="images\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<None Include="wwwroot\images\salvation_army_logo.png" />
 	</ItemGroup>
 
@@ -24,9 +31,6 @@
 
 	<ItemGroup>
 		<Compile Remove="images.cs" />
-	</ItemGroup>
-	<ItemGroup>
-		<Folder Include="images\" />
 	</ItemGroup>
 	<ItemGroup>
 		<Content Update="credentials.json">

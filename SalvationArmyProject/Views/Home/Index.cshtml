@@ -2,7 +2,30 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>This is the home page for Salvation Army. Mess with this to make it look presentable</p>
-</div>
+    <head>
+        <link rel="stylesheet" href="~/css/custom.css" />
+        <link href="https://fonts.googleapis.com/css?family=McLaren|Montserrat&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    </head>
+    <body>        
+        <section class="jumbotron">
+            <div class="container">
+                <div class="row text-center">
+                    <h1 class="col-sm-8">@ViewData["Title"]</h1>                    
+                </div>
+            </div>
+        </section>
+
+        <div class="main">
+            <section class="container">
+                <div class="row">
+                    <div class="col-sm-7">
+                        <p>I sneased really hard and now my neck hurts.</p>
+                        <p>Why won't the picture appear RRRREEEEEE</p>
+                        <p>Why is there a line above this sentence?</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </body>

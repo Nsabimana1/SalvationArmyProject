@@ -2,7 +2,6 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SalvationArmyProject.Entities;
@@ -10,16 +9,14 @@ using SalvationArmyProject.Entities;
 namespace SalvationArmyProject.Migrations
 {
     [DbContext(typeof(DBcontext))]
-    [Migration("20191108022701_addingidentity")]
-    partial class addingidentity
+    [Migration("20191201223625_initialmigration")]
+    partial class initialmigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "2.2.4-servicing-10062");
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -39,8 +36,7 @@ namespace SalvationArmyProject.Migrations
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
-                        .HasName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
+                        .HasName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles");
                 });
@@ -48,8 +44,7 @@ namespace SalvationArmyProject.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("ClaimType");
 
@@ -110,8 +105,7 @@ namespace SalvationArmyProject.Migrations
 
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
-                        .HasName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+                        .HasName("UserNameIndex");
 
                     b.ToTable("AspNetUsers");
                 });
@@ -119,8 +113,7 @@ namespace SalvationArmyProject.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("ClaimType");
 
@@ -180,6 +173,92 @@ namespace SalvationArmyProject.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("SalvationArmyProject.Entities.Event", b =>
+                {
+                    b.Property<Guid>("eventId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("eventDateTime");
+
+                    b.Property<string>("eventDescription");
+
+                    b.Property<int>("eventDuration");
+
+                    b.Property<string>("eventName");
+
+                    b.HasKey("eventId");
+
+                    b.ToTable("Events");
+                });
+
+            modelBuilder.Entity("SalvationArmyProject.Entities.EventRequest", b =>
+                {
+                    b.Property<Guid>("eventRequestId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("eventDescription");
+
+                    b.Property<Guid>("eventFK");
+
+                    b.Property<Guid?>("eventReponseeventResponseId");
+
+                    b.Property<DateTime>("eventRequestDate");
+
+                    b.Property<Guid>("eventRequesterId");
+
+                    b.HasKey("eventRequestId");
+
+                    b.HasIndex("eventFK");
+
+                    b.HasIndex("eventReponseeventResponseId");
+
+                    b.ToTable("EventRequests");
+                });
+
+            modelBuilder.Entity("SalvationArmyProject.Entities.EventResponse", b =>
+                {
+                    b.Property<Guid>("eventResponseId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid>("eventRequestFK");
+
+                    b.Property<string>("eventResponseComent");
+
+                    b.Property<DateTime>("eventResponseTime");
+
+                    b.Property<bool>("responseStatus");
+
+                    b.HasKey("eventResponseId");
+
+                    b.HasIndex("eventRequestFK");
+
+                    b.ToTable("EventResponses");
+                });
+
+            modelBuilder.Entity("SalvationArmyProject.Entities.Feedback", b =>
+                {
+                    b.Property<Guid>("feedbackId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid?>("Userid");
+
+                    b.Property<Guid>("eventFK");
+
+                    b.Property<Guid?>("eventId");
+
+                    b.Property<string>("feedbackContent");
+
+                    b.Property<Guid>("userFK");
+
+                    b.HasKey("feedbackId");
+
+                    b.HasIndex("Userid");
+
+                    b.HasIndex("eventId");
+
+                    b.ToTable("Feedbacks");
                 });
 
             modelBuilder.Entity("SalvationArmyProject.Entities.User", b =>
@@ -247,6 +326,37 @@ namespace SalvationArmyProject.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("SalvationArmyProject.Entities.EventRequest", b =>
+                {
+                    b.HasOne("SalvationArmyProject.Entities.Event", "Event")
+                        .WithMany("eventRequests")
+                        .HasForeignKey("eventFK")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("SalvationArmyProject.Entities.EventResponse", "eventReponse")
+                        .WithMany()
+                        .HasForeignKey("eventReponseeventResponseId");
+                });
+
+            modelBuilder.Entity("SalvationArmyProject.Entities.EventResponse", b =>
+                {
+                    b.HasOne("SalvationArmyProject.Entities.Event", "EventRequest")
+                        .WithMany()
+                        .HasForeignKey("eventRequestFK")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("SalvationArmyProject.Entities.Feedback", b =>
+                {
+                    b.HasOne("SalvationArmyProject.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("Userid");
+
+                    b.HasOne("SalvationArmyProject.Entities.Event", "Event")
+                        .WithMany()
+                        .HasForeignKey("eventId");
                 });
 #pragma warning restore 612, 618
         }

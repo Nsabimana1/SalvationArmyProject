@@ -1,0 +1,54 @@
+﻿@model EventRequestViewModel
+
+@{
+    ViewData["Title"] = "Event Request";
+    var eventName = TempData["EventName"];
+}
+
+
+<h1>Event Request</h1>
+
+<div class="row">
+    <div class="col-md-6">
+        <form method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="firstName"></label>
+                <input asp-for="firstName" class="form-control" />
+                <span asp-validation-for="firstName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="lastName"></label>
+                <input asp-for="lastName" class="form-control" />
+                <span asp-validation-for="lastName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="birthDate"></label>
+                <input type="date" asp-for="birthDate" class="form-control" />
+                <span asp-validation-for="birthDate" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="phoneNumber"></label>
+                <input asp-for="phoneNumber" class="form-control" />
+                <span asp-validation-for="phoneNumber" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="email"></label>
+                <input value="@User.Identity.Name" asp-for="email" class="form-control" />
+                <span asp-validation-for="email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="eventName"></label>
+                <input  value="@eventName" asp-for="eventName" class="form-control" />
+                <span asp-validation-for="eventName" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Send</button>
+        </form>
+    </div>
+</div>
