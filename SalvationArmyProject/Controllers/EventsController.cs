@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using SalvationArmyProject.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,17 +27,23 @@ namespace SalvationArmyProject.Controllers
         {
             //Create new event using some data structure
             //Make a boolean that makes sure that every part is filled out
+
             return View();
         }
 
         // POST: Events/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Events events)
         {
             try
             {
                 // TODO: Add insert logic here
+
+                if(events.id.get == null)
+                {
+
+                }
 
                 return RedirectToAction(nameof(Index));
             }
@@ -55,7 +62,7 @@ namespace SalvationArmyProject.Controllers
         // POST: Events/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, IFormCollection salvationarmydatabase)
         {
             try
             {
@@ -79,7 +86,7 @@ namespace SalvationArmyProject.Controllers
         // POST: Events/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, IFormCollection salvationarmydatabase)
         {
             try
             {
