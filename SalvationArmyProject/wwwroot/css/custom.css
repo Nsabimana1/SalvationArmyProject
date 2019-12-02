@@ -62,10 +62,6 @@
     height: 450px;
     color: rgb(200,90,0);
 }
-body{
-    background-image:url(/Users/silasmyane/Desktop/SalvationArmyProject/SalvationArmyProject/SalvationArmyProject/images/dot-grid.png);
-
-}
 
 #Register{
     float:inherit;
@@ -94,7 +90,7 @@ body{
     margin-bottom: 20px;
 }
 
-.form-group{
+#log_reg{
   width: 50%;
   overflow: hidden;
   font-size: 20px;
@@ -121,4 +117,10 @@ body{
 #button1{
   background-color: white;
   color: black;
+}
+.active a{
+    background-color: #49648a;
+}
+#reg{
+    border-bottom:2px solid red;
 }
