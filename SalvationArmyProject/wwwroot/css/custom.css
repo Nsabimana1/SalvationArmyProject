@@ -112,5 +112,13 @@ body{
   color: black;
 }
 .nav-item{
-    color:white;
+   -webkit-transition-duration: 0.4s; 
+  transition-duration: 0.4s;
+}
+.nav-item:hover{
+  background-color: #49648a;
+}
+#button1{
+  background-color: white;
+  color: black;
 }
