@@ -40,6 +40,8 @@ namespace SalvationArmyProject
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddScoped<IUserInfoRepository, UserInfoRepository>();
+            services.AddScoped<IEventRepository, EventRepositry>();
+            services.AddScoped<IFeedbackRepository, FeedbackRepository>();
 
             //string connectionString = Startup.Configuration["connectionStrings:DBConnectionString"];
             //services.AddDbContext<DBcontext>(o => o.UseSqlServer(connectionString));

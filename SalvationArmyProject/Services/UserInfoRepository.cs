@@ -38,6 +38,7 @@ namespace SalvationArmyProject.Services
         public void addUser(User user)
         {
             _dBcontext.Users.Add(user);
+            _dBcontext.SaveChanges();
         }
 
         public void updateUser(User user)
