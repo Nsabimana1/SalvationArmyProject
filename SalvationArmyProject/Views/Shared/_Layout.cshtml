@@ -56,21 +56,24 @@
                     <ul class="navbar-nav ml-auto ml-5">
                         @if (signInManager.IsSignedIn(User))
                         {
-                            <li class="nav-item">
-                                <form method="post" asp-controller="account">
-                                    <div class="dropdown">
-                                    <button class="dropbtn">
-                                        <i class="fas fa-user"></i>  @User.Identity.Name 
-                                      <i class="fa fa-caret-down"></i>
-                                    </button>
-                                    <div class="dropdown-content">
-                                      <a href="#">Profile</a>
-                                      <a href="#">Report</a>
-                                      <a><form asp-action="logout" asp-controller="account">Logout</form></a>
-                                    </div>
-                                  </div> 
-                                </form>
-                            </li>
+                        <li class="nav-item">
+                            <div class="dropdown">
+                                <button class="dropbtn">
+                                    <i class="fas fa-user"></i>  @User.Identity.Name
+                                    <i class="fa fa-caret-down"></i>
+                                </button>
+                                <div class="dropdown-content">
+                                    <a href="#">Profile</a>
+                                    <a href="#">Report</a>
+                                    <form asp-action="logout" asp-controller="account">
+                                        <input  value="Logout" type="submit"></input>
+                                    </form>
+                                    @*<a href="~/account/logout"><form method="post" asp-action="logout" asp-controller="account"></form>Logout</a>*@
+                                </div>
+                            </div>
+                            
+                            @*<form method="post" asp-controller="account"></form>*@
+                        </li>
                         }
                         else
                         {
