@@ -26,6 +26,21 @@ function previous() {
     showCalendar(currentMonth, currentYear);
 }
 
+function highlightCell() {
+    var table = document.getElementById("calendar-body");
+    var cells = table.getElementsByTagName("td");
+
+    for (var k = 0; k < cells.length; k++) {
+        var cell = cells[k];
+        cell.onclick = function () {
+            [].forEach.call(cells, function (el) {
+                el.style.backgroundColor = " ";
+            });
+            this.style.backgroundColor = "blue";
+        }
+    }
+}
+
 function jump() {
     currentYear = parseInt(selectYear.value);
     currentMonth - parseInt(selectMonth.value);
