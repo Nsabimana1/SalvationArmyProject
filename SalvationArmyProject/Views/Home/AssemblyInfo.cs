@@ -1,16 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-// [assembly: AssemblyTitle("SalvationArmyProject.Models")]
+// [assembly: AssemblyTitle("SalvationArmyProject.Views.Home")]
 // [assembly: AssemblyDescription("")]
 // [assembly: AssemblyConfiguration("")]
 // [assembly: AssemblyCompany("HP Inc.")]
-// [assembly: AssemblyProduct("SalvationArmyProject.Models")]
+// [assembly: AssemblyProduct("SalvationArmyProject.Views.Home")]
 // [assembly: AssemblyCopyright("Copyright © HP Inc. 2019")]
 // [assembly: AssemblyTrademark("")]
 // [assembly: AssemblyCulture("")]
@@ -21,7 +20,7 @@ using System.Threading.Tasks;
 // [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-// [assembly: Guid("8d6e15fe-e3df-4d0e-9a28-f0379f6b331b")]
+// [assembly: Guid("515bc537-f0cf-4d53-975a-c575a58c385b")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -32,23 +31,3 @@ using System.Threading.Tasks;
 //
 // [assembly: AssemblyVersion("1.0.0.0")]
 // [assembly: AssemblyFileVersion("1.0.0.0")]
-
-
-namespace SalvationArmyProject.Models
-{
-
-    public class Events
-    {
-        public Guid id { get; set; }
-
-        public string eventName { get; set; }
-
-        public string description { get; set; }
-
-        public DateTime startTime { get; set; }
-
-        public int volunteers { get; set; }
-
-    }
-}
-
