@@ -57,10 +57,18 @@
                         @if (signInManager.IsSignedIn(User))
                         {
                             <li class="nav-item">
-                                <form method="post" asp-action="logout" asp-controller="account">
-                                    <button type="submit" class="nav-link text-dark" style="width:auto">
-                                       <i class="fas fa-user"></i>  @User.Identity.Name
+                                <form method="post" asp-controller="account">
+                                    <div class="dropdown">
+                                    <button class="dropbtn">
+                                        <i class="fas fa-user"></i>  @User.Identity.Name 
+                                      <i class="fa fa-caret-down"></i>
                                     </button>
+                                    <div class="dropdown-content">
+                                      <a href="#">Profile</a>
+                                      <a href="#">Report</a>
+                                      <a><form asp-action="logout" asp-controller="account">Logout</form></a>
+                                    </div>
+                                  </div> 
                                 </form>
                             </li>
                         }
