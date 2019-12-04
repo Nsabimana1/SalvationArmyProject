@@ -19,6 +19,7 @@
               integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"/>
     </environment>
     <link rel="stylesheet" href="~/css/site.css" />
+    <script src="https://kit.fontawesome.com/ad6a81734d.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <header class="bg-info">        
@@ -57,8 +58,8 @@
                         {
                             <li class="nav-item">
                                 <form method="post" asp-action="logout" asp-controller="account">
-                                    <button type="submit" class="nav-link text-light" style="width:auto">
-                                        Logout @User.Identity.Name
+                                    <button type="submit" class="nav-link text-dark" style="width:auto">
+                                       <i class="fas fa-user"></i>  @User.Identity.Name
                                     </button>
                                 </form>
                             </li>
@@ -66,13 +67,13 @@
                         else
                         {
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="account" asp-action="register">
+                            <a class="nav-link text-light" asp-controller="account" asp-action="register">
                                 Register
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="account" asp-action="login">
-                                login
+                            <a class="nav-link text-light" asp-controller="account" asp-action="login">
+                                Login
                             </a>
                         </li>
                         }
