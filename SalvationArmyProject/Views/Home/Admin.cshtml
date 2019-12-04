@@ -1,0 +1,46 @@
+@{
+    ViewData["Title"] = "Admin";
+}
+<head>
+     <link rel="stylesheet" href="~/css/custom.css"/>
+    <link href="https://fonts.googleapis.com/css?family=McLaren|Montserrat&display=swap" rel="stylesheet">
+
+</head>
+
+<h1>@ViewData["Title"]</h1>
+
+<body>
+    <div class="tab">
+        <button class="tablinks" onclick="ChangeTab(event, 'Events')">Events</button>
+        <button class="tablinks" onclick="ChangeTab(event, 'Users')">Event Request</button>
+       
+        </div>
+
+      
+        <div id="Events" class="tabcontent">
+          <h3 id="admintable">Events</h3>
+          <p></p>
+        </div>
+
+        <div id="Users" class="tabcontent">
+          <h3 id="admintable">Event Request</h3>
+          <p></p> 
+        </div>
+
+
+        <script>
+            function ChangeTab(evt, cityName) {
+              var i, tabcontent, tablinks;
+              tabcontent = document.getElementsByClassName("tabcontent");
+              for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+              }
+              tablinks = document.getElementsByClassName("tablinks");
+              for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+              }
+              document.getElementById(cityName).style.display = "block";
+              evt.currentTarget.className += " active";
+            }
+        </script>
+</body>

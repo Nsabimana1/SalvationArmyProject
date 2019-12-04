@@ -28,6 +28,10 @@ namespace SalvationArmyProject.Controllers
         {
             return View();
         }
+        public IActionResult Admin()
+        {
+            return View();
+        }
 
         //public IActionResult EventRequest(string eventName)
         //{

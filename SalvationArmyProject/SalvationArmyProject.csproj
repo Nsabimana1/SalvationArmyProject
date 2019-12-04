@@ -11,6 +11,8 @@
 	  <Content Remove="images\**" />
 	  <EmbeddedResource Remove="images\**" />
 	  <None Remove="images\**" />
+	  <None Remove="SalvationArmyDatabase.db" />
+	  <Content Remove="Views\Event\EventRequest.cshtml" />
 	</ItemGroup>
 
 	<ItemGroup>
