@@ -12,10 +12,10 @@
 	  <EmbeddedResource Remove="images\**" />
 	  <None Remove="images\**" />
 	  <None Remove="SalvationArmyDatabase.db" />
-	  <Content Remove="Views\Event\EventRequest.cshtml" />
 	</ItemGroup>
 
 	<ItemGroup>
+		<None Include="Views\Event\EventRequest.cshtml" />
 		<None Include="wwwroot\images\salvation_army_logo.png" />
 	</ItemGroup>
 
