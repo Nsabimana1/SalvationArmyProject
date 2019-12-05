@@ -19,6 +19,9 @@ namespace SalvationArmyProject.ViewModels
         [Required]
         [EmailAddress]
         public string email { get; set; }
+        [Required]
         public string eventName { get; set; }
+        [Required]
+        public Guid requestedEventId { get; set; }
     }
 }

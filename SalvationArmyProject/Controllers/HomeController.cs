@@ -47,10 +47,16 @@ namespace SalvationArmyProject.Controllers
         //}
 
         public IActionResult EventRequest(string eventName)
+        public IActionResult Admin()
         {
-            TempData["EventName"] = eventName;
             return View();
         }
+
+        //public IActionResult EventRequest(string eventName)
+        //{
+        //    TempData["EventName"] = eventName;
+        //    return View();
+        //}
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

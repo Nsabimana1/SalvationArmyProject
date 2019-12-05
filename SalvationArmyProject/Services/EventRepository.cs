@@ -17,6 +17,7 @@ namespace SalvationArmyProject.Services
         public void addEvent(Event e)
         {
             _dBcontext.Events.Add(e);
+            _dBcontext.SaveChanges();
         }
 
         public IEnumerable<Event> allEvents()

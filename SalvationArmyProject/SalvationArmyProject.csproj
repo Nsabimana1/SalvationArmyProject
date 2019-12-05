@@ -11,9 +11,11 @@
 	  <Content Remove="images\**" />
 	  <EmbeddedResource Remove="images\**" />
 	  <None Remove="images\**" />
+	  <None Remove="SalvationArmyDatabase.db" />
 	</ItemGroup>
 
 	<ItemGroup>
+		<None Include="Views\Event\EventRequest.cshtml" />
 		<None Include="wwwroot\images\salvation_army_logo.png" />
 	</ItemGroup>
 
@@ -26,6 +28,7 @@
 		<PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
 		<PackageReference Include="Microsoft.Data.Sqlite.Core" Version="2.2.2" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.2.2" />
+		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.4" />
 	</ItemGroup>
 
 	<ItemGroup>

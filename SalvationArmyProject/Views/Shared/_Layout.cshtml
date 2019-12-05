@@ -19,6 +19,7 @@
               integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"/>
     </environment>
     <link rel="stylesheet" href="~/css/site.css" />
+    <script src="https://kit.fontawesome.com/ad6a81734d.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <header class="bg-info">        
@@ -47,7 +48,7 @@
                                 <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Contact">Contact Us</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Test">Locations</a>
+                                <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Admin">Admin</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Feedback">Feedback</a>
@@ -58,24 +59,35 @@
                     <ul class="navbar-nav ml-auto ml-5">
                         @if (signInManager.IsSignedIn(User))
                         {
-                            <li class="nav-item">
-                                <form method="post" asp-action="logout" asp-controller="account">
-                                    <button type="submit" class="nav-link text-light" style="width:auto">
-                                        Logout @User.Identity.Name
-                                    </button>
-                                </form>
-                            </li>
+                        <li class="nav-item">
+                            <div class="dropdown">
+                                <button class="dropbtn">
+                                    <i class="fas fa-user"></i>  @User.Identity.Name
+                                    <i class="fa fa-caret-down"></i>
+                                </button>
+                                <div class="dropdown-content">
+                                    <a href="#">Profile</a>
+                                    <a href="#">Report</a>
+                                    <form asp-action="logout" asp-controller="account">
+                                        <input  value="Logout" type="submit"></input>
+                                    </form>
+                                    @*<a href="~/account/logout"><form method="post" asp-action="logout" asp-controller="account"></form>Logout</a>*@
+                                </div>
+                            </div>
+                            
+                            @*<form method="post" asp-controller="account"></form>*@
+                        </li>
                         }
                         else
                         {
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="account" asp-action="register">
+                            <a class="nav-link text-light" asp-controller="account" asp-action="register">
                                 Register
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="account" asp-action="login">
-                                login
+                            <a class="nav-link text-light" asp-controller="account" asp-action="login">
+                                Login
                             </a>
                         </li>
                         }

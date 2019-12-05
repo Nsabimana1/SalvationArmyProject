@@ -38,11 +38,23 @@ namespace SalvationArmyProject.Services
         public void addUser(User user)
         {
             _dBcontext.Users.Add(user);
+            _dBcontext.SaveChanges();
         }
 
         public void updateUser(User user)
         {
             throw new NotImplementedException();
+        }
+
+        public User getUserByEmail(string email)
+        {
+            var user = _dBcontext.Users.Where(u => u.email == email).FirstOrDefault();
+            return user;
+        }
+
+        public void SaveAllNewChanges()
+        {
+            _dBcontext.SaveChanges();
         }
     }
 }

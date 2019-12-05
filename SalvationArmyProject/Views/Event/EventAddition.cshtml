@@ -1,0 +1,53 @@
+﻿@model EventAdditionViewModel
+
+@{
+    ViewData["Title"] = "Event Addition";
+}
+
+
+<h1 id="login_header">Event Addition</h1>
+
+<div class="row">
+    <div class="col-md-6">
+        <form method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label id="reg" asp-for="eventName">Event Name</label>
+                <input asp-for="eventName" class="form-control" />
+                <span asp-validation-for="eventName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label id="reg" asp-for="eventDescription">Event Description</label>
+                <textarea asp-for="eventDescription" class="form-control" ></textarea>
+                <span asp-validation-for="eventDescription" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label id="reg" asp-for="eventDateTime">Event DateTime</label>
+                <input type="datetime-local" asp-for="eventDateTime" class="form-control" />
+                <span asp-validation-for="eventDateTime" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label id="reg" asp-for="eventDuration">Event Duration</label>
+                <input type="number" asp-for="eventDuration" class="form-control" />
+                <span asp-validation-for="eventDuration" class="text-danger"></span>
+            </div>
+
+            @*<div class="form-group">
+                <label id="reg" asp-for="email">Email</label>
+                <input value="@User.Identity.Name" asp-for="email" class="form-control" />
+                <span asp-validation-for="email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label id="reg" asp-for="eventName">Event Name</label>
+                <input value="@eventName" asp-for="eventName" class="form-control" />
+                <span asp-validation-for="eventName" class="text-danger"></span>
+            </div>*@
+
+            <button type="submit" class="btn btn-primary">Add</button>
+        </form>
+    </div>
+</div>
