@@ -9,6 +9,11 @@ namespace SalvationArmyProject.ViewModels
         [Display(Name = "Feedback")]
         public string feedbackContent { get; set; }
 
+        [Required]
+        public Guid eventID { get; set; }
+
+        [Required]
+        public Guid userID { get; set; }
     }
 }
 

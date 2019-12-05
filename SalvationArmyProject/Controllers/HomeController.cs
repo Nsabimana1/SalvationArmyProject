@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using SalvationArmyProject.Entities;
 using Microsoft.AspNetCore.Mvc;
 using SalvationArmyProject.Models;
 using SalvationArmyProject.ViewModels;
@@ -30,33 +31,10 @@ namespace SalvationArmyProject.Controllers
             return View();
         }
 
-        [HttpGet]
-        public IActionResult Feedback()
-        {
-            return View();
-        }
-
-        //[HttpPost]
-        //public IActionResult Feedback(FeedbackViewModel feedback)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        var content = feedback.feedbackContent;
-
-        //    }
-        //}
-
-        public IActionResult EventRequest(string eventName)
         public IActionResult Admin()
         {
             return View();
         }
-
-        //public IActionResult EventRequest(string eventName)
-        //{
-        //    TempData["EventName"] = eventName;
-        //    return View();
-        //}
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

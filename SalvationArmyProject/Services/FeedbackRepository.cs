@@ -55,5 +55,11 @@ namespace SalvationArmyProject.Services
         {
             throw new NotImplementedException();
         }
+
+        public void addFeedback(Feedback f)
+        {
+            _dBcontext.Feedbacks.Add(f);
+            _dBcontext.SaveChanges();
+        }
     }
 }

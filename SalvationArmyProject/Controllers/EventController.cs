@@ -13,10 +13,13 @@ namespace SalvationArmyProject.Controllers
     {
         private IEventRepository _iEventRepository;
         private IUserInfoRepository _iUserInfoRepository;
+        private IFeedbackRepository _iFeedbackRepository;
 
-        public EventController(IEventRepository iEventRepository, IUserInfoRepository iUserInfoRepository) {
+        public EventController(IEventRepository iEventRepository, IUserInfoRepository iUserInfoRepository,
+            IFeedbackRepository iFeedbackRepository) {
             _iEventRepository = iEventRepository;
             _iUserInfoRepository = iUserInfoRepository;
+            _iFeedbackRepository = iFeedbackRepository;
         }
         [HttpGet]
         public IActionResult EventRequest(string eventName)
@@ -83,6 +86,38 @@ namespace SalvationArmyProject.Controllers
         {
             IEnumerable<Event> allevnts = _iEventRepository.allEvents();
             return new JsonResult(allevnts);
+        }
+
+        [HttpGet]
+        public IActionResult Feedback()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Feedback(FeedbackViewModel feedback)
+        {
+            if (ModelState.IsValid)
+            {
+                var feedbackN = new Feedback()
+                {
+                    feedbackId = new Guid(),
+                    feedbackContent = feedback.feedbackContent,
+                    eventFK = feedback.eventID,
+                    userFK = feedback.userID,
+                    Event = _iEventRepository.getEvent(feedback.eventID),
+                    User = _iUserInfoRepository.getUser(feedback.userID)
+                };
+                this._iFeedbackRepository.addFeedback(feedbackN);
+                return RedirectToAction("feedback", "home");
+            }
+            return View(feedback);
+        }
+
+        [HttpGet]
+        public IActionResult MyEvents()
+        {
+            return View();
         }
     }
 }

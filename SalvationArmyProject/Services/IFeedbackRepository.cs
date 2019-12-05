@@ -8,6 +8,7 @@ namespace SalvationArmyProject.Services
 {
     public interface IFeedbackRepository
     {
+        void addFeedback(Feedback f);
         bool feedbackExists(Guid id);
         Feedback getFeedback(Guid id);
         string getContent(Guid id);
