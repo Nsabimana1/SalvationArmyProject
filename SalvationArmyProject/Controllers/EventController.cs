@@ -14,11 +14,13 @@ namespace SalvationArmyProject.Controllers
         private IEventRepository _iEventRepository;
         private IUserInfoRepository _iUserInfoRepository;
         private IFeedbackRepository _iFeedbackRepository;
+        private IEventRequestRepository _iEventRequestRepository;
 
         public EventController(IEventRepository iEventRepository, IUserInfoRepository iUserInfoRepository,
             IFeedbackRepository iFeedbackRepository) {
             _iEventRepository = iEventRepository;
             _iUserInfoRepository = iUserInfoRepository;
+            _iEventRequestRepository = iEventRequestRepository;
             _iFeedbackRepository = iFeedbackRepository;
         }
         [HttpGet]
@@ -48,7 +50,10 @@ namespace SalvationArmyProject.Controllers
                     Event = _iEventRepository.getEvent(eventRequestModel.requestedEventId),
                     eventRequesterId = userRecord.id
                 };
-                
+                _iEventRequestRepository.addEventRequest(eventRequest);
+                return RedirectToAction("index", "home");
+
+
             }
             return View(eventRequestModel);
         }
@@ -86,6 +91,13 @@ namespace SalvationArmyProject.Controllers
         {
             IEnumerable<Event> allevnts = _iEventRepository.allEvents();
             return new JsonResult(allevnts);
+        }
+
+        [HttpGet("eventRequest/all")]
+        public JsonResult getAllEventRequests()
+        {
+            IEnumerable<EventRequest> alleveRequests = _iEventRequestRepository.allEventRequests();
+            return new JsonResult(alleveRequests);
         }
 
         [HttpGet]
