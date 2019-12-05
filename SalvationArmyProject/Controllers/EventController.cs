@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,7 +17,7 @@ namespace SalvationArmyProject.Controllers
         private IEventRequestRepository _iEventRequestRepository;
 
         public EventController(IEventRepository iEventRepository, IUserInfoRepository iUserInfoRepository,
-            IFeedbackRepository iFeedbackRepository) {
+            IFeedbackRepository iFeedbackRepository, IEventRequestRepository iEventRequestRepository) {
             _iEventRepository = iEventRepository;
             _iUserInfoRepository = iUserInfoRepository;
             _iEventRequestRepository = iEventRequestRepository;
