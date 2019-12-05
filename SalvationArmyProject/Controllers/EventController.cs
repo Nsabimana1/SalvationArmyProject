@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SalvationArmyProject.Entities;
 using SalvationArmyProject.Services;
@@ -9,6 +10,7 @@ using SalvationArmyProject.ViewModels;
 
 namespace SalvationArmyProject.Controllers
 {
+   
     public class EventController : Controller
     {
         private IEventRepository _iEventRepository;
@@ -23,7 +25,9 @@ namespace SalvationArmyProject.Controllers
             _iEventRequestRepository = iEventRequestRepository;
             _iFeedbackRepository = iFeedbackRepository;
         }
+
         [HttpGet]
+        [Authorize]
         public IActionResult EventRequest(string id)
         {
             Event ev = _iEventRepository.getEvent(new Guid(id));
@@ -33,6 +37,7 @@ namespace SalvationArmyProject.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult EventRequest(EventRequestViewModel eventRequestModel)
         {
             if (ModelState.IsValid) {
@@ -42,32 +47,42 @@ namespace SalvationArmyProject.Controllers
                 userRecord.lastName = eventRequestModel.lastName;
                 userRecord.phoneNumber = eventRequestModel.phoneNumber;
                 _iUserInfoRepository.SaveAllNewChanges();
-
+                Event requestedEvent = _iEventRepository.getEvent(eventRequestModel.requestedEventId);
+               
                 EventRequest eventRequest = new EventRequest()
                 {
                     eventRequestId = new Guid(),
                     eventFK = eventRequestModel.requestedEventId,
                     eventDescription = "",
                     eventRequestDate = new DateTime(),
-                    Event = _iEventRepository.getEvent(eventRequestModel.requestedEventId),
+                    Event = requestedEvent,
                     eventRequesterId = userRecord.id
                 };
+
+                if (requestedEvent.eventRequests == null) {
+                    requestedEvent.eventRequests = new LinkedList<EventRequest>();
+                }
+                requestedEvent.eventRequests.Add(eventRequest);
                 _iEventRequestRepository.addEventRequest(eventRequest);
+                _iEventRequestRepository.saveAllChanges();
+                _iEventRepository.saveAllChanges();
                 return RedirectToAction("index", "home");
 
-
+                // do the chech whether the user is alread requested
             }
             return View(eventRequestModel);
         }
 
 
         [HttpGet]
+        [Authorize]
         public IActionResult EventAddition()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult EventAddition(EventAdditionViewModel eventModel)
         {
             if (ModelState.IsValid)

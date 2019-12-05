@@ -59,6 +59,12 @@ namespace SalvationArmyProject.Services
             _dBcontext.Events.Remove(ev);
         }
 
+        public void saveAllChanges()
+        {
+            _dBcontext.SaveChanges();
+            
+        }
+
         public void updateEvent(Event e)
         {
             throw new NotImplementedException();

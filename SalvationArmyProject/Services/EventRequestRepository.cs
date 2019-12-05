@@ -39,6 +39,11 @@ namespace SalvationArmyProject.Services
             throw new NotImplementedException();
         }
 
+        public void saveAllChanges()
+        {
+            _dbContext.SaveChanges();
+        }
+
         public void updateEventRequest(Event e)
         {
             throw new NotImplementedException();
