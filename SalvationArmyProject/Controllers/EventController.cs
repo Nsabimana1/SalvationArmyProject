@@ -12,8 +12,13 @@ namespace SalvationArmyProject.Controllers
     public class EventController : Controller
     {
         private IEventRepository _iEventRepository;
-        public EventController(IEventRepository iEventRepository) {
+        private IUserInfoRepository _iUserInfoRepository;
+        private IEventRequestRepository _iEventRequestRepository;
+
+        public EventController(IEventRepository iEventRepository, IUserInfoRepository iUserInfoRepository, IEventRequestRepository iEventRequestRepository) {
             _iEventRepository = iEventRepository;
+            _iUserInfoRepository = iUserInfoRepository;
+            _iEventRequestRepository = iEventRequestRepository;
         }
         [HttpGet]
         public IActionResult EventRequest(string eventName)
@@ -21,6 +26,36 @@ namespace SalvationArmyProject.Controllers
             TempData["EventName"] = eventName;
             return View();
         }
+
+        [HttpPost]
+        public IActionResult EventRequest(EventRequestViewModel eventRequestModel)
+        {
+            if (ModelState.IsValid) {
+                var curUserEmail = eventRequestModel.email;
+                User userRecord = _iUserInfoRepository.getUserByEmail(curUserEmail);
+                userRecord.firstName = eventRequestModel.firstName;
+                userRecord.lastName = eventRequestModel.lastName;
+                userRecord.phoneNumber = eventRequestModel.phoneNumber;
+                _iUserInfoRepository.SaveAllNewChanges();
+
+                EventRequest eventRequest = new EventRequest()
+                {
+                    eventRequestId = new Guid(),
+                    eventFK = eventRequestModel.requestedEventId,
+                    eventDescription = "",
+                    eventRequestDate = new DateTime(),
+                    Event = _iEventRepository.getEvent(eventRequestModel.requestedEventId),
+                    eventRequesterId = userRecord.id
+                };
+                _iEventRequestRepository.addEventRequest(eventRequest);
+                return RedirectToAction("index", "home");
+
+
+            }
+            return View(eventRequestModel);
+        }
+
+
         [HttpGet]
         public IActionResult EventAddition()
         {
@@ -46,6 +81,20 @@ namespace SalvationArmyProject.Controllers
             }
 
             return View(eventModel);
+        }
+
+        [HttpGet("event/all")]
+        public JsonResult getAllEvents()
+        {
+            IEnumerable<Event> allevnts = _iEventRepository.allEvents();
+            return new JsonResult(allevnts);
+        }
+
+        [HttpGet("eventRequest/all")]
+        public JsonResult getAllEventRequests()
+        {
+            IEnumerable<EventRequest> alleveRequests = _iEventRequestRepository.allEventRequests();
+            return new JsonResult(alleveRequests);
         }
     }
 }

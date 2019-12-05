@@ -10,10 +10,12 @@ namespace SalvationArmyProject.Services
     {
         bool userExist(Guid userId);
         User getUser(Guid userId);
+        User getUserByEmail(string email);
         IEnumerable<User> allUsers();
         void deleteUser(Guid userId);
         void addUser(User user);
         void updateUser(User user);
+        void SaveAllNewChanges();
 
     }
 }

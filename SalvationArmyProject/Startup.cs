@@ -42,6 +42,8 @@ namespace SalvationArmyProject
             services.AddScoped<IUserInfoRepository, UserInfoRepository>();
             services.AddScoped<IEventRepository, EventRepositry>();
             services.AddScoped<IFeedbackRepository, FeedbackRepository>();
+            services.AddScoped<IEventRequestRepository, EventRequestRepository>();
+
 
             //string connectionString = Startup.Configuration["connectionStrings:DBConnectionString"];
             //services.AddDbContext<DBcontext>(o => o.UseSqlServer(connectionString));
