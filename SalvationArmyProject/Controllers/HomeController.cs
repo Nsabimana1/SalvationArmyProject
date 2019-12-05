@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SalvationArmyProject.Models;
+using SalvationArmyProject.ViewModels;
 
 namespace SalvationArmyProject.Controllers
 {
@@ -28,6 +29,22 @@ namespace SalvationArmyProject.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        public IActionResult Feedback()
+        {
+            return View();
+        }
+
+        //[HttpPost]
+        //public IActionResult Feedback(FeedbackViewModel feedback)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var content = feedback.feedbackContent;
+
+        //    }
+        //}
 
         public IActionResult EventRequest(string eventName)
         {
