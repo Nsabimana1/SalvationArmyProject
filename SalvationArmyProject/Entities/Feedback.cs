@@ -13,7 +13,9 @@ namespace SalvationArmyProject.Entities
         [Required]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid feedbackId { get; set; }
+
         public string feedbackContent { get; set; }
+
         [ForeignKey("userFK")]
         public Guid userFK { get; set; }
         public User User { get; set; }
