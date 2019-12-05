@@ -3,13 +3,21 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using SalvationArmyProject.Entities;
 using Microsoft.AspNetCore.Mvc;
 using SalvationArmyProject.Models;
+using SalvationArmyProject.ViewModels;
+using SalvationArmyProject.Services;
 
 namespace SalvationArmyProject.Controllers
 {
     public class HomeController : Controller
     {
+        private IEventRepository _iEventRepository;
+
+        public HomeController(IEventRepository iEventRepository) {
+            _iEventRepository = iEventRepository;
+        }
         public IActionResult Index()
         {
             return View();
@@ -17,7 +25,9 @@ namespace SalvationArmyProject.Controllers
 
         public IActionResult Help()
         {
-            return View();
+            IEnumerable<Event> events = _iEventRepository.allEvents();
+            ViewData["events"] = events;
+            return View(events);
         }
 
         public IActionResult Volunteers() {
@@ -28,16 +38,11 @@ namespace SalvationArmyProject.Controllers
         {
             return View();
         }
+
         public IActionResult Admin()
         {
             return View();
         }
-
-        //public IActionResult EventRequest(string eventName)
-        //{
-        //    TempData["EventName"] = eventName;
-        //    return View();
-        //}
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

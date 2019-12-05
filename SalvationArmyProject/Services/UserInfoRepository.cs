@@ -48,7 +48,7 @@ namespace SalvationArmyProject.Services
 
         public User getUserByEmail(string email)
         {
-            var user = _dBcontext.Users.Where(u => u.email == email).FirstOrDefault();
+            User user = _dBcontext.Users.Where(u => u.email == email).FirstOrDefault();
             return user;
         }
 

@@ -17,5 +17,6 @@ namespace SalvationArmyProject.Services
         void removeEvent(Guid id);
         void updateEvent(Event e);
         IEnumerable<Event> allEvents();
+        void saveAllChanges();
     }
 }
