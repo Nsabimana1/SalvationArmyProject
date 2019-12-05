@@ -89,5 +89,12 @@ namespace SalvationArmyProject.Controllers
             IEnumerable<Event> allevnts = _iEventRepository.allEvents();
             return new JsonResult(allevnts);
         }
+
+        [HttpGet("eventRequest/all")]
+        public JsonResult getAllEventRequests()
+        {
+            IEnumerable<EventRequest> alleveRequests = _iEventRequestRepository.allEventRequests();
+            return new JsonResult(alleveRequests);
+        }
     }
 }

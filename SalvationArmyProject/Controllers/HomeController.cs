@@ -46,7 +46,7 @@ namespace SalvationArmyProject.Controllers
         //    }
         //}
 
-        public IActionResult EventRequest(string eventName)
+
         public IActionResult Admin()
         {
             return View();
