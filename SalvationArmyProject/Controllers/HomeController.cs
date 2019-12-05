@@ -7,11 +7,17 @@ using SalvationArmyProject.Entities;
 using Microsoft.AspNetCore.Mvc;
 using SalvationArmyProject.Models;
 using SalvationArmyProject.ViewModels;
+using SalvationArmyProject.Services;
 
 namespace SalvationArmyProject.Controllers
 {
     public class HomeController : Controller
     {
+        private IEventRepository _iEventRepository;
+
+        public HomeController(IEventRepository iEventRepository) {
+            _iEventRepository = iEventRepository;
+        }
         public IActionResult Index()
         {
             return View();
@@ -19,7 +25,9 @@ namespace SalvationArmyProject.Controllers
 
         public IActionResult Help()
         {
-            return View();
+            IEnumerable<Event> events = _iEventRepository.allEvents();
+            ViewData["events"] = events;
+            return View(events);
         }
 
         public IActionResult Volunteers() {

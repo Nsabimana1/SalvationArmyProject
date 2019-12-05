@@ -24,9 +24,11 @@ namespace SalvationArmyProject.Controllers
             _iFeedbackRepository = iFeedbackRepository;
         }
         [HttpGet]
-        public IActionResult EventRequest(string eventName)
+        public IActionResult EventRequest(string id)
         {
-            TempData["EventName"] = eventName;
+            Event ev = _iEventRepository.getEvent(new Guid(id));
+            TempData["EventId"] = ev.eventId;
+            TempData["EventName"] = ev.eventName;
             return View();
         }
 
@@ -34,8 +36,8 @@ namespace SalvationArmyProject.Controllers
         public IActionResult EventRequest(EventRequestViewModel eventRequestModel)
         {
             if (ModelState.IsValid) {
-                var curUserEmail = eventRequestModel.email;
-                User userRecord = _iUserInfoRepository.getUserByEmail(curUserEmail);
+                //string curUserEmail = ;
+                User userRecord = _iUserInfoRepository.getUserByEmail(eventRequestModel.email);
                 userRecord.firstName = eventRequestModel.firstName;
                 userRecord.lastName = eventRequestModel.lastName;
                 userRecord.phoneNumber = eventRequestModel.phoneNumber;

@@ -37,13 +37,13 @@ namespace SalvationArmyProject.Controllers
                 var user = new IdentityUser { UserName = model.Email, Email = model.Email };
                 var result = await userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded) {
-                    await signInManager.SignInAsync(user, isPersistent: false);
-                    var registeredUser = new User() {
+                    var registeredUser = new User()
+                    {
                         id = new Guid(),
                         email = model.Email
                     };
                     _userInfoRepository.addUser(registeredUser);
-
+                    await signInManager.SignInAsync(user, isPersistent: false);
                     return RedirectToAction("index", "home");
                 }
 

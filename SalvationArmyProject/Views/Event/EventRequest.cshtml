@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Event Request";
     var eventName = TempData["EventName"];
+    var eventId = TempData["EventId"];
 }
 
 
@@ -47,7 +48,10 @@
                 <input  value="@eventName" asp-for="eventName" class="form-control" />
                 <span asp-validation-for="eventName" class="text-danger"></span>
             </div>
-
+            <div class="form-group">
+                <input type="hidden" value="@eventId" asp-for="requestedEventId" class="form-control" />
+                <span asp-validation-for="requestedEventId" class="text-danger"></span>
+            </div>
             <button type="submit" class="btn btn-primary">Send</button>
         </form>
     </div>
