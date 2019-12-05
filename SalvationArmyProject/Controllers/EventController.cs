@@ -13,10 +13,12 @@ namespace SalvationArmyProject.Controllers
     {
         private IEventRepository _iEventRepository;
         private IUserInfoRepository _iUserInfoRepository;
+        private IEventRequestRepository _iEventRequestRepository;
 
-        public EventController(IEventRepository iEventRepository, IUserInfoRepository iUserInfoRepository) {
+        public EventController(IEventRepository iEventRepository, IUserInfoRepository iUserInfoRepository, IEventRequestRepository iEventRequestRepository) {
             _iEventRepository = iEventRepository;
             _iUserInfoRepository = iUserInfoRepository;
+            _iEventRequestRepository = iEventRequestRepository;
         }
         [HttpGet]
         public IActionResult EventRequest(string eventName)
@@ -45,7 +47,10 @@ namespace SalvationArmyProject.Controllers
                     Event = _iEventRepository.getEvent(eventRequestModel.requestedEventId),
                     eventRequesterId = userRecord.id
                 };
-                
+                _iEventRequestRepository.addEventRequest(eventRequest);
+                return RedirectToAction("index", "home");
+
+
             }
             return View(eventRequestModel);
         }
