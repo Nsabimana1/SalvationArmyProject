@@ -16,7 +16,7 @@ namespace SalvationArmyProject.Controllers
             this._userInfoRepository = userInfoRepository;
         }
 
-        [HttpGet("/all")]
+        [HttpGet("/user/all")]
         public IActionResult GetAllUsers() {
             // var result = Mapper.Map<IEnumerable<UserDto>>(_userInfoRepository.allUsers());
             return Ok(_userInfoRepository.allUsers());
