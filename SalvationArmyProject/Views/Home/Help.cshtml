@@ -52,9 +52,35 @@
             <h5 class="event">
                 Upcoming Dates
             </h5>
-            <p class="dates">
+            <div id="Events" class="tabcontent">
+                <h3 id="helptable">Events</h3>
+                <a href="~/event/eventaddition" id="newevent" class="btn btn-info">Create Event</a>
+                <p>
+                    <<<<<<< HEAD
+                    <table id="table" style="width:100%">
+                        =======
+                        <table style="width:100%">
 
-            </p>
+                            >>>>>>> master
+                            <tr>
+                                <th>Event Type</th>
+                                <th>Date/Time</th>
+                                <th>Duration</th>
+                                <th>Description</th>
+                            </tr>
+                            <<<<<<< HEAD
+
+                            =======
+                            <tbody>
+                                <tr class="tabboby"></tr>
+                            </tbody>
+                            >>>>>>> master
+                        </table>
+                </p>
+                <button class="btnTest">
+                    load table
+                </button>
+            </div>
             <!--<div class="btn btn-info"><a href="~/event/eventrequest/Redikatle">Register</a></div>-->
             <input id="Register" type="button" value="Register"><a href="Home/eventrequest"></a></input>
         </div>
@@ -157,8 +183,40 @@
             <h5 class="event">
                 Upcoming Dates
             </h5>
-            <p class="dates">
-            </p>
+            <div id="Events" class="tabcontent">
+                <h3 id="helptable">Events</h3>
+                <a href="~/event/eventaddition" id="newevent" class="btn btn-info">Create Event</a>
+                <p>
+                    <<<<<<< HEAD
+                    <table id="table" style="width:100%">
+                        =======
+                        <table style="width:100%">
+
+                            >>>>>>> master
+                            <tr>
+                                <th>Event Type</th>
+                                <th>Date/Time</th>
+                                <th>Duration</th>
+                                <th>Description</th>
+                            </tr>
+                            <<<<<<< HEAD
+
+                            =======
+                            <tbody>
+                                <tr class="tabboby"></tr>
+                            </tbody>
+                            >>>>>>> master
+                        </table>
+                </p>
+                <button class="btnTest">
+                    load table
+                </button>
+            </div>
+
+            <div id="Users" class="tabcontent">
+                <h3 id="admintable">Event Request</h3>
+                <p></p>
+            </div>
             <input id="Register" type="button" value="Register" />
         </div>
         <!--<div class="box box4">
@@ -252,4 +310,47 @@
             </div>
         </div>-->
 
+
+        <script>function ChangeTab(evt, cityName) {
+              var i, tabcontent, tablinks;
+              tabcontent = document.getElementsByClassName("tabcontent");
+              for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+              }
+              tablinks = document.getElementsByClassName("tablinks");
+              for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+              }
+              document.getElementById(cityName).style.display = "block";
+              evt.currentTarget.className += " active";
+            }
+
+            $(document).ready(function () {
+                
+                $('.btnTest').click(function () {
+                    console.log(" I am clicked")
+                    $.ajax({
+                        type: 'get',
+                        dataType: "json",
+                        url: "https://localhost:5001/event/all",
+                        success: function (results) {
+                            for (var a = 0; a < 3; a++){ 
+                                console.log(results[a]);
+
+                                 var i = results[a];
+
+                                console.log(i['eventDuration']);
+
+                                var type = i['eventName'];
+                                var time = i['eventDateTime'];
+                                var dur = (i['eventDuration']);
+                                var desc = i['eventDescription'];
+
+                                $('#table').append('<tr><td>'+type+'</td><td>'+time+'</td><td>'+dur+'</td><td>'+desc+'</td></tr>')
+
+                        }
+                    }
+                });
+            });
+        });</script>
 </body>
