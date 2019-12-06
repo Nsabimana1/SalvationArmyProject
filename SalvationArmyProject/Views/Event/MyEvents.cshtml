@@ -1,5 +1,57 @@
 ﻿@{
     ViewData["Title"] = "My Events";
 }
+<head>
+     <link rel="stylesheet" href="~/css/custom.css"/>
+    <link href="https://fonts.googleapis.com/css?family=McLaren|Montserrat&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-<h1>My Events</h1>
+</head>
+
+
+
+<body>
+    <h1>My Events</h1>
+
+    <div>
+        <h3 id="admintable">Your Events</h3>
+        <table class="table" style="width:100%">
+            <tr>
+                <th>Event Type</th>
+                <th>Date/Time</th>
+                <th>Duration</th>
+                <th>Description</th>
+                <th>Feedback</th>
+            </tr>
+
+        </table>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                type: 'get',
+                dataType: "json",
+                url: "https://localhost:5001/event/all",
+                success: function (results) {
+                    for (var a = 0; a < 3; a++){ 
+                        console.log(results[a]);
+
+                            var i = results[a];
+
+                        console.log(i['eventDuration']);
+
+                        var type = i['eventName'];
+                        var time = i['eventDateTime'];
+                        var dur = (i['eventDuration']);
+                        var desc = i['eventDescription'];
+                        var fe = "yes";
+
+                        $('.table').append('<tr><td>' + type + '</td><td>' + time + '</td><td>'
+                            + dur + '</td><td>' + desc + '</td><td>' + fe + '</tr>')
+                    }
+                }
+            });
+        });
+
+    </script>
+</body>

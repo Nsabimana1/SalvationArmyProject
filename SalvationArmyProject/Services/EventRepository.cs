@@ -53,6 +53,16 @@ namespace SalvationArmyProject.Services
             return e.eventName;
         }
 
+        //public Feedback getFeedback(Guid feedback)
+        //{
+        //    var f = _dBcontext.Feedbacks.Find(feedback);
+        //    if (f != null)
+        //    {
+        //        return f;
+        //    }
+        //    return null;
+        //}
+
         public void removeEvent(Guid id)
         {
             var ev = this.getEvent(id);
@@ -64,7 +74,6 @@ namespace SalvationArmyProject.Services
             _dBcontext.SaveChanges();
             
         }
-
         public void updateEvent(Event e)
         {
             throw new NotImplementedException();
