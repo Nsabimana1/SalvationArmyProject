@@ -21,25 +21,20 @@
           <h3 id="admintable">Events</h3>
             <a href="~/event/eventaddition" id="newevent" class="btn btn-info">Create Event</a>
           <p>
-<<<<<<< HEAD
               <table id ="table" style="width:100%">
-=======
-              <table style="width:100%">
                   
->>>>>>> master
+
                   <tr>
                       <th>Event Type</th>
                       <th>Date/Time</th>
                       <th>Duration</th>
                       <th>Description</th>
                   </tr>
-<<<<<<< HEAD
-                 
-=======
+
                   <tbody>
                       <tr class="tabboby"></tr>
                   </tbody>
->>>>>>> master
+
               </table>
           </p>
             <button class ="btnTest">
@@ -49,7 +44,18 @@
 
         <div id="Users" class="tabcontent">
           <h3 id="admintable">Event Request</h3>
-          <p></p> 
+          <p>
+              <table id="atable" style="width:100%">
+                  <tr>
+
+                  
+                  <th>Event</th>
+                  <th>Name</th>
+                  <th>Date</th>
+                  <th>Description</th>
+                  </tr>
+              </table>
+          </p> 
         </div>
 
 
@@ -73,16 +79,17 @@
                 $('.btnTest').click(function () {
                     console.log(" I am clicked")
                     $.ajax({
+
                         type: 'get',
                         dataType: "json",
-                        url: "https://localhost:5001/event/all",
+                        url: "https://localhost:44326/event/all",
                         success: function (results) {
                             for (var a = 0; a < 3; a++){ 
-                                console.log(results[a]);
+                               
 
                                  var i = results[a];
 
-                                console.log(i['eventDuration']);
+                                
 
                                 var type = i['eventName'];
                                 var time = i['eventDateTime'];
@@ -95,7 +102,57 @@
                     }
                 });
             });
-        });
+            });
+
+            $(document).ready(function () {
+                
+                $('.btnTest').click(function () {
+                    console.log(" I am clicked")
+                    $.ajax({
+                        type: 'get',
+                        dataType: "json",
+                        url: "https://localhost:44326/eventrequest/all",
+                        success: function (results) {
+                            for (var a = 0; a < 3; a++){ 
+                                
+
+                                var i = results[a];
+                                
+
+                                var type = i['evenRequestId'];
+                                var usr = i['eventRequesterId'];
+                                var date = (i['eventRequestDate']);
+                                var desc = i['eventDescription'];
+
+                                $('#atable').append('<tr><td>'+type+'</td><td>'+usr+'</td><td>'+date+'</td><td>'+desc+'</td></tr>')
+                                return usr;
+                        }
+                    }
+                });
+            });
+            });
+
+            $(doucument).ready(function (usr) {
+                $('.btnTest').click(function () {
+                    console.log(" I am clicked")
+                    $.ajax({
+                        type: 'get',
+                        dataType: "json",
+                        url: "https://localhost:44326/user/all",
+                        success: function (results) {
+                            for (var b = 0; b < 100; b++) {
+                                var user = results[b];
+                                var first = user["firstName"];
+                                console.log(first);
+
+                                if (first == usr) {
+                                    return first;
+                                }
+                            }
+                        }
+                    });
+                });      
+            });
 
         </script>
 </body>
