@@ -18,5 +18,9 @@ namespace SalvationArmyProject.Entities
         public int eventDuration { get; set; }
         public string eventDescription { get; set; }
         public ICollection<EventRequest> eventRequests { get; set; }
+
+        //[ForeignKey("feedbackFK")]
+        //public string feedbackFK { get; set; }
+        //public Feedback feedback { get; set; }
     }
 }

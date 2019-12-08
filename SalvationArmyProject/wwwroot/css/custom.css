@@ -1,8 +1,4 @@
-﻿body{
-    background-image:url(/Users/silasmyane/Desktop/SalvationArmyProject/SalvationArmyProject/SalvationArmyProject/images/dot-grid.png);
-
-}
-.navbar {
+﻿.navbar {
     background-color: rgb(52,70,95);
 
 }
@@ -184,4 +180,8 @@
 }
 #newevent{
     float:right;
+}
+
+#feedbackEvents {
+    color: #7a7a7a;
 }
