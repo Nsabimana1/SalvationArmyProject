@@ -23,6 +23,11 @@ namespace SalvationArmyProject.Controllers
             return View();
         }
 
+        public IActionResult LandingPage()
+        {
+            return View();
+        }
+
         public IActionResult Help()
         {
             IEnumerable<Event> events = _iEventRepository.allEvents();
