@@ -5,13 +5,14 @@
     ViewData["Title"] = "Ways To Help";
 
 }
-<head>
-    <link rel="stylesheet" href="~/css/custom.css" />
-    <link href="https://fonts.googleapis.com/css?family=McLaren|Montserrat&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="~/css/theme1.css"/>
-    <script src="~/js/caleandar.js"></script>
-    <script src="~/js/events.js"></script>
-</head>
+    <head>
+        <link rel="stylesheet" href="~/css/custom.css" />
+        <link href="https://fonts.googleapis.com/css?family=McLaren|Montserrat&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="~/css/theme1.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="~/js/caleandar.js"></script>
+        <script src="~/js/events.js"></script>
+    </head>
 <body>
     <h1>@ViewData["Title"]</h1>
 
@@ -207,23 +208,6 @@
             </div>
             <input id="Register" type="button" value="Register" />
         </div>
-
-        <script type="text/javascript" src="js/caleandar.js"></script>
-        <script type="text/javascript" src="js/demo.js?v2"></script>
-        <script>
-            try {
-                fetch(new Request("https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js", { method: 'HEAD', mode: 'no-cors' })).then(function (response) {
-                    return true;
-                }).catch(function (e) {
-                    var carbonScript = document.createElement("script");
-                    carbonScript.src = "//cdn.carbonads.com/carbon.js?serve=CE7DC2JW&placement=wwwcssscriptcom";
-                    carbonScript.id = "_carbonads_js";
-                    document.getElementById("carbon-block").appendChild(carbonScript);
-                });
-            } catch (error) {
-                console.log(error);
-            }
-        </script>
 
         <script>
     function ChangeTab(evt, cityName) {
