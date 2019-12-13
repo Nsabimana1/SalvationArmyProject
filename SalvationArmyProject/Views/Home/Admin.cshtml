@@ -13,7 +13,7 @@
 <body>
     <div class="tab">
         <button class="tablinks" onclick="ChangeTab(event, 'Events')">Events</button>
-        <button class="tablinks" onclick="ChangeTab(event, 'Users')">Event Request</button>
+   
        
     </div>
     <div id="Events" class="tabcontent">
@@ -30,31 +30,45 @@
                     <th>Description</th>
                 </tr>
 
-                <tbody>
-                    <tr class="tabboby"></tr>
-                </tbody>
+                  <tbody>
+                      <tr class="tabboby">
 
-            </table>
-        </p>
-        <button class ="btnTest">
-            Load Events
-        </button>
-    </div>
-    <div id="Users" class="tabcontent">
-        <h3 id="admintable">Event Request</h3>
-        <p>
-            <table id="atable" style="width:100%">
-                <tr>
+                      </tr>
+                  </tbody>
+
+              </table>
+          </p>
+            <button class ="btnTest">
+                load table
+            </button>
+            <button class='users'>
+                users
+            </button>
+             
+        </div>
+
+        
+        <div id="myModal" class="modal">
+
+          <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h3 id="admintable">Event Request</h3>
+          <p>
+              <table id="atable" style="width:100%">
+                  <tr>
 
                   
-                <th>Event</th>
-                <th>Name</th>
-                <th>Date</th>
-                <th>Description</th>
-                </tr>
-            </table>
-        </p> 
-    </div>
+                  <th>Name</th>
+                  
+                  <th>Date</th>
+                 
+                  </tr>
+              </table>
+          </p> 
+            </div>
+
+        </div>
 
     <script>
         function ChangeTab(evt, cityName) {
@@ -93,7 +107,7 @@
                             var dur = (i['eventDuration']);
                             var desc = i['eventDescription'];
 
-                            $('#table').append('<tr><td>'+type+'</td><td>'+time+'</td><td>'+dur+'</td><td>'+desc+'</td></tr>')
+                                $('#table').append('<tr><td><a href="silas">'+type+'</td><td>'+time+'</td><td>'+dur+'hrs'+'</td><td>'+desc+'</td></tr>');
 
                         }
                     }
@@ -103,16 +117,14 @@
 
         $(document).ready(function () {
                 
-            $('.btnTest').click(function () {
-                console.log(" I am clicked")
-                $.ajax({
-                    type: 'get',
-                    dataType: "json",
-                    url: "https://localhost:5001/eventrequest/all",
-                    success: function (results) {
-                        for (var a = 0; a < 3; a++){ 
-                        
-                            var i = results[a];
+                $('.btnTest').click(function () {
+                    console.log(" I am clicked")
+                    $.ajax({
+                        type: 'get',
+                        dataType: "json",
+                        url: "https://localhost:5001/eventrequest/all",
+                        success: function (results) {
+                            for (var a = 0; a < results.length; a++){ 
                                 
 
                             var type = i['evenRequestId'];
@@ -120,35 +132,51 @@
                             var date = (i['eventRequestDate']);
                             var desc = i['eventDescription'];
 
-                            $('#atable').append('<tr><td>'+type+'</td><td>'+usr+'</td><td>'+date+'</td><td>'+desc+'</td></tr>')
-                            return usr;
+                                
+                                var usr = i['eventRequesterId'];
+                               
+                               
+                               
+                                var date = (i['eventRequestDate']);
+                                var name = getdata(usr,date);
+                                
+
+                              
+                                
                         }
                     }
-                });
-            });
-        });
-
-        $(doucument).ready(function (usr) {
-            $('.btnTest').click(function () {
-                console.log(" I am clicked")
-                $.ajax({
-                    type: 'get',
-                    dataType: "json",
-                    url: "https://localhost:5001/user/all",
-                    success: function (results) {
-                        for (var b = 0; b < 100; b++) {
-                            var user = results[b];
-                            var first = user["firstName"];
+                    });
+                      function getdata(id,date) {
+                      $.ajax({
+                        type: 'get',
+                        dataType: "json",
+                        url: "https://localhost:5001/user/"+id,
+                        success: function (results) {
+                            var first = results['firstName'];
+                            var last = results['lastName'];
+                            
                             console.log(first);
-
-                            if (first == usr) {
-                                return first;
-                            }
+                            console.log(last);
+                            $('#atable').append('<tr><td>' + first +" "+ last + '</td><td>' + date + '</td></tr>');
                         }
-                    }
-                });
-            });      
-        });
+                     
+                      });
+                          
+                }
+            });
+            });
+            var modal = document.getElementById("myModal");
+            var span = document.getElementsByClassName("close")[0];
+            $('#table tr').click(function () {
+                modal.style.display = "block";
+            });
+            $('span').click(function () {
+                modal.style.display = "none";
+            })
+            
+            
+               
+            
 
     </script>
 </body>
