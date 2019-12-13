@@ -12,7 +12,7 @@ namespace SalvationArmyProject.Services
         EventRequest getEventRequest(Guid id);
         void addEventRequest(EventRequest e);
         void removeEventRequest(Guid id);
-        void updateEventRequest(Event e);
+        void updateEventRequest(EventRequest e);
         IEnumerable<EventRequest> allEventRequests();
         void saveAllChanges();
     }

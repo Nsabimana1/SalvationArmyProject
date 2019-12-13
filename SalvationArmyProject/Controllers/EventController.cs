@@ -148,5 +148,31 @@ namespace SalvationArmyProject.Controllers
         {
             return View();
         }
+
+        [HttpPost("/event/response")]
+        public IActionResult Respond(EventResponseViewModel eventResponseView)
+        {
+            if (ModelState.IsValid) {
+                EventResponse eventResponse = new EventResponse()
+                {
+                    eventResponseId = new Guid(),
+                    eventRequestFK = eventResponseView.eventRequestFK,
+                    eventResponseComent = eventResponseView.eventResponseComent,
+                    eventResponseTime = new DateTime(),
+                    responseStatus = eventResponseView.responseStatus
+                    
+                };
+                
+                EventRequest requestedEventTobeReponded = _iEventRequestRepository.getEventRequest(eventResponseView.eventRequestFK);
+                requestedEventTobeReponded.eventReponse = eventResponse;
+                _iEventRequestRepository.updateEventRequest(requestedEventTobeReponded);
+            }
+            return Ok(true);
+        }
+        [HttpGet("/event/userevent/{id}")]
+        public IActionResult GetUserUpprovedEventById(Guid id) {
+
+            return null;
+        }
     }
 }
