@@ -15,7 +15,7 @@ var Calendar = function(model, options, date){
     DateTimeFormat: 'mmm, yyyy',
     DatetimeLocation: '',
     EventClick: '',
-    EventTargetWholeDay: false,
+    EventTargetWholeDay: true,
     DisabledDays: [],
     ModelChange: model
   };

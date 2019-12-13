@@ -8,6 +8,9 @@
 <head>
     <link rel="stylesheet" href="~/css/custom.css" />
     <link href="https://fonts.googleapis.com/css?family=McLaren|Montserrat&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/theme1.css"/>
+    <script src="~/js/caleandar.js"></script>
+    <script src="~/js/events.js"></script>
 </head>
 <body>
     <h1>@ViewData["Title"]</h1>
@@ -86,72 +89,77 @@
         </div>
         <div class="box box2">
             <img class="customImage" src="~/images/redketlle.png">
-            <h3 class="card-header" id="monthAndYear"></h3>
-            <table class="table table-bordered table-responsive-sm" id="calendar">
-                <thead>
-                    <tr>
-                        <th>Sun</th>
-                        <th>Mon</th>
-                        <th>Tue</th>
-                        <th>Wed</th>
-                        <th>Thu</th>
-                        <th>Fri</th>
-                        <th>Sat</th>
-                    </tr>
-                </thead>
+            <!--<h3 class="card-header" id="monthAndYear"></h3>
+        <table class="table table-bordered table-responsive-sm" id="calendar">
+            <thead>
+                <tr>
+                    <th>Sun</th>
+                    <th>Mon</th>
+                    <th>Tue</th>
+                    <th>Wed</th>
+                    <th>Thu</th>
+                    <th>Fri</th>
+                    <th>Sat</th>
+                </tr>
+            </thead>
 
-                <tbody id="calendar-body"></tbody>
-            </table>
+            <tbody id="calendar-body"></tbody>
+        </table>
 
-            <div class="form-inline">
+        <div class="form-inline">
 
-                <button class="btn btn-outline-primary col-sm-6" id="previous" onclick="previous()">Previous</button>
+            <button class="btn btn-outline-primary col-sm-6" id="previous" onclick="previous()">Previous</button>
 
-                <button class="btn btn-outline-primary col-sm-6" id="next" onclick="next()">Next</button>
+            <button class="btn btn-outline-primary col-sm-6" id="next" onclick="next()">Next</button>
+        </div>
+        <br />
+        <form class="form-inline">
+            <label class="lead mr-2 ml-2" for="month">Jump To: </label>
+            <select class="form-control col-sm-4" name="month" id="month" onchange="jump()">
+                <option value=0>Jan</option>
+                <option value=1>Feb</option>
+                <option value=2>Mar</option>
+                <option value=3>Apr</option>
+                <option value=4>May</option>
+                <option value=5>Jun</option>
+                <option value=6>Jul</option>
+                <option value=7>Aug</option>
+                <option value=8>Sep</option>
+                <option value=9>Oct</option>
+                <option value=10>Nov</option>
+                <option value=11>Dec</option>
+            </select>
+
+
+            <label for="year"></label><select class="form-control col-sm-4" name="year" id="year" onchange="jump()">
+                <option value=2010>2010</option>
+                <option value=2011>2011</option>
+                <option value=2012>2012</option>
+                <option value=2013>2013</option>
+                <option value=2014>2014</option>
+                <option value=2015>2015</option>
+                <option value=2016>2016</option>
+                <option value=2017>2017</option>
+                <option value=2018>2018</option>
+                <option value=2019>2019</option>
+                <option value=2020>2020</option>
+                <option value=2021>2021</option>
+                <option value=2022>2022</option>
+                <option value=2023>2023</option>
+                <option value=2024>2024</option>
+                <option value=2025>2025</option>
+                <option value=2026>2026</option>
+                <option value=2027>2027</option>
+                <option value=2028>2028</option>
+                <option value=2029>2029</option>
+                <option value=2030>2030</option>
+            </select>
+        </form>-->
+        </div>
+        <div class="container">
+            <div id="caleandar">
+
             </div>
-            <br />
-            <form class="form-inline">
-                <label class="lead mr-2 ml-2" for="month">Jump To: </label>
-                <select class="form-control col-sm-4" name="month" id="month" onchange="jump()">
-                    <option value=0>Jan</option>
-                    <option value=1>Feb</option>
-                    <option value=2>Mar</option>
-                    <option value=3>Apr</option>
-                    <option value=4>May</option>
-                    <option value=5>Jun</option>
-                    <option value=6>Jul</option>
-                    <option value=7>Aug</option>
-                    <option value=8>Sep</option>
-                    <option value=9>Oct</option>
-                    <option value=10>Nov</option>
-                    <option value=11>Dec</option>
-                </select>
-
-
-                <label for="year"></label><select class="form-control col-sm-4" name="year" id="year" onchange="jump()">
-                    <option value=2010>2010</option>
-                    <option value=2011>2011</option>
-                    <option value=2012>2012</option>
-                    <option value=2013>2013</option>
-                    <option value=2014>2014</option>
-                    <option value=2015>2015</option>
-                    <option value=2016>2016</option>
-                    <option value=2017>2017</option>
-                    <option value=2018>2018</option>
-                    <option value=2019>2019</option>
-                    <option value=2020>2020</option>
-                    <option value=2021>2021</option>
-                    <option value=2022>2022</option>
-                    <option value=2023>2023</option>
-                    <option value=2024>2024</option>
-                    <option value=2025>2025</option>
-                    <option value=2026>2026</option>
-                    <option value=2027>2027</option>
-                    <option value=2028>2028</option>
-                    <option value=2029>2029</option>
-                    <option value=2030>2030</option>
-                </select>
-            </form>
         </div>
         <div class="box box3">
             <h3 class="event">
@@ -199,24 +207,41 @@
             </div>
             <input id="Register" type="button" value="Register" />
         </div>
-        
 
-        <script>function ChangeTab(evt, cityName) {
-              var i, tabcontent, tablinks;
-              tabcontent = document.getElementsByClassName("tabcontent");
-              for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-              }
-              tablinks = document.getElementsByClassName("tablinks");
-              for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-              }
-              document.getElementById(cityName).style.display = "block";
-              evt.currentTarget.className += " active";
+        <script type="text/javascript" src="js/caleandar.js"></script>
+        <script type="text/javascript" src="js/demo.js?v2"></script>
+        <script>
+            try {
+                fetch(new Request("https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js", { method: 'HEAD', mode: 'no-cors' })).then(function (response) {
+                    return true;
+                }).catch(function (e) {
+                    var carbonScript = document.createElement("script");
+                    carbonScript.src = "//cdn.carbonads.com/carbon.js?serve=CE7DC2JW&placement=wwwcssscriptcom";
+                    carbonScript.id = "_carbonads_js";
+                    document.getElementById("carbon-block").appendChild(carbonScript);
+                });
+            } catch (error) {
+                console.log(error);
+            }
+        </script>
+
+        <script>
+    function ChangeTab(evt, cityName) {
+                var i, tabcontent, tablinks;
+                tabcontent = document.getElementsByClassName("tabcontent");
+                for (i = 0; i < tabcontent.length; i++) {
+                    tabcontent[i].style.display = "none";
+                }
+                tablinks = document.getElementsByClassName("tablinks");
+                for (i = 0; i < tablinks.length; i++) {
+                    tablinks[i].className = tablinks[i].className.replace(" active", "");
+                }
+                document.getElementById(cityName).style.display = "block";
+                evt.currentTarget.className += " active";
             }
 
             $(document).ready(function () {
-                
+
                 $('.btnTest').click(function () {
                     console.log(" I am clicked")
                     $.ajax({
@@ -224,10 +249,10 @@
                         dataType: "json",
                         url: "https://localhost:5001/event/all",
                         success: function (results) {
-                            for (var a = 0; a < 3; a++){ 
+                            for (var a = 0; a < 3; a++) {
                                 console.log(results[a]);
 
-                                 var i = results[a];
+                                var i = results[a];
 
                                 console.log(i['eventDuration']);
 
@@ -236,11 +261,11 @@
                                 var dur = (i['eventDuration']);
                                 var desc = i['eventDescription'];
 
-                                $('#table').append('<tr><td>'+type+'</td><td>'+time+'</td><td>'+dur+'</td><td>'+desc+'</td></tr>')
+                                $('#table').append('<tr><td>' + type + '</td><td>' + time + '</td><td>' + dur + '</td><td>' + desc + '</td></tr>')
 
+                            }
                         }
-                    }
+                    });
                 });
-            });
-        });</script>
+            });</script>
 </body>
