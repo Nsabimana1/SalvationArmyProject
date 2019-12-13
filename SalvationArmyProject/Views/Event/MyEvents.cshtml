@@ -16,14 +16,26 @@
     <div>
         <h3 id="admintable">Your Events</h3>
         <table class="table" style="width:100%">
-            <tr>
-                <th>Event Type</th>
-                <th>Date/Time</th>
-                <th>Duration</th>
-                <th>Description</th>
-                <th>Feedback</th>
-            </tr>
-
+            <thead>
+                <tr>
+                    <th>Event Type</th>
+                    <th>Date/Time</th>
+                    <th>Duration</th>
+                    <th>Description</th>
+                    <th>Feedback</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>red kettle</td>
+                    <td>now</td>
+                    <td>2</td>
+                    <td>very fun</td>
+                    <td>
+                        <button type="button" class="btn btn-secondary" data-toggle="popover" data-placement="right" data-content="This is working" data-container="body">Submit</button>
+                    </td>
+                </tr>
+            </tbody>
         </table>
     </div>
     <script>
@@ -33,24 +45,31 @@
                 dataType: "json",
                 url: "https://localhost:5001/event/all",
                 success: function (results) {
-                    for (var a = 0; a < 3; a++){ 
-                        console.log(results[a]);
+                    for (var a = 0; a < results.length; a++){
 
-                            var i = results[a];
-
-                        console.log(i['eventDuration']);
+                        var i = results[a];
 
                         var type = i['eventName'];
                         var time = i['eventDateTime'];
                         var dur = (i['eventDuration']);
                         var desc = i['eventDescription'];
-                        var fe = "yes";
+                        var feed = `<button type="button" class="btn btn-secondary" data-toggle="popover-${a}" data-placement="right" data-content="This is working" data-container="body">${a}</button>`;
+                        var toAppend = '<tr><td>' + type + '</td><td>' + time + '</td><td>' + dur + '</td><td>' + desc + '</td><td>' + feed + '</td></tr>';
 
-                        $('.table').append('<tr><td>' + type + '</td><td>' + time + '</td><td>'
-                            + dur + '</td><td>' + desc + '</td><td>' + fe + '</tr>')
+                        $('.table').append(toAppend);
+
+                    //    $('.table').append(`<tr id= ${a} ></tr>`);
+                    //    $(`# ${a}`).append('<td>' + type + '</td>');
+                    //    $(`# ${a}`).append('<td>' + time + '</td>');
+                    //    $(`# ${a}`).append('<td>' + dur + '</td>');
+                    //    $(`# ${a}`).append('<td>' + desc + '</td>');
+                    //    $(`# ${a}`).append('<td><button type="button" class="btn btn-secondary" data-toggle="popover" data-placement="right" data-content="This is working" data-container="body">Submit</button></td>');
                     }
                 }
             });
+            $(function (a) {
+                $(`[data-toggle="popover-${a}"]`).popover();
+            })
         });
 
     </script>

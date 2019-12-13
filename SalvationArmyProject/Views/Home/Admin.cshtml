@@ -13,26 +13,27 @@
 <body>
     <div class="tab">
         <button class="tablinks" onclick="ChangeTab(event, 'Events')">Events</button>
-        <button class="tablinks" onclick="ChangeTab(event, 'Users')">Event Request</button>
+   
        
-       </div>
-
-        <div id="Events" class="tabcontent">
-          <h3 id="admintable">Events</h3>
-            <a href="~/event/eventaddition" id="newevent" class="btn btn-info">Create Event</a>
-          <p>
-              <table id ="table" style="width:100%">
+    </div>
+    <div id="Events" class="tabcontent">
+        <h3 id="admintable">Events</h3>
+        <a href="~/event/eventaddition" id="newevent" class="btn btn-info">Create Event</a>
+        <p>
+            <table id ="table" style="width:100%">
                   
 
-                  <tr>
-                      <th>Event Type</th>
-                      <th>Date/Time</th>
-                      <th>Duration</th>
-                      <th>Description</th>
-                  </tr>
+                <tr>
+                    <th>Event Type</th>
+                    <th>Date/Time</th>
+                    <th>Duration</th>
+                    <th>Description</th>
+                </tr>
 
                   <tbody>
-                      <tr class="tabboby"></tr>
+                      <tr class="tabboby">
+
+                      </tr>
                   </tbody>
 
               </table>
@@ -40,119 +41,142 @@
             <button class ="btnTest">
                 load table
             </button>
+            <button class='users'>
+                users
+            </button>
+             
         </div>
 
-        <div id="Users" class="tabcontent">
-          <h3 id="admintable">Event Request</h3>
+        
+        <div id="myModal" class="modal">
+
+          <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h3 id="admintable">Event Request</h3>
           <p>
               <table id="atable" style="width:100%">
                   <tr>
 
                   
-                  <th>Event</th>
                   <th>Name</th>
+                  
                   <th>Date</th>
-                  <th>Description</th>
+                 
                   </tr>
               </table>
           </p> 
+            </div>
+
         </div>
 
-
-        <script>
-            function ChangeTab(evt, cityName) {
-              var i, tabcontent, tablinks;
-              tabcontent = document.getElementsByClassName("tabcontent");
-              for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-              }
-              tablinks = document.getElementsByClassName("tablinks");
-              for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-              }
-              document.getElementById(cityName).style.display = "block";
-              evt.currentTarget.className += " active";
+    <script>
+        function ChangeTab(evt, cityName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
             }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(cityName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
 
-            $(document).ready(function () {
+        $(document).ready(function () {
                 
-                $('.btnTest').click(function () {
-                    console.log(" I am clicked")
-                    $.ajax({
+            $('.btnTest').click(function () {
+                console.log(" I am clicked")
+                $.ajax({
 
-                        type: 'get',
-                        dataType: "json",
-                        url: "https://localhost:44326/event/all",
-                        success: function (results) {
-                            for (var a = 0; a < 3; a++){ 
+                    type: 'get',
+                    dataType: "json",
+                    url: "https://localhost:5001/event/all",
+                    success: function (results) {
+                        for (var a = 0; a < 3; a++){ 
                                
 
-                                 var i = results[a];
+                                var i = results[a];
 
                                 
 
-                                var type = i['eventName'];
-                                var time = i['eventDateTime'];
-                                var dur = (i['eventDuration']);
-                                var desc = i['eventDescription'];
+                            var type = i['eventName'];
+                            var time = i['eventDateTime'];
+                            var dur = (i['eventDuration']);
+                            var desc = i['eventDescription'];
 
-                                $('#table').append('<tr><td>'+type+'</td><td>'+time+'</td><td>'+dur+'</td><td>'+desc+'</td></tr>')
+                                $('#table').append('<tr><td><a href="silas">'+type+'</td><td>'+time+'</td><td>'+dur+'hrs'+'</td><td>'+desc+'</td></tr>');
 
                         }
                     }
                 });
             });
-            });
+        });
 
-            $(document).ready(function () {
+        $(document).ready(function () {
                 
                 $('.btnTest').click(function () {
                     console.log(" I am clicked")
                     $.ajax({
                         type: 'get',
                         dataType: "json",
-                        url: "https://localhost:44326/eventrequest/all",
+                        url: "https://localhost:5001/eventrequest/all",
                         success: function (results) {
-                            for (var a = 0; a < 3; a++){ 
+                            for (var a = 0; a < results.length; a++){ 
                                 
 
-                                var i = results[a];
-                                
+                            var type = i['evenRequestId'];
+                            var usr = i['eventRequesterId'];
+                            var date = (i['eventRequestDate']);
+                            var desc = i['eventDescription'];
 
-                                var type = i['evenRequestId'];
+                                
                                 var usr = i['eventRequesterId'];
+                               
+                               
+                               
                                 var date = (i['eventRequestDate']);
-                                var desc = i['eventDescription'];
+                                var name = getdata(usr,date);
+                                
 
-                                $('#atable').append('<tr><td>'+type+'</td><td>'+usr+'</td><td>'+date+'</td><td>'+desc+'</td></tr>')
-                                return usr;
+                              
+                                
                         }
                     }
-                });
-            });
-            });
-
-            $(doucument).ready(function (usr) {
-                $('.btnTest').click(function () {
-                    console.log(" I am clicked")
-                    $.ajax({
+                    });
+                      function getdata(id,date) {
+                      $.ajax({
                         type: 'get',
                         dataType: "json",
-                        url: "https://localhost:44326/user/all",
+                        url: "https://localhost:5001/user/"+id,
                         success: function (results) {
-                            for (var b = 0; b < 100; b++) {
-                                var user = results[b];
-                                var first = user["firstName"];
-                                console.log(first);
-
-                                if (first == usr) {
-                                    return first;
-                                }
-                            }
+                            var first = results['firstName'];
+                            var last = results['lastName'];
+                            
+                            console.log(first);
+                            console.log(last);
+                            $('#atable').append('<tr><td>' + first +" "+ last + '</td><td>' + date + '</td></tr>');
                         }
-                    });
-                });      
+                     
+                      });
+                          
+                }
             });
+            });
+            var modal = document.getElementById("myModal");
+            var span = document.getElementsByClassName("close")[0];
+            $('.users').click(function () {
+                modal.style.display = "block";
+            });
+            $('span').click(function () {
+                modal.style.display = "none";
+            })
+            
+            
+               
+            
 
-        </script>
+    </script>
 </body>
