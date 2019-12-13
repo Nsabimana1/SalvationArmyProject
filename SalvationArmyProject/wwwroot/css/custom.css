@@ -58,6 +58,17 @@
     color: rgb(237,28,43);
 }
 
+#scrollable {
+    height: 402px;
+    width: 310px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+#pad {
+    padding-bottom: 30px;
+}
+
 #Register{
     float:inherit;
 }

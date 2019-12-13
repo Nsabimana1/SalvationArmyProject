@@ -15,21 +15,20 @@
         <button class="tablinks" onclick="ChangeTab(event, 'Events')">Events</button>
    
        
-       </div>
-
-        <div id="Events" class="tabcontent">
-          <h3 id="admintable">Events</h3>
-            <a href="~/event/eventaddition" id="newevent" class="btn btn-info">Create Event</a>
-          <p>
-              <table id ="table" style="width:100%">
+    </div>
+    <div id="Events" class="tabcontent">
+        <h3 id="admintable">Events</h3>
+        <a href="~/event/eventaddition" id="newevent" class="btn btn-info">Create Event</a>
+        <p>
+            <table id ="table" style="width:100%">
                   
 
-                  <tr>
-                      <th>Event Type</th>
-                      <th>Date/Time</th>
-                      <th>Duration</th>
-                      <th>Description</th>
-                  </tr>
+                <tr>
+                    <th>Event Type</th>
+                    <th>Date/Time</th>
+                    <th>Duration</th>
+                    <th>Description</th>
+                </tr>
 
                   <tbody>
                       <tr class="tabboby">
@@ -71,45 +70,42 @@
 
         </div>
 
-
-        <script>
-            function ChangeTab(evt, cityName) {
-              var i, tabcontent, tablinks;
-              tabcontent = document.getElementsByClassName("tabcontent");
-              for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-              }
-              tablinks = document.getElementsByClassName("tablinks");
-              for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-              }
-              document.getElementById(cityName).style.display = "block";
-              evt.currentTarget.className += " active";
+    <script>
+        function ChangeTab(evt, cityName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
             }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(cityName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
 
-           
-
-            $(document).ready(function () {
+        $(document).ready(function () {
                 
-                $('.btnTest').click(function () {
-                    console.log(" I am clicked")
-                    $.ajax({
+            $('.btnTest').click(function () {
+                console.log(" I am clicked")
+                $.ajax({
 
-                        type: 'get',
-                        dataType: "json",
-                        url: "https://localhost:44326/event/all",
-                        success: function (results) {
-                            for (var a = 0; a < 3; a++){ 
+                    type: 'get',
+                    dataType: "json",
+                    url: "https://localhost:5001/event/all",
+                    success: function (results) {
+                        for (var a = 0; a < 3; a++){ 
                                
 
-                                 var i = results[a];
+                                var i = results[a];
 
                                 
 
-                                var type = i['eventName'];
-                                var time = i['eventDateTime'];
-                                var dur = (i['eventDuration']);
-                                var desc = i['eventDescription'];
+                            var type = i['eventName'];
+                            var time = i['eventDateTime'];
+                            var dur = (i['eventDuration']);
+                            var desc = i['eventDescription'];
 
                                 $('#table').append('<tr><td><a href="silas">'+type+'</td><td>'+time+'</td><td>'+dur+'hrs'+'</td><td>'+desc+'</td></tr>');
 
@@ -117,23 +113,24 @@
                     }
                 });
             });
-            });
+        });
 
-            $(document).ready(function () {
-           
+        $(document).ready(function () {
                 
                 $('.btnTest').click(function () {
                     console.log(" I am clicked")
                     $.ajax({
                         type: 'get',
                         dataType: "json",
-                        url: "https://localhost:44326/eventrequest/all",
+                        url: "https://localhost:5001/eventrequest/all",
                         success: function (results) {
                             for (var a = 0; a < results.length; a++){ 
                                 
 
-                                var i = results[a];
-                                
+                            var type = i['evenRequestId'];
+                            var usr = i['eventRequesterId'];
+                            var date = (i['eventRequestDate']);
+                            var desc = i['eventDescription'];
 
                                 
                                 var usr = i['eventRequesterId'];
@@ -170,7 +167,7 @@
             });
             var modal = document.getElementById("myModal");
             var span = document.getElementsByClassName("close")[0];
-            $('#table tr').click(function () {
+            $('.users').click(function () {
                 modal.style.display = "block";
             });
             $('span').click(function () {
@@ -181,5 +178,5 @@
                
             
 
-        </script>
+    </script>
 </body>

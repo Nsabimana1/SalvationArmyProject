@@ -23,6 +23,13 @@ namespace SalvationArmyProject.Controllers
             return View();
         }
 
+        public IActionResult newHelp()
+        {
+            IEnumerable<Event> events = _iEventRepository.allEvents();
+            ViewData["events"] = events;
+            return View(events);
+        }
+
         public IActionResult LandingPage()
         {
             return View();
