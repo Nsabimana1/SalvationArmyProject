@@ -3,10 +3,10 @@
 @{
     ViewData["Title"] = "Login Page";
 }
-<head>
-    <script src="https://kit.fontawesome.com/ad6a81734d.js" crossorigin="anonymous"></script>
-     <link rel="stylesheet" href="~/css/custom.css"/>
-</head>
+    <head>
+        <script src="https://kit.fontawesome.com/ad6a81734d.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="~/css/custom.css" />
+    </head>
 <h1 id="login_header">Login</h1>
 
 <div class="row">
@@ -28,7 +28,7 @@
                 <label for="Password">Password</label>
                 <input class="form-control" type="password" data-val="true" data-val-required="The Password field is required." id="Password" name="Password">
                 <span class="text-danger field-validation-valid" data-valmsg-for="Password" data-valmsg-replace="true"></span>
-                <input class="form-control col-sm-1" type="checkbox" onclick="showPassword()" id="showPassword"/>
+                <input class="form-control col-sm-1" type="button" value="show password" id="showPassword"/>
             </div>
             
             <div class="form-group">
@@ -44,15 +44,28 @@
     </div>
 </div>
 <script>
-    function showPassword() {
-        var pass = document.getElementById("Password");
-        if (pass.type === "password") {
-            pass.type = "text";
+    function show() {
+        var p = document.getElementById('Password');
+        p.setAttribute('type', 'text');
+    }
+
+    function hide() {
+        var p = document.getElementById('Password');
+        p.setAttribute('type', 'password');
+    }
+
+    var pwShown = 0;
+
+    document.getElementById("showPassword").addEventListener("click", function () {
+        if (pwShown == 0) {
+            pwShown = 1;
+            show();
+        } else {
+            pwShown = 0;
+            hide();
         }
-        else {
-            pass.type = "password";
-        }
-    }</script>
+    }, false);
+</script>
         
     
 
