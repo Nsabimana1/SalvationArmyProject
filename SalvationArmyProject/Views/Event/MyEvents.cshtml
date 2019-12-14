@@ -10,7 +10,7 @@
 
 
 
-<body>
+<body id="mainevent">
     <h1>My Events</h1>
 
     <div>
@@ -26,18 +26,10 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>red kettle</td>
-                    <td>now</td>
-                    <td>2</td>
-                    <td>very fun</td>
-                    <td>
-                        <button type="button" class="btn btn-secondary" data-toggle="popover" data-placement="right" data-content="This is working" data-container="body">Submit</button>
-                    </td>
-                </tr>
             </tbody>
         </table>
     </div>
+
     <script>
         $(document).ready(function () {
             $.ajax({
@@ -53,24 +45,43 @@
                         var time = i['eventDateTime'];
                         var dur = (i['eventDuration']);
                         var desc = i['eventDescription'];
-                        var feed = `<button type="button" class="btn btn-secondary" data-toggle="popover-${a}" data-placement="right" data-content="This is working" data-container="body">${a}</button>`;
+
+                        modalDivs(type, time, a);
+                   
+                        var feed = `<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal${a}"> this${a} </button>`;
+                        var toAppend = '<tr><td>' + type + '</td><td>' + time + '</td><td>' + dur + '</td><td>' + desc + '</td><td>' + feed + '</td></tr>';
+
+                        //var feed = `<button type="button" class="btn btn-secondary" data-toggle="popover" data-placement="right" data-content="<p>hi</p><p>lo</p>" data-container="body">${a}</button>`;
                         var toAppend = '<tr><td>' + type + '</td><td>' + time + '</td><td>' + dur + '</td><td>' + desc + '</td><td>' + feed + '</td></tr>';
 
                         $('.table').append(toAppend);
 
-                    //    $('.table').append(`<tr id= ${a} ></tr>`);
-                    //    $(`# ${a}`).append('<td>' + type + '</td>');
-                    //    $(`# ${a}`).append('<td>' + time + '</td>');
-                    //    $(`# ${a}`).append('<td>' + dur + '</td>');
-                    //    $(`# ${a}`).append('<td>' + desc + '</td>');
-                    //    $(`# ${a}`).append('<td><button type="button" class="btn btn-secondary" data-toggle="popover" data-placement="right" data-content="This is working" data-container="body">Submit</button></td>');
                     }
+                    function modalDivs(type, time, a) {
+
+                        console.log("testing");
+                        var modalBody = $('<div class="modal-body"></div>').text('yes');
+
+                        var modalTitle = $('<h4 class="modal-title"></h4>').text("Give us feed back on " + type + "for " + time + " hours.");
+                        var close = $('<button type="button" class="close" data-dismiss="modal"></button>').text('&times;');
+                        var modalHeader = $('<div class="modal-header"></div>').append(close, modalTitle);
+
+                        var modalContent = $('<div class="modal-content"></div>').append(modalHeader, modalBody);
+                        var modalDialog = $(`<div class="modal-dialog"></div>`).append(modalContent);
+                        var modal = $(`<div id="modal${a}" class="modal fade" role="dialog"></div>`).append(modalDialog);
+
+                        console.log($(`#modal${a}`));
+                           
+                        $('#mainevent').append(modal);
+                    }
+                    //$(function (a) {
+                    //    $('[data-toggle="popover"]').popover();
+                    //})
                 }
             });
-            $(function (a) {
-                $(`[data-toggle="popover-${a}"]`).popover();
-            })
         });
+
+        
 
     </script>
 </body>
