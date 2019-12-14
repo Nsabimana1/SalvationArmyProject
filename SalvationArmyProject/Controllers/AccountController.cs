@@ -79,5 +79,9 @@ namespace SalvationArmyProject.Controllers
             }
             return View(model);
         }
+        public IActionResult Profile()
+        {
+            return View();
+        }
     }
 }
