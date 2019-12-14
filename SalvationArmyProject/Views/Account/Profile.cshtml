@@ -1,0 +1,39 @@
+using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+@{
+    ViewData["Email"] = "Profile";
+    ViewData["Password"] = "Profile";
+}
+
+    <head>
+        <script src="https://kit.fontawesome.com/ad6a81734d.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="~/css/custom.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    </head>
+<body>
+    <h1>Profile</h1>
+    
+
+    <script>
+        $(document).ready(function () {
+
+            $.ajax({
+                type: 'get',
+                datatype: 'json',
+                url: "https://localhost:5001/users/" + id,
+                success: function (results) {
+                    for (var a = 0; a < results.length; a++) {
+
+                        var type = i['id'];
+                        var fName = i['firstName'];
+                        var lName = i['lastName'];
+                        var e = i['email'];
+                        var num = i['phoneNumber'];
+                    }
+                }
+            })
+
+        })
+    </script>
+</body>
