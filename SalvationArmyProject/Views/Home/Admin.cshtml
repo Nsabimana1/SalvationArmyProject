@@ -105,6 +105,7 @@
 
                         $('#atable').append('<tr><td>' + first + " " + last + '</td><td>' + event_id + '</td><td><button id ="Accept_button" type="button" class"bt btn-info"">Accept</button></td><td><button type="button" class="btn btn-info">' + 'Deny' + '</button></td></tr>');
                     }
+<<<<<<< Updated upstream
                 });
             }
             $(document).on('click', '#Accept_button', function (event) {
@@ -119,6 +120,37 @@
             //        eventRepsonseComment: "You have been Accepted"
             //    });
             //}); 
+=======
+                    });
+                      function getdata(id,date,event_id) {
+                      $.ajax({
+                        type: 'get',
+                        dataType: "json",
+                        url: "https://localhost:5001/user/"+id,
+                        success: function (results) {
+                            var first = results['firstName'];
+                            var last = results['lastName'];
+                            
+                            
+                            //var accept = '<form method="post"><div class="form-group"><button type="button" class="btn btn-info" asp-for="responseStatus">Accept</button></div></form>';
+                            $('#atable').append('<tr><td>' + first + " " + last + '</td><td>' + date + '</td><td><button id ="Accept_button" type="button" class"bt btn-info">Accept</button></td><td><button type="button" class="btn btn-info">' + 'Deny' + '</button></td></tr>');
+                        }
+                     
+                      });
+                          
+                      }
+
+            
+
+            function accept(event_id) {
+                console.log("work");
+                $.post("https://localhost:5001/event/response", {
+                    eventRequestFK: event_id,
+                    responseStatus: True,
+                    eventRepsonseComment: "You have been Accepted"
+                })
+            }  
+>>>>>>> Stashed changes
         });
 
     </script>
