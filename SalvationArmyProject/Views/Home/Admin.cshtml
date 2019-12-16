@@ -13,15 +13,15 @@
 <body>
     <div class="tab">
         <button class="tablinks" onclick="ChangeTab(event, 'Events')">Events</button>
-   
-       
+
+
     </div>
     <div id="Events" class="tabcontent">
         <h3 id="admintable">Events</h3>
         <a href="~/event/eventaddition" id="newevent" class="btn btn-info">Create Event</a>
         <p>
             <table id ="table" style="width:100%">
-                  
+
 
                 <tr>
                     <th>Event Type</th>
@@ -44,10 +44,10 @@
             <button class='users'>
                 users
             </button>
-             
+
         </div>
 
-        
+
         <div id="myModal" class="modal">
 
           <!-- Modal content -->
@@ -58,14 +58,14 @@
               <table id="atable" style="width:100%">
                   <tr>
 
-                  
+
                   <th>Name</th>
-                  
+
                   <th>Date</th>
-                 
+
                   </tr>
               </table>
-          </p> 
+          </p>
             </div>
 
         </div>
@@ -86,7 +86,7 @@
         }
 
         $(document).ready(function () {
-                
+
             $('.btnTest').click(function () {
                 console.log(" I am clicked")
                 $.ajax({
@@ -95,12 +95,12 @@
                     dataType: "json",
                     url: "https://localhost:5001/event/all",
                     success: function (results) {
-                        for (var a = 0; a < 3; a++){ 
-                               
+                        for (var a = 0; a < 3; a++){
+
 
                                 var i = results[a];
 
-                                
+
 
                             var type = i['eventName'];
                             var time = i['eventDateTime'];
@@ -116,7 +116,7 @@
         });
 
         $(document).ready(function () {
-                
+
                 $('.btnTest').click(function () {
                     console.log(" I am clicked")
                     $.ajax({
@@ -124,25 +124,25 @@
                         dataType: "json",
                         url: "https://localhost:5001/eventrequest/all",
                         success: function (results) {
-                            for (var a = 0; a < results.length; a++){ 
-                                
+                            for (var a = 0; a < results.length; a++){
+
 
                             var type = i['evenRequestId'];
                             var usr = i['eventRequesterId'];
                             var date = (i['eventRequestDate']);
                             var desc = i['eventDescription'];
 
-                                
+
                                 var usr = i['eventRequesterId'];
-                               
-                               
-                               
+
+
+
                                 var date = (i['eventRequestDate']);
                                 var name = getdata(usr,date);
-                                
 
-                              
-                                
+
+
+
                         }
                     }
                     });
@@ -154,14 +154,14 @@
                         success: function (results) {
                             var first = results['firstName'];
                             var last = results['lastName'];
-                            
+
                             console.log(first);
                             console.log(last);
                             $('#atable').append('<tr><td>' + first +" "+ last + '</td><td>' + date + '</td></tr>');
                         }
-                     
+
                       });
-                          
+
                 }
             });
             });
@@ -173,10 +173,10 @@
             $('span').click(function () {
                 modal.style.display = "none";
             })
-            
-            
-               
-            
+
+
+
+
 
     </script>
 </body>
