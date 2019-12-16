@@ -1,8 +1,11 @@
 @{
     ViewData["Title"] = "Admin";
 }
+
+
 <head>
-     <link rel="stylesheet" href="~/css/custom.css"/>
+     <link rel="stylesheet" href="/css/custom.css" />
+
     <link href="https://fonts.googleapis.com/css?family=McLaren|Montserrat&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
@@ -11,33 +14,42 @@
 
 
 <body>
+<<<<<<< Updated upstream
     <div class="tab">
         <button class="tablinks" onclick="ChangeTab(event, 'Events')">Events</button>
 
 
     </div>
+=======
+   
+>>>>>>> Stashed changes
     <div id="Events" class="tabcontent">
         <h3 id="admintable">Events</h3>
-        <a href="~/event/eventaddition" id="newevent" class="btn btn-info">Create Event</a>
+        <a href="/event/eventaddition" id="newevent" class="btn btn-info">Create Event</a>
+        <a href="/event/eventaddition" id="newevent" class="btn btn-info">Delete Event</a>
+        <button type="button" class="btn btn-info" id="myBtn"> View Volunteers</button>
         <p>
             <table id ="table" style="width:100%">
 
 
                 <tr>
+                 
                     <th>Event Type</th>
                     <th>Date/Time</th>
                     <th>Duration</th>
                     <th>Description</th>
+                    
                 </tr>
 
                   <tbody>
                       <tr class="tabboby">
-
+                          
                       </tr>
                   </tbody>
 
               </table>
           </p>
+<<<<<<< Updated upstream
             <button class ="btnTest">
                 load table
             </button>
@@ -67,25 +79,47 @@
               </table>
           </p>
             </div>
-
+=======
+            
+            
+             
         </div>
 
+        
+    <div class="modal" id="myModal" role="dialog">
+    
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Volunteers</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+        </div>
+        <div class="modal-body">
+          <table id="atable" style="width:100%">
+              <tr>
+                  <th>Name</th>
+                  <th>Date</th>
+                  <th>Approve</th>
+              </tr>
+              <tbody>
+                  <tr>
+>>>>>>> Stashed changes
+
+                  </tr>
+              </tbody>
+          </table>
+        </div>
+        
+      </div>
+  </div>
+
     <script>
-        function ChangeTab(evt, cityName) {
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tabcontent");
-            for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
-            }
-            tablinks = document.getElementsByClassName("tablinks");
-            for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" active", "");
-            }
-            document.getElementById(cityName).style.display = "block";
-            evt.currentTarget.className += " active";
-        }
+        
 
         $(document).ready(function () {
+<<<<<<< Updated upstream
 
             $('.btnTest').click(function () {
                 console.log(" I am clicked")
@@ -97,28 +131,47 @@
                     success: function (results) {
                         for (var a = 0; a < 3; a++){
 
+=======
+                
+            
+                $.ajax({
+
+                        type: 'get',
+                        dataType: "json",
+                        url: "https://localhost:5001/event/all",
+                        success: function (results) {
+                            for (var a = 0; a < 3; a++){ 
+                               
+>>>>>>> Stashed changes
 
                                 var i = results[a];
 
 
 
                             var type = i['eventName'];
-                            var time = i['eventDateTime'];
+                            var ti = i['eventDateTime'];
+                            var regex = new RegExp('/([0-9]|0[0-9]|1[0-9])/([0 - 9][0 - 9] | [0 - 9]) / [0 - 9]{ 4} at ([0 - 9] | 0[0 - 9] | 1[0 - 9]): [0 - 9]{ 2 }: [0 - 9]{ 2 } (AM | PM)/g');
+                            var date = ti.split(regex);
                             var dur = (i['eventDuration']);
                             var desc = i['eventDescription'];
 
-                                $('#table').append('<tr><td><a href="silas">'+type+'</td><td>'+time+'</td><td>'+dur+'hrs'+'</td><td>'+desc+'</td></tr>');
-
+                                
+                                $('#table').append('<tr><td>' + type + '</td><td>' + date + '</td><td>' + dur + 'hrs' + '</td><td>' + desc + '</td></tr>');
                         }
                     }
                 });
-            });
+            
         });
 
         $(document).ready(function () {
+<<<<<<< Updated upstream
 
                 $('.btnTest').click(function () {
                     console.log(" I am clicked")
+=======
+                
+                
+>>>>>>> Stashed changes
                     $.ajax({
                         type: 'get',
                         dataType: "json",
@@ -127,6 +180,7 @@
                             for (var a = 0; a < results.length; a++){
 
 
+                                var i = results[a];
                             var type = i['evenRequestId'];
                             var usr = i['eventRequesterId'];
                             var date = (i['eventRequestDate']);
@@ -157,12 +211,13 @@
 
                             console.log(first);
                             console.log(last);
-                            $('#atable').append('<tr><td>' + first +" "+ last + '</td><td>' + date + '</td></tr>');
+                            $('#atable').append('<tr><td>' + first +" "+ last + '</td><td>' + date + '</td><td><button type="button" class="btn btn-info">'+ 'Accept'+ '</button></td><td><button type="button" class="btn btn-info">'+ 'Deny'+ '</button></td></tr>');
                         }
 
                       });
 
                 }
+<<<<<<< Updated upstream
             });
             });
             var modal = document.getElementById("myModal");
@@ -177,6 +232,17 @@
 
 
 
+=======
+            
+        });
+
+        $(document).ready(function(){
+          $("#myBtn").click(function(){
+            $("#myModal").modal();
+          });
+        });
+            
+>>>>>>> Stashed changes
 
     </script>
 </body>
