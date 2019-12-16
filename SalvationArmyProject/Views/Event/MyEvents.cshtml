@@ -10,7 +10,7 @@
 
 
 
-<body id="mainevent">
+<body id="mainTable">
     <h1>My Events</h1>
 
     <div>
@@ -35,7 +35,7 @@
             $.ajax({
                 type: 'get',
                 dataType: "json",
-                url: "https://localhost:5001/event/all",
+                url: "https://localhost:44326/event/all",
                 success: function (results) {
                     for (var a = 0; a < results.length; a++){
 
@@ -49,10 +49,7 @@
                         modalDivs(type, time, a);
                    
                         var feed = `<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal${a}"> this${a} </button>`;
-                        var toAppend = '<tr><td>' + type + '</td><td>' + time + '</td><td>' + dur + '</td><td>' + desc + '</td><td>' + feed + '</td></tr>';
-
-                        //var feed = `<button type="button" class="btn btn-secondary" data-toggle="popover" data-placement="right" data-content="<p>hi</p><p>lo</p>" data-container="body">${a}</button>`;
-                        var toAppend = '<tr><td>' + type + '</td><td>' + time + '</td><td>' + dur + '</td><td>' + desc + '</td><td>' + feed + '</td></tr>';
+                        var toAppend = '<tr><td>' + type + '</td><td>' + time + '</td><td>' + dur + ' hours</td><td>' + desc + '</td><td>' + feed + '</td></tr>';
 
                         $('.table').append(toAppend);
 
@@ -63,8 +60,9 @@
                         var modalBody = $('<div class="modal-body"></div>').text('yes');
 
                         var modalTitle = $('<h4 class="modal-title"></h4>').text("Give us feed back on " + type + "for " + time + " hours.");
-                        var close = $('<button type="button" class="close" data-dismiss="modal"></button>').text('&times;');
-                        var modalHeader = $('<div class="modal-header"></div>').append(close, modalTitle);
+                        var times = $('<span aria-hidden="true"></span>').append('&times;');
+                        var closeButton = $('<button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>').append(times);
+                        var modalHeader = $('<div class="modal-header"></div>').append(modalTitle, closeButton);
 
                         var modalContent = $('<div class="modal-content"></div>').append(modalHeader, modalBody);
                         var modalDialog = $(`<div class="modal-dialog"></div>`).append(modalContent);
@@ -72,7 +70,7 @@
 
                         console.log($(`#modal${a}`));
                            
-                        $('#mainevent').append(modal);
+                        $('#mainTable').before(modal);
                     }
                     //$(function (a) {
                     //    $('[data-toggle="popover"]').popover();
