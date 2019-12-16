@@ -9,6 +9,24 @@
     </head>
 <body>
     <h1>Profile</h1>
+    <div class="container" id="info">
+        <h4>Name:</h4>
+        <div id="Name">
+
+        </div>
+        <h4>Email:</h4>
+        <div id="Email">
+
+        </div>
+        <h4>Phone Number:</h4>
+        <div id="phoneNum">
+
+        </div>
+        <h4>Birth Date:</h4>
+        <div id="bDate">
+
+        </div>
+    </div>
     
 
     <script>
@@ -34,6 +52,24 @@
                 console.log(lName);
                 console.log(birth);
                 console.log(phone);
+
+                if (fName == null) {
+                    fName = "N/A";
+                }
+                if (lName == null) {
+                    lName = "N/A";
+                }
+                if (birth == null) {
+                    birth = "N/A";
+                }
+                if (phone == null) {
+                    phone = "N/A";
+                }
+
+                $("#Name").append(fName + " " + lName);
+                $("#Email").append(email);
+                $("#phoneNum").append(phone);
+                $("#bDate").append(birth);
            
             }
 
