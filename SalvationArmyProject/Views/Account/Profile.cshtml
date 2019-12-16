@@ -17,25 +17,25 @@
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
                 <label id="reg" asp-for="firstName">First Name</label>
-                <input asp-for="firstName" class="form-control" />
+                <input value="" asp-for="firstName" class="form-control" />
                 <span asp-validation-for="firstName" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label id="reg" asp-for="lastName">Last Name</label>
-                <input asp-for="lastName" class="form-control" />
+                <input value="" asp-for="lastName" class="form-control" />
                 <span asp-validation-for="lastName" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label id="reg" asp-for="birthDate">Date of Birth</label>
-                <input type="date" asp-for="birthDate" class="form-control" />
+                <input value="" type="date" asp-for="birthDate" class="form-control" />
                 <span asp-validation-for="birthDate" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label id="reg" asp-for="phoneNumber">Phone Number</label>
-                <input asp-for="phoneNumber" class="form-control" />
+                <input value="" asp-for="phoneNumber" class="form-control" />
                 <span asp-validation-for="phoneNumber" class="text-danger"></span>
             </div>
 
@@ -50,23 +50,22 @@
 
 
 
-    <div class="col-sm-6">
+    <!--<div class="col-sm-6">
         <div id="scrollable">
             <div class="col-md-6">
-                @foreach (var ev in IEnumerable<Event>)
-                {
+                
                     
                         <div class="card mb-2" style="width: 18rem;">
                             <div class="card-body">
-                                <h5 class="card-title">A reminder that you have signed up for @ev.eventName at:</h5>
-                                <p class="card-text"><small class="text-muted">@ev.eventDateTime</small></p>
+                                <h5 class="card-title">A reminder that you have signed up for  at:</h5>
+                                <p class="card-text"><small class="text-muted"></small></p>
                                 <a href="#" class="btn btn-primary">Got it</a>
                             </div>
                         </div>
                     
-                }
+                
             </div>
-        </div>
+        </div>-->
     
 
     <script>
