@@ -1,6 +1,5 @@
 ﻿.navbar {
     background-color: rgb(52,70,95);
-
 }
 
 .navbar-brand{
@@ -55,7 +54,8 @@
     align-items: center;
     background-image: url("../images/pro_red_kettle.jpg");
     background-size: cover;
-    color: rgb(237,28,43);
+    color: rgb(52,70,95);
+    height: 100vh;
 }
 
 #scrollable {
