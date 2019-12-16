@@ -18,18 +18,19 @@
     <div id="Events" class="tabcontent">
         <h3 id="admintable">Events</h3>
         <a href="/event/eventaddition" id="newevent" class="btn btn-info">Create Event</a>
-        <a href="/event/eventaddition" id="newevent" class="btn btn-info">Delete Event</a>
-        <button type="button" class="btn btn-info" id="myBtn"> View Volunteers</button>
+        
+       
         <p>
             <table id ="table" style="width:100%">
 
 
                 <tr>
-                 
+                    <th></th>
                     <th>Event Type</th>
                     <th>Date/Time</th>
                     <th>Duration</th>
                     <th>Description</th>
+                    <th></th>
                     
                 </tr>
 
@@ -87,8 +88,8 @@
                         type: 'get',
                         dataType: "json",
                         url: "https://localhost:5001/event/all",
-                        success: function (results) {
-                            for (var a = 0; a < 3; a++){ 
+                    success: function (results) {
+                        for (var a = 0; a < results.length; a++){ 
                                
 
                                 var i = results[a];
@@ -101,9 +102,10 @@
                             var date = ti.split(regex);
                             var dur = (i['eventDuration']);
                             var desc = i['eventDescription'];
+                            var event_id = i['eventId'];
 
                                 
-                                $('#table').append('<tr><td>' + type + '</td><td>' + date + '</td><td>' + dur + 'hrs' + '</td><td>' + desc + '</td></tr>');
+                                $('#table').append('<tr><td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal"></button><td>' + type + '</td><td>' + date + '</td><td>' + dur + 'hrs' + '</td><td>' + desc + '</td><td><a href="/event/eventaddition" id="newevent" class="btn btn-info">Delete Event</a></td></tr>');
                         }
                     }
                 });
@@ -122,18 +124,11 @@
                                 
 
                                 var i = results[a];
-                            var type = i['evenRequestId'];
-                            var usr = i['eventRequesterId'];
-                            var date = (i['eventRequestDate']);
-                            var desc = i['eventDescription'];
-
-                                
                                 var usr = i['eventRequesterId'];
-                               
-                               
-                               
                                 var date = (i['eventRequestDate']);
-                                var name = getdata(usr,date);
+                                var id = i['eventFK'];
+
+                                var name = getdata(usr,date,id);
                                 
 
                               
@@ -141,7 +136,7 @@
                         }
                     }
                     });
-                      function getdata(id,date) {
+                      function getdata(id,date,event_id) {
                       $.ajax({
                         type: 'get',
                         dataType: "json",
@@ -150,23 +145,27 @@
                             var first = results['firstName'];
                             var last = results['lastName'];
                             
-                            console.log(first);
-                            console.log(last);
-                            $('#atable').append('<tr><td>' + first +" "+ last + '</td><td>' + date + '</td><td><button type="button" class="btn btn-info">'+ 'Accept'+ '</button></td><td><button type="button" class="btn btn-info">'+ 'Deny'+ '</button></td></tr>');
+                            
+                            //var accept = '<form method="post"><div class="form-group"><button type="button" class="btn btn-info" asp-for="responseStatus">Accept</button></div></form>';
+                            $('#atable').append('<tr><td>' + first + " " + last + '</td><td>' + event_id + '</td><td><button id ="Accept_button" type="button" class"bt btn-info" onclick="accept('+event_id+')">Accept</button></td><td><button type="button" class="btn btn-info">' + 'Deny' + '</button></td></tr>');
                         }
                      
                       });
                           
-                }
-            
-        });
+                      }
 
-        $(document).ready(function(){
-          $("#myBtn").click(function(){
-            $("#myModal").modal();
-          });
+            function accept(event_id) {
+                console.log("work");
+                $.post("https://localhost:5001/event/response", {
+                    eventRequestFK: event_id,
+                    responseStatus: True,
+                    eventRepsonseComment: "You have been Accepted"
+                })
+            }  
         });
-            
+        
+
+      
 
     </script>
 </body>
