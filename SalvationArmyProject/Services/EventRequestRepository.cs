@@ -24,6 +24,10 @@ namespace SalvationArmyProject.Services
             return this._dbContext.EventRequests;
         }
 
+        public IEnumerable<EventRequest> getEventReuqestByEventFK(Guid evFK) {
+             return this._dbContext.EventRequests.Where(e => e.eventFK == evFK).ToList();
+        }
+
         public bool eventRequestExists(Guid id)
         {
             throw new NotImplementedException();
