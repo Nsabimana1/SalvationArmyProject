@@ -14,15 +14,7 @@
 
 
 <body>
-<<<<<<< Updated upstream
-    <div class="tab">
-        <button class="tablinks" onclick="ChangeTab(event, 'Events')">Events</button>
 
-
-    </div>
-=======
-   
->>>>>>> Stashed changes
     <div id="Events" class="tabcontent">
         <h3 id="admintable">Events</h3>
         <a href="/event/eventaddition" id="newevent" class="btn btn-info">Create Event</a>
@@ -49,13 +41,8 @@
 
               </table>
           </p>
-<<<<<<< Updated upstream
-            <button class ="btnTest">
-                load table
-            </button>
-            <button class='users'>
-                users
-            </button>
+
+           
 
         </div>
 
@@ -79,7 +66,7 @@
               </table>
           </p>
             </div>
-=======
+
             
             
              
@@ -105,7 +92,7 @@
               </tr>
               <tbody>
                   <tr>
->>>>>>> Stashed changes
+
 
                   </tr>
               </tbody>
@@ -116,22 +103,7 @@
   </div>
 
     <script>
-        
-
-        $(document).ready(function () {
-<<<<<<< Updated upstream
-
-            $('.btnTest').click(function () {
-                console.log(" I am clicked")
-                $.ajax({
-
-                    type: 'get',
-                    dataType: "json",
-                    url: "https://localhost:5001/event/all",
-                    success: function (results) {
-                        for (var a = 0; a < 3; a++){
-
-=======
+    $(document).ready(function () {
                 
             
                 $.ajax({
@@ -142,11 +114,10 @@
                         success: function (results) {
                             for (var a = 0; a < 3; a++){ 
                                
->>>>>>> Stashed changes
 
                                 var i = results[a];
 
-
+                                
 
                             var type = i['eventName'];
                             var ti = i['eventDateTime'];
@@ -164,21 +135,15 @@
         });
 
         $(document).ready(function () {
-<<<<<<< Updated upstream
-
-                $('.btnTest').click(function () {
-                    console.log(" I am clicked")
-=======
                 
                 
->>>>>>> Stashed changes
                     $.ajax({
                         type: 'get',
                         dataType: "json",
                         url: "https://localhost:5001/eventrequest/all",
                         success: function (results) {
-                            for (var a = 0; a < results.length; a++){
-
+                            for (var a = 0; a < results.length; a++){ 
+                                
 
                                 var i = results[a];
                             var type = i['evenRequestId'];
@@ -186,17 +151,17 @@
                             var date = (i['eventRequestDate']);
                             var desc = i['eventDescription'];
 
-
+                                
                                 var usr = i['eventRequesterId'];
-
-
-
+                               
+                               
+                               
                                 var date = (i['eventRequestDate']);
                                 var name = getdata(usr,date);
+                                
 
-
-
-
+                              
+                                
                         }
                     }
                     });
@@ -208,31 +173,15 @@
                         success: function (results) {
                             var first = results['firstName'];
                             var last = results['lastName'];
-
+                            
                             console.log(first);
                             console.log(last);
                             $('#atable').append('<tr><td>' + first +" "+ last + '</td><td>' + date + '</td><td><button type="button" class="btn btn-info">'+ 'Accept'+ '</button></td><td><button type="button" class="btn btn-info">'+ 'Deny'+ '</button></td></tr>');
                         }
-
+                     
                       });
-
+                          
                 }
-<<<<<<< Updated upstream
-            });
-            });
-            var modal = document.getElementById("myModal");
-            var span = document.getElementsByClassName("close")[0];
-            $('.users').click(function () {
-                modal.style.display = "block";
-            });
-            $('span').click(function () {
-                modal.style.display = "none";
-            })
-
-
-
-
-=======
             
         });
 
@@ -242,7 +191,6 @@
           });
         });
             
->>>>>>> Stashed changes
 
     </script>
 </body>
