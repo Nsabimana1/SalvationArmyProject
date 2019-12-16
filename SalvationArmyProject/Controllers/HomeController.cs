@@ -55,6 +55,14 @@ namespace SalvationArmyProject.Controllers
         {
             return View();
         }
+        //[HttpPost]
+        //public IActionResult Admin(EventResponseViewModel eventResponse)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+
+        //    }
+        //}
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

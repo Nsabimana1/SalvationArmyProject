@@ -23,7 +23,7 @@
 </head>
 <body>
     <header class="bg-info">        
-        <nav class="topnav navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="topnav navbar-expand-sm navbar-toggleable-sm navbar-light bg-white">
             @*<input id="button" type="button" value="Log In"/>*@
             <div class="navbar">
                 <div class="container">
@@ -39,7 +39,7 @@
                                 <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Help">Ways to Help</a>
+                                <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="newHelp">Ways to Help</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Volunteers">Volunteers</a>
@@ -94,12 +94,12 @@
         </nav>
 
     </header>
-    <div class="container">
+    
         <partial name="_CookieConsentPartial" />
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
-    </div>
+    
 
     <footer class="border-top footer text-muted">
         <div class="container">

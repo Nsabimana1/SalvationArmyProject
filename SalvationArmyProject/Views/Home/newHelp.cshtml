@@ -11,15 +11,19 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </head>
 
-<body>
-    <h1>@ViewData["Title"]</h1>
-    <div class="main">
-        <section class="container">
-            <div class="row text-center">
-                <h3 class="col-sm-6">Red Kettle</h3>
-                <h2 class="col-sm-6">Featured Events</h2>
+<div class="container">
+    <body>
+        <h1>@ViewData["Title"]</h1>
+        <div class="main">
+            <div class="row justify-content-center text-center">
+                <div class="col-sm-7">
+                    <h3>Red Kettle</h3>
+                </div>
+                <div class="col-sm-5">
+                    <h2>Featured Events</h2>
+                </div>
             </div>
-            <div class="row">
+            <div class="row justify-content-around text-center">
                 <div class="col-sm-6">
                     <p>
                         In 1891, Salvation Army Captain Joseph McFee was distraught because so many poor individuals in San Francisco were going hungry.
@@ -34,37 +38,37 @@
                     </p>
                 </div>
                 <div id="scrollable">
-                    <div class="row text-center">
-                        <div class="col-md-6">
-                            @foreach (var ev in Model)
-                            {
-                                <div class="card mb-2" style="width: 18rem;">
-                                    <div class="card-body">
-                                        <h5 class="card-title">@ev.eventName</h5>
-                                        <p class="card-text">@ev.eventDescription</p>
-                                        <p class="card-text"><small class="text-muted">@ev.eventDateTime</small></p>
-                                        <a href="~/event/eventrequest/?id=@ev.eventId" class="btn btn-primary">volunteer</a>
-                                        <a href="#" class="btn btn-primary">View Feedback</a>
-                                    </div>
-                                </div>
-                            }
-                            <div class="card" style="width: 18rem;">
+                    <div class="col-md-6">
+                        @foreach (var ev in Model)
+                        {
+                            <div class="card mb-2" style="width: 18rem;">
                                 <div class="card-body">
-                                    <h5 class="card-title">Special title treatment</h5>
-                                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                                    <h5 class="card-title">@ev.eventName</h5>
+                                    <p class="card-text">@ev.eventDescription</p>
+                                    <p class="card-text"><small class="text-muted">@ev.eventDateTime</small></p>
+                                    <a href="~/event/eventrequest/?id=@ev.eventId" class="btn btn-primary">volunteer</a>
+                                    <a href="#" class="btn btn-primary">View Feedback</a>
                                 </div>
                             </div>
+                        }
+                        <div class="card" style="width: 18rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">Special title treatment</h5>
+                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
                         </div>
-                        <div class="col-md-4">
+                    </div>
+                    <div class="col-md-4">
 
-                        </div>
                     </div>
                 </div>
             </div>
             <div class="row text-center">
-                <h3 class="col-sm-6">Angle Tree</h3>
+                <div class="col-sm-4">
+                    <h3>Angle Tree</h3>
+                </div>
             </div>
             <div class="row" id="pad">
                 <div class="col-sm-6">
@@ -74,6 +78,7 @@
                     </p>
                 </div>
             </div>
-        </section>
-    </div>
-</body>
+        </div>
+    </body>
+</div>
+
