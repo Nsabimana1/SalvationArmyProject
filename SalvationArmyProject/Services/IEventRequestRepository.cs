@@ -10,10 +10,12 @@ namespace SalvationArmyProject.Services
     {
         bool eventRequestExists(Guid id);
         EventRequest getEventRequest(Guid id);
+        IEnumerable<EventRequest> getEventReuqestByEventFK(Guid evFK);
         void addEventRequest(EventRequest e);
         void removeEventRequest(Guid id);
         void updateEventRequest(EventRequest e);
         IEnumerable<EventRequest> allEventRequests();
         void saveAllChanges();
+
     }
 }

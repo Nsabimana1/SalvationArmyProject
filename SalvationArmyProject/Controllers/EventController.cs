@@ -169,10 +169,21 @@ namespace SalvationArmyProject.Controllers
             }
             return Ok(true);
         }
+        
+
+
         [HttpGet("/event/userevent/{id}")]
         public IActionResult GetUserUpprovedEventById(Guid id) {
 
             return null;
         }
+
+        [HttpGet("/event/eventrequests/{eventId}")]
+        public IActionResult GetEventRequestByEventId(string eventId)
+        {
+            var eventreqests = _iEventRequestRepository.getEventReuqestByEventFK(new Guid(eventId));
+            return new JsonResult(eventreqests);
+        }
+
     }
 }
