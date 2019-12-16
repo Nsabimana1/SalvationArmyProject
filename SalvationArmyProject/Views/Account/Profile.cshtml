@@ -1,9 +1,5 @@
-using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
 @{
-    ViewData["Email"] = "Profile";
-    ViewData["Password"] = "Profile";
+
 }
 
     <head>
@@ -18,22 +14,35 @@ using System.Runtime.InteropServices;
     <script>
         $(document).ready(function () {
 
-            $.ajax({
-                type: 'get',
-                datatype: 'json',
-                url: "https://localhost:44326/users/" + id,
-                success: function (results) {
-                    for (var a = 0; a < results.length; a++) {
+            function getUserInfo(){
+                var email = @User.Identity.Name;
+                console.log(email);
 
-                        var type = i['id'];
-                        var fName = i['firstName'];
-                        var lName = i['lastName'];
-                        var e = i['email'];
-                        var num = i['phoneNumber'];
+                $.ajax({
+                    type: 'get',
+                    datatype: 'json',
+                    url: "https://localhost:5001/users/" + email,
+                    success: function (results) {
+                    var fName = results['firstName'],
+                    var lName = results['lastName'],
+                    var birth = results['birthDate'],
+                    var phone = results['phoneNumber'],
                     }
-                }
-            })
+                })
 
+                console.log(fName);
+                console.log(lName);
+                console.log(birth);
+                console.log(phone);
+           
+            }
+
+            window.onload({
+                getUserInfo();
+            })
         })
+            
+
+            
     </script>
 </body>
