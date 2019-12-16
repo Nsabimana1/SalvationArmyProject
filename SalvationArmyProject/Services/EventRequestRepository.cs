@@ -35,7 +35,7 @@ namespace SalvationArmyProject.Services
 
         public EventRequest getEventRequest(Guid id)
         {
-            throw new NotImplementedException();
+            return _dbContext.EventRequests.Where(e=> e.eventRequestId == id).FirstOrDefault();
         }
 
         public void removeEventRequest(Guid id)
@@ -58,7 +58,6 @@ namespace SalvationArmyProject.Services
             evenReq.eventDescription = eventRequest.eventDescription;
             evenReq.eventFK = eventRequest.eventFK;
             evenReq.Event = eventRequest.Event;
-            evenReq.eventRequestId = eventRequest.eventRequestId;
             _dbContext.SaveChanges();
         }
     }

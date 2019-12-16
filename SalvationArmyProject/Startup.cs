@@ -43,6 +43,7 @@ namespace SalvationArmyProject
             services.AddScoped<IEventRepository, EventRepositry>();
             services.AddScoped<IFeedbackRepository, FeedbackRepository>();
             services.AddScoped<IEventRequestRepository, EventRequestRepository>();
+            services.AddScoped<IEventResponseRepository, EventResponseRepository>();
 
 
             //string connectionString = Startup.Configuration["connectionStrings:DBConnectionString"];
@@ -51,7 +52,7 @@ namespace SalvationArmyProject
             string connectionString = Startup.Configuration["connectionStrings:DBConnectionString"];
             services.AddDbContext<DBcontext>(o =>
             {
-                o.UseSqlite(connectionString);
+                o.UseSqlite(connectionString, x => x.SuppressForeignKeyEnforcement());
             });
 
             services.AddIdentity<IdentityUser, IdentityRole>()
@@ -80,6 +81,9 @@ namespace SalvationArmyProject
             app.UseCookiePolicy();
             app.UseAuthentication();
             app.UseStaticFiles();
+
+            app.UseStatusCodePages();
+            app.UseCors();
 
             app.UseMvc(routes =>
             {

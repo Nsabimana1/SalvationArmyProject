@@ -12,6 +12,7 @@ namespace SalvationArmyProject.ViewModels
         [Required]
         public bool responseStatus { get; set; }
         public string eventResponseComent { get; set; }
+        [Required]
         public Guid eventRequestFK { get; set; }
     }
 }

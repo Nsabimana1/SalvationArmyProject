@@ -53,6 +53,35 @@ namespace SalvationArmyProject.Services
             return e.eventName;
         }
 
+        public IEnumerable<Event> GetUserUpprovedEventById(Guid id)
+        {
+            var allprovedusers = _dBcontext.EventResponses.Where(r => r.responseStatus == true).ToList();
+            List<Event> events = new List<Event>();
+            foreach (var res in allprovedusers) {
+               Guid data = _dBcontext.EventRequests.Where(e => e.eventRequesterId == id && e.eventRequestId == res.eventRequestFK).Select(s =>s.eventFK).FirstOrDefault();
+                if (data != null) {
+                    events.Add(this.getEvent(data));
+                }
+            }
+            return events;
+            //var query = _dBcontext.EventResponses
+            //    .Join(
+            //    _dBcontext.EventRequests,
+            //    EventResponse => EventResponse.eventRequestFK,
+            //    EventRequest => EventRequest.eventRequestId,
+            //    (EventResponse, EventRequest) => (EventResponse.responseStatus == true && EventRequest.eventRequesterId == id)
+            //    ).ToList();
+
+            //return null;
+            //return (Event) query;
+
+            //var resp = _dBcontext.EventResponses.Where(r => r.responseStatus == true)
+            //    .Join(
+            //    _dBcontext.EventRequests
+            //    .Where(e => e.eventRequesterId == id));
+            
+        }
+
         //public Feedback getFeedback(Guid feedback)
         //{
         //    var f = _dBcontext.Feedbacks.Find(feedback);

@@ -17,13 +17,16 @@ namespace SalvationArmyProject.Controllers
         private IUserInfoRepository _iUserInfoRepository;
         private IFeedbackRepository _iFeedbackRepository;
         private IEventRequestRepository _iEventRequestRepository;
+        private IEventResponseRepository _iEventResponseRepository;
 
         public EventController(IEventRepository iEventRepository, IUserInfoRepository iUserInfoRepository,
-            IFeedbackRepository iFeedbackRepository, IEventRequestRepository iEventRequestRepository) {
+            IFeedbackRepository iFeedbackRepository, IEventRequestRepository iEventRequestRepository,
+            IEventResponseRepository iEventResponseRepository) {
             _iEventRepository = iEventRepository;
             _iUserInfoRepository = iUserInfoRepository;
             _iEventRequestRepository = iEventRequestRepository;
             _iFeedbackRepository = iFeedbackRepository;
+            _iEventResponseRepository = iEventResponseRepository;
         }
 
         [HttpGet]
@@ -150,9 +153,12 @@ namespace SalvationArmyProject.Controllers
         }
 
         [HttpPost("/event/response")]
-        public IActionResult Respond(EventResponseViewModel eventResponseView)
+        public IActionResult Respond([FromBody]EventResponseViewModel eventResponseView)
         {
-            if (ModelState.IsValid) {
+            if (eventResponseView == null) return BadRequest();
+            if (!ModelState.IsValid) return BadRequest();
+            if (ModelState.IsValid)
+            {
                 EventResponse eventResponse = new EventResponse()
                 {
                     eventResponseId = new Guid(),
@@ -160,22 +166,25 @@ namespace SalvationArmyProject.Controllers
                     eventResponseComent = eventResponseView.eventResponseComent,
                     eventResponseTime = new DateTime(),
                     responseStatus = eventResponseView.responseStatus
-                    
+
                 };
-                
+
                 EventRequest requestedEventTobeReponded = _iEventRequestRepository.getEventRequest(eventResponseView.eventRequestFK);
                 requestedEventTobeReponded.eventReponse = eventResponse;
+                _iEventResponseRepository.addEventResponse(eventResponse);
                 _iEventRequestRepository.updateEventRequest(requestedEventTobeReponded);
+            }
+            else {
+                throw new System.ArgumentException("Parameter cannot be null", "original"); 
             }
             return Ok(true);
         }
         
-
-
-        [HttpGet("/event/userevent/{id}")]
-        public IActionResult GetUserUpprovedEventById(Guid id) {
-
-            return null;
+        [HttpGet("/event/userApprovedEvents/{email}")]
+        public IActionResult GetUserUpprovedEventByEmail(string email) {
+            var user = _iUserInfoRepository.getUserByEmail(email);
+            var approvedUsers = _iEventRepository.GetUserUpprovedEventById(user.id);
+            return new JsonResult(approvedUsers);
         }
 
         [HttpGet("/event/eventrequests/{eventId}")]
@@ -184,6 +193,5 @@ namespace SalvationArmyProject.Controllers
             var eventreqests = _iEventRequestRepository.getEventReuqestByEventFK(new Guid(eventId));
             return new JsonResult(eventreqests);
         }
-
     }
 }

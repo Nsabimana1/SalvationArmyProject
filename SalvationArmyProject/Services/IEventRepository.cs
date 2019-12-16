@@ -19,5 +19,6 @@ namespace SalvationArmyProject.Services
         IEnumerable<Event> allEvents();
         // Feedback getFeedback(Guid feedback);
         void saveAllChanges();
+        IEnumerable<Event> GetUserUpprovedEventById(Guid id);
     }
 }
