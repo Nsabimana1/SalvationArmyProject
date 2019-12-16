@@ -60,7 +60,7 @@
 
 #scrollable {
     height: 402px;
-    width: 310px;
+    width: 320px;
     overflow-x: hidden;
     overflow-y: auto;
 }
