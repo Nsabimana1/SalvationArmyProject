@@ -52,10 +52,14 @@
     font-family: 'Open Sans Condensed', sans-serif;
     display: flex;
     align-items: center;
-    background-image: url("../images/pro_red_kettle.jpg");
+    background: linear-gradient(to bottom, rgba(237, 28, 43, 0.6) 0%, rgba(237, 28, 43, 0.6) 100%), url("../images/pro_red_kettle.jpg");
     background-size: cover;
-    color: rgb(52,70,95);
+    color: white;
     height: 100vh;
+}
+
+.alert {
+    margin-top: 3rem;
 }
 
 #scrollable {
@@ -67,6 +71,10 @@
 
 #pad {
     padding-bottom: 30px;
+}
+
+#marg {
+    margin-top: 55px;
 }
 
 #Register{

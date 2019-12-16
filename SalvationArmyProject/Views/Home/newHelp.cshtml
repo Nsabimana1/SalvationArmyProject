@@ -11,74 +11,74 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </head>
 
-<div class="container">
-    <body>
-        <h1>@ViewData["Title"]</h1>
-        <div class="main">
-            <div class="row justify-content-center text-center">
-                <div class="col-sm-7">
-                    <h3>Red Kettle</h3>
-                </div>
-                <div class="col-sm-5">
-                    <h2>Featured Events</h2>
-                </div>
+
+<body class="container">
+    <h1 id="marg">@ViewData["Title"]</h1>
+    <div class="main">
+        <div class="row justify-content-center text-center">
+            <div class="col-sm-7">
+                <h3>Red Kettle</h3>
             </div>
-            <div class="row justify-content-around text-center">
-                <div class="col-sm-6">
-                    <p>
-                        In 1891, Salvation Army Captain Joseph McFee was distraught because so many poor individuals in San Francisco were going hungry.
-                        During the holiday season, he resolved to provide a free Christmas dinner for the destitute and poverty-stricken. He only had one
-                        major hurdle to overcome -- funding the project. Where would the money come from, he wondered. He lay awake nights, worrying,
-                        thinking, praying about how he could find the funds to fulfill his commitment of feeding 1,000 of the city's poorest individuals
-                        on Christmas Day. As he pondered the issue, his thoughts drifted back to his sailor days in Liverpool, England. He remembered how
-                        at Stage Landing, where the boats came in, there was a large, iron kettle called "Simpson's Pot" into which passers-by tossed a
-                        coin or two to help the poor. The next day Captain McFee placed a similar pot at the Oakland Ferry Landing at the foot of Market
-                        Street. Beside the pot, he placed a sign that read, "Keep the Pot Boiling." He soon had the money to see that the needy people
-                        were properly fed at Christmas.
-                    </p>
-                </div>
-                <div id="scrollable">
-                    <div class="col-md-6">
-                        @foreach (var ev in Model)
-                        {
-                            <div class="card mb-2" style="width: 18rem;">
-                                <div class="card-body">
-                                    <h5 class="card-title">@ev.eventName</h5>
-                                    <p class="card-text">@ev.eventDescription</p>
-                                    <p class="card-text"><small class="text-muted">@ev.eventDateTime</small></p>
-                                    <a href="~/event/eventrequest/?id=@ev.eventId" class="btn btn-primary">volunteer</a>
-                                    <a href="#" class="btn btn-primary">View Feedback</a>
-                                </div>
-                            </div>
-                        }
-                        <div class="card" style="width: 18rem;">
+            <div class="col-sm-5">
+                <h2>Featured Events</h2>
+            </div>
+        </div>
+        <div class="row justify-content-around text-center">
+            <div class="col-sm-6">
+                <p>
+                    In 1891, Salvation Army Captain Joseph McFee was distraught because so many poor individuals in San Francisco were going hungry.
+                    During the holiday season, he resolved to provide a free Christmas dinner for the destitute and poverty-stricken. He only had one
+                    major hurdle to overcome -- funding the project. Where would the money come from, he wondered. He lay awake nights, worrying,
+                    thinking, praying about how he could find the funds to fulfill his commitment of feeding 1,000 of the city's poorest individuals
+                    on Christmas Day. As he pondered the issue, his thoughts drifted back to his sailor days in Liverpool, England. He remembered how
+                    at Stage Landing, where the boats came in, there was a large, iron kettle called "Simpson's Pot" into which passers-by tossed a
+                    coin or two to help the poor. The next day Captain McFee placed a similar pot at the Oakland Ferry Landing at the foot of Market
+                    Street. Beside the pot, he placed a sign that read, "Keep the Pot Boiling." He soon had the money to see that the needy people
+                    were properly fed at Christmas.
+                </p>
+            </div>
+            <div id="scrollable">
+                <div class="col-md-6">
+                    @foreach (var ev in Model)
+                    {
+                        <div class="card mb-2" style="width: 18rem;">
                             <div class="card-body">
-                                <h5 class="card-title">Special title treatment</h5>
-                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                                <h5 class="card-title">@ev.eventName</h5>
+                                <p class="card-text">@ev.eventDescription</p>
+                                <p class="card-text"><small class="text-muted">@ev.eventDateTime</small></p>
+                                <a href="~/event/eventrequest/?id=@ev.eventId" class="btn btn-primary">volunteer</a>
+                                <a href="#" class="btn btn-primary">View Feedback</a>
                             </div>
                         </div>
+                    }
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">Special title treatment</h5>
+                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
                     </div>
-                    <div class="col-md-4">
+                </div>
+                <div class="col-md-4">
 
-                    </div>
-                </div>
-            </div>
-            <div class="row text-center">
-                <div class="col-sm-4">
-                    <h3>Angle Tree</h3>
-                </div>
-            </div>
-            <div class="row" id="pad">
-                <div class="col-sm-6">
-                    <p>
-                        The Salvation Army's Angel Tree program provides new clothing and/or toys for children of needy families. Each Angel Tree is
-                        decorated with numbered paper angel tags with the first name, age, and gender of a child who is in need of a gift.
-                    </p>
                 </div>
             </div>
         </div>
-    </body>
-</div>
+        <div class="row text-center">
+            <div class="col-sm-4">
+                <h3>Angle Tree</h3>
+            </div>
+        </div>
+        <div class="row" id="pad">
+            <div class="col-sm-6">
+                <p>
+                    The Salvation Army's Angel Tree program provides new clothing and/or toys for children of needy families. Each Angel Tree is
+                    decorated with numbered paper angel tags with the first name, age, and gender of a child who is in need of a gift.
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+
 
