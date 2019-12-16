@@ -2,9 +2,8 @@
     ViewData["Title"] = "My Events";
 }
 <head>
-     <link rel="stylesheet" href="~/css/custom.css"/>
+    <link rel="stylesheet" href="~/css/custom.css"/>
     <link href="https://fonts.googleapis.com/css?family=McLaren|Montserrat&display=swap" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 </head>
 
@@ -30,56 +29,6 @@
         </table>
     </div>
 
-    <script>
-        $(document).ready(function () {
-            $.ajax({
-                type: 'get',
-                dataType: "json",
-                url: "https://localhost:44326/event/all",
-                success: function (results) {
-                    for (var a = 0; a < results.length; a++){
-
-                        var i = results[a];
-
-                        var type = i['eventName'];
-                        var time = i['eventDateTime'];
-                        var dur = (i['eventDuration']);
-                        var desc = i['eventDescription'];
-
-                        modalDivs(type, time, a);
-                   
-                        var feed = `<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal${a}"> this${a} </button>`;
-                        var toAppend = '<tr><td>' + type + '</td><td>' + time + '</td><td>' + dur + ' hours</td><td>' + desc + '</td><td>' + feed + '</td></tr>';
-
-                        $('.table').append(toAppend);
-
-                    }
-                    function modalDivs(type, time, a) {
-
-                        console.log("testing");
-                        var modalBody = $('<div class="modal-body"></div>').text('yes');
-
-                        var modalTitle = $('<h4 class="modal-title"></h4>').text("Give us feed back on " + type + "for " + time + " hours.");
-                        var times = $('<span aria-hidden="true"></span>').append('&times;');
-                        var closeButton = $('<button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>').append(times);
-                        var modalHeader = $('<div class="modal-header"></div>').append(modalTitle, closeButton);
-
-                        var modalContent = $('<div class="modal-content"></div>').append(modalHeader, modalBody);
-                        var modalDialog = $(`<div class="modal-dialog"></div>`).append(modalContent);
-                        var modal = $(`<div id="modal${a}" class="modal fade" role="dialog"></div>`).append(modalDialog);
-
-                        console.log($(`#modal${a}`));
-                           
-                        $('#mainTable').before(modal);
-                    }
-                    //$(function (a) {
-                    //    $('[data-toggle="popover"]').popover();
-                    //})
-                }
-            });
-        });
-
-        
-
-    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="~/js/myEvents.js"></script>
 </body>

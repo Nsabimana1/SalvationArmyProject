@@ -14,15 +14,11 @@
 
 
 <body>
-<<<<<<< Updated upstream
     <div class="tab">
         <button class="tablinks" onclick="ChangeTab(event, 'Events')">Events</button>
 
 
     </div>
-=======
-   
->>>>>>> Stashed changes
     <div id="Events" class="tabcontent">
         <h3 id="admintable">Events</h3>
         <a href="/event/eventaddition" id="newevent" class="btn btn-info">Create Event</a>
@@ -30,62 +26,39 @@
         <button type="button" class="btn btn-info" id="myBtn"> View Volunteers</button>
         <p>
             <table id ="table" style="width:100%">
-
-
                 <tr>
-                 
                     <th>Event Type</th>
                     <th>Date/Time</th>
                     <th>Duration</th>
                     <th>Description</th>
-                    
                 </tr>
-
-                  <tbody>
-                      <tr class="tabboby">
-                          
-                      </tr>
+                <tbody>
+                    <tr class="tabboby">
+                    </tr>
                   </tbody>
-
-              </table>
-          </p>
-<<<<<<< Updated upstream
-            <button class ="btnTest">
-                load table
-            </button>
-            <button class='users'>
-                users
-            </button>
-
+            </table>
+        </p>
+        <button class ="btnTest">
+            load table
+        </button>
+        <button class='users'>
+            users
+        </button>
+    </div>
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3 id="admintable">Event Request</h3>
+            <p>
+                <table id="atable" style="width:100%">
+                    <tr>
+                        <th>Name</th>
+                        <th>Date</th>
+                    </tr>
+                </table>
+            </p>
         </div>
-
-
-        <div id="myModal" class="modal">
-
-          <!-- Modal content -->
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <h3 id="admintable">Event Request</h3>
-          <p>
-              <table id="atable" style="width:100%">
-                  <tr>
-
-
-                  <th>Name</th>
-
-                  <th>Date</th>
-
-                  </tr>
-              </table>
-          </p>
-            </div>
-=======
-            
-            
-             
-        </div>
-
-        
+    </div>
     <div class="modal" id="myModal" role="dialog">
     
     
@@ -241,8 +214,7 @@
             $("#myModal").modal();
           });
         });
-            
->>>>>>> Stashed changes
+         
 
     </script>
 </body>

@@ -169,7 +169,26 @@ namespace SalvationArmyProject.Controllers
             }
             return Ok(true);
         }
-        
+
+        [HttpPost("/event/feedbackPost")]
+        public IActionResult FeedbackPost(FeedbackViewModel feedback)
+        {
+            if (ModelState.IsValid)
+            {
+                var feedbackN = new Feedback()
+                {
+                    feedbackId = new Guid(),
+                    feedbackContent = feedback.feedbackContent,
+                    eventFK = feedback.eventID,
+                    userFK = feedback.userID,
+                    Event = _iEventRepository.getEvent(feedback.eventID),
+                    User = _iUserInfoRepository.getUser(feedback.userID)
+                };
+                this._iFeedbackRepository.addFeedback(feedbackN);
+                return RedirectToAction("myEvents", "Event");
+            }
+            return View(feedback);
+        }
 
 
         [HttpGet("/event/userevent/{id}")]
