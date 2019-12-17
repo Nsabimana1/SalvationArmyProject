@@ -2,7 +2,7 @@
     $.ajax({
         type: 'get',
         dataType: "json",
-        url: "https://localhost:5001/event/userevent/{id}",
+        url: 'https://localhost:5001/event/userApprovedEvents/' + $('#email').text(),
         success: function (results) {
             for (var a = 0; a < results.length; a++) {
 
