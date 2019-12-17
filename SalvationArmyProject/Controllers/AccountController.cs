@@ -95,7 +95,7 @@ namespace SalvationArmyProject.Controllers
         }
 
         [HttpPost("/Account/Profile")]
-        public IActionResult Profile(UserProfileViewModel model){
+        public IActionResult Profile([FromForm] UserProfileViewModel model){
             if (ModelState.IsValid)
             {
                 var user = _userInfoRepository.getUser(model.id);
