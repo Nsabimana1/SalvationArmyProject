@@ -16,25 +16,25 @@
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
                 <label id="reg" asp-for="firstName">First Name</label>
-                <input value="model.firstName" asp-for="firstName" class="form-control" />
+                <input asp-for="firstName" class="form-control" />
                 <span asp-validation-for="firstName" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label id="reg" asp-for="lastName">Last Name</label>
-                <input value="model.lastName" asp-for="lastName" class="form-control" />
+                <input asp-for="lastName" class="form-control" />
                 <span asp-validation-for="lastName" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label id="reg" asp-for="birthDate">Date of Birth</label>
-                <input value="@Model.birthDate" type="date" asp-for="birthDate" class="form-control" />
+                <input type="date" asp-for="birthDate" class="form-control" />
                 <span asp-validation-for="birthDate" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label id="reg" asp-for="phoneNumber">Phone Number</label>
-                <input value="@Model.phoneNumber" asp-for="phoneNumber" class="form-control" />
+                <input asp-for="phoneNumber" class="form-control" />
                 <span asp-validation-for="phoneNumber" class="text-danger"></span>
             </div>
 
