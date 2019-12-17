@@ -41,7 +41,11 @@
                         var i = results[a];
 
                         var type = i['eventName'];
-                        var time = i['eventDateTime'];
+                        
+                        var ti = new Date(i['eventDateTime']);
+                        var day = ti.getDate();
+                        var month = ti.getMonth();
+                        var year = ti.getFullYear();
                         var dur = (i['eventDuration']);
                         var desc = i['eventDescription'];
                         var event_id = i['eventId'];
@@ -49,8 +53,9 @@
                         modalDivs(event_id, a);
 
 
-                        var feed = `<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal${a}"> Delete Event </button>`;
-                        var toAppend = '<tr><td>' + type + '</td><td>' + time + '</td><td>' + dur + ' hours</td><td>' + desc + '</td><td>' + feed + '</td></tr>';
+                       var feed = `<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal${a}"> View Volunteers </button>`;
+                        var del = `<button id="button${a}" onclick="deny('button${a}')" type="button" class="bt btn - info" data-id="` + event_id + `">Delete</button>`;
+                        var toAppend = '<tr><td>' + type + '</td><td>' + month + '-' + day + '-' + year + '</td><td>' + dur + ' hours</td><td>' + desc + '</td><td>' + feed + '</td><td>' + del + '</td>/tr>';
 
                         $('#table').append(toAppend);
 
@@ -141,6 +146,19 @@
                 },
                 error: function (result) {
                     console.log(result);
+                }
+            });
+        }
+    </script>
+    <script>
+        function deny(buttonId) {
+            var event_Id = $(`#${buttonId}`).attr('data-id')
+            console.log(event_Id);
+            $.ajax({
+                url: 'https://localhost:5001/event/' + event_Id,
+                type: 'DELETE',
+                success: function (result) {
+                    console.log()
                 }
             });
         }
