@@ -217,10 +217,11 @@ namespace SalvationArmyProject.Controllers
             return View(feedback);
         }
 
-        [HttpDelete("/event/delete/{Id}")]
-        public IActionResult DeleteEvent(Guid id)
+        [HttpDelete("/event/delete/{id}")]
+        public IActionResult DeleteEvent(Guid Id)
         {
-            _iEventRepository.removeEvent(id);
+            _iEventRepository.removeEvent(Id);
+            _iEventRepository.saveAllChanges();
             return RedirectToAction("admin", "home");
         }
     }

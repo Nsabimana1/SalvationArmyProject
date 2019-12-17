@@ -41,13 +41,16 @@
                             <li class="nav-item">
                                 <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="newHelp">Volunteer</a>
                             </li>
-                          
+
                             <li class="nav-item">
                                 <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Contact">Contact Us</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Admin">Admin</a>
-                            </li>
+                            @if ((signInManager.IsSignedIn(User)) && User.Identity.Name == "nsabimanaii@hendrix.edu")
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Admin">Admin</a>
+                                </li>
+                            }
                         </ul>
 
                     </div>

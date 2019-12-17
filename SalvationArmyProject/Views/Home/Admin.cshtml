@@ -34,7 +34,7 @@
             $.ajax({
             type: 'get',
             dataType: "json",
-            url: 'https://localhost:5001/event/all',
+            url: 'https://localhost:44326/event/all',
                 success: function (results) {
                     for (var a = 0; a < results.length; a++) {
 
@@ -83,7 +83,7 @@
                         $.ajax({
                             type: 'get',
                             dataType: 'json',
-                            url: 'https://localhost:5001/user/' + requesterID,
+                            url: 'https://localhost:44326/user/' + requesterID,
                             success: function (results) {
 
                                 var name = results['firstName'] + ' ' + results['lastName'];
@@ -98,7 +98,7 @@
                         $.ajax({
                             type: 'get',
                             dataType: 'json',
-                            url: 'https://localhost:5001/event/eventrequests/' + event_id,
+                            url: 'https://localhost:44326/event/eventrequests/' + event_id,
                             success: function (results) {
                                 for (i = 0; i < results.length; i++) {
                                     modalBodyTable(results[i]['eventRequesterId'], results[i]['eventRequestId'], a, i)
@@ -130,7 +130,7 @@
                 accept: 'application/json',
                 header: 'application/json',
                 type: 'POST',
-                url: "https://localhost:5001/event/response",
+                url: "https://localhost:44326/event/response",
                 data: JSON.stringify({
                     eventRequestFK: eventRequestId,
                     responseStatus: true,
