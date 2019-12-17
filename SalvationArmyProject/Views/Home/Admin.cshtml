@@ -29,6 +29,7 @@
         </table>
     </p>
     <script>
+        
         $(document).ready(function () {
             $.ajax({
             type: 'get',
@@ -44,7 +45,6 @@
                         var dur = (i['eventDuration']);
                         var desc = i['eventDescription'];
                         var event_id = i['eventId'];
-                        console.log(event_id);
 
                         modalDivs(event_id, a);
 
@@ -59,10 +59,10 @@
                     function modalDivs(event_id, a) {
 
                         var name, buttons = requesters(event_id, a)
-                        var tableBody = $(`<tbody id="tbody${a}"></tbody>`).append(name, buttons);
+                        var tableBody = $('<tbody></tbody>').append(name, buttons);
 
                         var tableHead = $('<tr></tr>').append('<th>Name</th><th>Approve</th>');
-                        var table = $('<table></table>').append(tableHead, tableBody);
+                        var table = $(`<table id="table${a}"></table>`).append(tableHead, tableBody);
                         var modalBody = $('<div class="modal-body"></div>').append(table);
 
                         var modalTitle = $('<h4 class="modal-title"></h4>').text("Volunteers");
@@ -74,26 +74,12 @@
                         var modalDialog = $(`<div class="modal-dialog modal-lg"></div>`).append(modalContent);
                         var modal = $(`<div id="modal${a}" class="modal fade"></div>`).append(modalDialog);
 
+
+
                         $('#mainTable').before(modal);
                     }
 
-
-                    function requesters(event_id, a) {
-                        $.ajax({
-                            type: 'get',
-                            dataType: 'json',
-                            url: 'https://localhost:5001/event/eventrequests/' + event_id,
-                            success: function (results) {
-                                for (i = 0; i < results.length; i++) {
-                                    modalBodyTable(results[i]['eventRequesterId'], a)
-                  
-                                }
-
-                            }
-                        });
-                    }
-
-                    function modalBodyTable(requesterID, a) {
+                    function modalBodyTable(requesterID, eventRequestId, a, i) {
                         $.ajax({
                             type: 'get',
                             dataType: 'json',
@@ -101,68 +87,63 @@
                             success: function (results) {
 
                                 var name = results['firstName'] + ' ' + results['lastName'];
-                                var trow = $('<tr></tr>').append('<td>' + name + `</td><td><button id="Accept_button${a}" type="button" class="bt btn-info">Accept</button></td>`);
+                                var trow = $('<tr></tr>').append('<td>' + name + `</td><td><button id="button${i}${a}" onclick="accept('button${i}${a}')" type="button" class="bt btn - info" data-id="` + eventRequestId + `">Accept</button></td>`);
                                 
-                                $(`#tbody${a}`).append(trow);
-
+                                $(`#table${a}`).append(trow);  
                             }
                         });
                         
                     }
+                    function requesters(event_id, a) {
+                        $.ajax({
+                            type: 'get',
+                            dataType: 'json',
+                            url: 'https://localhost:5001/event/eventrequests/' + event_id,
+                            success: function (results) {
+                                for (i = 0; i < results.length; i++) {
+                                    modalBodyTable(results[i]['eventRequesterId'], results[i]['eventRequestId'], a, i)
+                                }
+
+                            }
+                        });
+                    }
                 }
             });
-
-            //$.ajax({
-            //    type: 'get',
-            //    dataType: "json",
-            //    url: "https://localhost:5001/event/all",
-            //    success: function (results) {
-            //        for (var a = 0; a < results.length; a++){
-
-            //            var i = results[a];
-
-            //            var type = i['eventName'];
-            //            var ti = i['eventDateTime'];
-            //            var regex = new RegExp('/([0-9]|0[0-9]|1[0-9])/([0 - 9][0 - 9] | [0 - 9]) / [0 - 9]{ 4} at ([0 - 9] | 0[0 - 9] | 1[0 - 9]): [0 - 9]{ 2 }: [0 - 9]{ 2 } (AM | PM)/g');
-            //            var date = ti.split(regex);
-            //            var dur = (i['eventDuration']);
-            //            var desc = i['eventDescription'];
-            //            var event_id = i['eventId'];
-
-            //            $('#table').append('<tr><td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal"></button><td>' + type + '</td><td>' + date + '</td><td>' + dur + 'hrs' + '</td><td>' + desc + '</td><td><a href="/event/eventaddition" id="newevent" class="btn btn-info">Delete Event</a></td></tr>');
-            //            eventRequest(event_id);
-
-            //        }
-            //    }
-            //});
-
-            //function eventRequest(event_id) {
-            //    $.ajax({
-            //    type: 'get',
-            //    dataType: "json",
-            //    url: "https://localhost:5001/event/eventrequests/" + event_id,
-            //        success: function (results) {
-            //            for (var a = 0; a < results.length; a++) {
-            //                var i = results[a];
-            //                var user_id = i['eventRequesterId'];
-            //                var date = (i['eventRequestDate']);
-            //                var eventResponseFK = i['eventRequestId'];
-
-            //                var name = getUser(user_id);
-            //                console.log(name);
-
-                            
-
-            //                //var first = user['firstName'];
-            //                //console.log('test');
-            //                //var last = user['lastName'];
-
-            //                $('#atable').append('<tr><td>' + name + '</td><td>' + date + `</td><td><button id="Accept_button${a}" type="button" class="bt btn-info">Accept</button></td><td><button type="button" class="btn btn-info">` + 'Deny' + '</button></td></tr>');
-            //            }
-            //        }
-            //    });
-            ////            responseStatus: True,
         });
+    </script>
+    <script>
+        function accept(buttonId) {
 
+            var eventRequestId = $(`#${buttonId}`).attr('data-id')
+            var datatoreturn = {
+                eventRequestFK: eventRequestId, responseStatus: true,
+                eventResponseComment: 'You are Accepted. If you have volunteered for more than 3 days, you must fill out a volunteer registration form. Please do so and bring it by our office so that we can allow you to continue volunteering!'
+            };
+
+            var jsonstringfy = JSON.stringify(datatoreturn)
+
+            console.log(jsonstringfy);
+
+            $.ajax({
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                accept: 'application/json',
+                header: 'application/json',
+                type: 'POST',
+                url: "https://localhost:5001/event/response",
+                data: JSON.stringify({
+                    eventRequestFK: eventRequestId,
+                    responseStatus: true,
+                    eventResponseComment: 'You are Accepted. If you have volunteered for more than 3 days, you must fill out a volunteer registration form. Please do so and bring it by our office so that we can allow you to continue volunteering!'
+                }),
+                success: function (result) {
+                    console.log(result);
+                },
+                error: function (result) {
+                    console.log(result);
+                }
+            });
+        }
     </script>
 </body>
+ 

@@ -156,7 +156,7 @@ namespace SalvationArmyProject.Controllers
         public IActionResult Respond([FromBody]EventResponseViewModel eventResponseView)
         {
             if (eventResponseView == null) return BadRequest();
-            if (!ModelState.IsValid) return BadRequest();
+            if (!ModelState.IsValid) return BadRequest(ModelState);
             if (ModelState.IsValid)
             {
                 EventResponse eventResponse = new EventResponse()
