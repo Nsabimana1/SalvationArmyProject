@@ -61,10 +61,10 @@
                                     <i class="fa fa-caret-down"></i>
                                 </button>
                                 <div class="dropdown-content">
-                                    <a href="../Account/Profile">Profile</a>
-                                    <a href="../Event/MyEvents">My Events</a>
+                                    <a href="~/Account/Profile/@User.Identity.Name">Profile</a>
+                                    <a href="~/Event/MyEvents">My Events</a>
                                     <form asp-action="logout" asp-controller="account">
-                                        <input  value="Logout" type="submit"></input>
+                                        <input class="btn justify-content-end"  value="Logout" type="submit"></input>
                                     </form>
                                     @*<a href="~/account/logout"><form method="post" asp-action="logout" asp-controller="account"></form>Logout</a>*@
                                 </div>

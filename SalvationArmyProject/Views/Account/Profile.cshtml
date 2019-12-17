@@ -1,54 +1,71 @@
-@model UserDto
-
+@model ProfileViewModelReturn
 @{
-    ViewData["Title"] = "User";
+    ViewData["Title"] = "Profile";
 }
+    <div class="container" id="marg">
+        <div class="row">
+            <div class="col-md-6">
+                <form method="post" action="~/Account/Profile">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="form-group">
+                        <input type="hidden" value="@Model.currentUser.id" asp-for="profileViewModel.id" class="form-control" />
+                        <span asp-validation-for="profileViewModel.id" class="text-danger"></span>
+                    </div>
 
-    <head>
-        <script src="https://kit.fontawesome.com/ad6a81734d.js" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="~/css/custom.css" />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    </head>
-<body>
-    <h1>Profile</h1>
-    <div class="col-sm-6" id="info">
-        <form method="post">
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
-                <label id="reg" asp-for="firstName">First Name</label>
-                <input value="" asp-for="firstName" class="form-control" />
-                <span asp-validation-for="firstName" class="text-danger"></span>
+                    <div class="form-group">
+                        <label id="reg" asp-for="profileViewModel.firstName">First Name</label>
+                        <input value="@Model.currentUser.firstName" asp-for="profileViewModel.firstName" class="form-control" />
+                        <span asp-validation-for="profileViewModel.firstName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label id="reg" asp-for="profileViewModel.lastName">Last Name</label>
+                        <input value="@Model.currentUser.lastName" asp-for="profileViewModel.lastName" class="form-control" />
+                        <span asp-validation-for="profileViewModel.lastName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label id="reg" asp-for="profileViewModel.email">Email</label>
+                        <input value="@Model.currentUser.email" asp-for="profileViewModel.email" class="form-control" />
+                        <span asp-validation-for="profileViewModel.email" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label id="reg" asp-for="currentUser.birthDate">Birth Date</label>
+                        <input type="date" value="@Model.currentUser.birthDate" asp-for="profileViewModel.birthDate" class="form-control" />
+                        <span asp-validation-for="currentUser.birthDate" class="text-danger"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </form>
             </div>
+            <div class="col-md-2">
 
-            <div class="form-group">
-                <label id="reg" asp-for="lastName">Last Name</label>
-                <input asp-for="lastName" class="form-control" />
-                <span asp-validation-for="lastName" class="text-danger"></span>
             </div>
-
-            <div class="form-group">
-                <label id="reg" asp-for="birthDate">Date of Birth</label>
-                <input type="date" asp-for="birthDate" class="form-control" />
-                <span asp-validation-for="birthDate" class="text-danger"></span>
+            <div class="col-md-4" id="marg">
+                <div id="scrollable">
+                    @foreach (var ev in Model.userResponces)
+                    {
+                        <div class="card mb-2" style="width: 18rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">@ev.EventRequest</h5>
+                                <p class="card-text">@ev.eventResponseComent</p>
+                                <p class="card-text"><small class="text-muted">@ev.eventResponseTime</small></p>
+                                @*<a href="~/event/eventrequest/?id=@ev.eventId" class="btn btn-primary">volunteer</a>*@
+                            </div>
+                        </div>
+                    }
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">Special title treatment</h5>
+                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </div>
 
-            <div class="form-group">
-                <label id="reg" asp-for="phoneNumber">Phone Number</label>
-                <input asp-for="phoneNumber" class="form-control" />
-                <span asp-validation-for="phoneNumber" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label id="reg" asp-for="email">Email</label>
-                <input value="@User.Identity.Name" asp-for="email" class="form-control" />
-                <span asp-validation-for="email" class="text-danger"></span>
-            </div>
-            <button type="submit" class="btn btn-primary">Save Changes</button>
-        </form>
-</div>
-
-    <script>
-
-       
-    </script>
-</body>
+    </div>
+    

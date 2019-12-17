@@ -49,6 +49,27 @@ namespace SalvationArmyProject.Services
             _dbContext.SaveChanges();
         }
 
+        public IEnumerable<EventResponse> getRequestResponsesByUser(Guid id)
+        {
+            //var allreponses = _dBContext.EventResponses.Select(s => {
+            //    s.eventRequestFK;
+            //    if (_dBContext.EventRequests.Where(e => e.eventRequestId == s.eventRequestFK && e.eventRequesterId == id)) {
+
+            //    }
+            //    }
+            //var allreponses = _dBContext.EventResponses.Where<EventRequest, EventResponse>(s => _dBContext.EventRequests.Where<EventResponse>(e => e.eventRequestId == s.eventRequestFK && e.eventRequesterId == id));
+
+            List<EventResponse> eventResp = new List<EventResponse>();
+            foreach (var er in _dbContext.EventResponses)
+            {
+                if (this.getEventRequest(er.eventRequestFK).eventRequesterId == id) {
+                    eventResp.Add(er);
+                }
+            }
+            return eventResp;
+        }
+
+
         public void updateEventRequest(EventRequest eventRequest)
         {
             var evenReq = _dbContext.EventRequests.Where(e => e.eventRequestId == eventRequest.eventRequestId).FirstOrDefault();

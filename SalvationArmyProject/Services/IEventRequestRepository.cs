@@ -15,6 +15,7 @@ namespace SalvationArmyProject.Services
         void removeEventRequest(Guid id);
         void updateEventRequest(EventRequest e);
         IEnumerable<EventRequest> allEventRequests();
+        IEnumerable<EventResponse> getRequestResponsesByUser(Guid id);
         void saveAllChanges();
 
     }

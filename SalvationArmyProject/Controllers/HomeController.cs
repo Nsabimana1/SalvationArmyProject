@@ -8,16 +8,21 @@ using Microsoft.AspNetCore.Mvc;
 using SalvationArmyProject.Models;
 using SalvationArmyProject.ViewModels;
 using SalvationArmyProject.Services;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace SalvationArmyProject.Controllers
 {
     public class HomeController : Controller
     {
         private IEventRepository _iEventRepository;
+        private readonly SignInManager<IdentityUser> _signInManager;
 
-        public HomeController(IEventRepository iEventRepository) {
+        public HomeController(IEventRepository iEventRepository, SignInManager<IdentityUser> signInManager) {
             _iEventRepository = iEventRepository;
+            _signInManager = signInManager;
         }
+        
         public IActionResult Index()
         {
             return View();
@@ -50,7 +55,7 @@ namespace SalvationArmyProject.Controllers
         {
             return View();
         }
-
+        
         public IActionResult Admin()
         {
             return View();
