@@ -1,5 +1,7 @@
-@{
+@model UserDto
 
+@{
+    ViewData["Title"] = "User";
 }
 
     <head>
@@ -9,76 +11,44 @@
     </head>
 <body>
     <h1>Profile</h1>
-    <div class="container" id="info">
-        <h4>Name:</h4>
-        <div id="Name">
+    <div class="col-sm-6" id="info">
+        <form method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label id="reg" asp-for="firstName">First Name</label>
+                <input value="" asp-for="firstName" class="form-control" />
+                <span asp-validation-for="firstName" class="text-danger"></span>
+            </div>
 
-        </div>
-        <h4>Email:</h4>
-        <div id="Email">
+            <div class="form-group">
+                <label id="reg" asp-for="lastName">Last Name</label>
+                <input asp-for="lastName" class="form-control" />
+                <span asp-validation-for="lastName" class="text-danger"></span>
+            </div>
 
-        </div>
-        <h4>Phone Number:</h4>
-        <div id="phoneNum">
+            <div class="form-group">
+                <label id="reg" asp-for="birthDate">Date of Birth</label>
+                <input type="date" asp-for="birthDate" class="form-control" />
+                <span asp-validation-for="birthDate" class="text-danger"></span>
+            </div>
 
-        </div>
-        <h4>Birth Date:</h4>
-        <div id="bDate">
+            <div class="form-group">
+                <label id="reg" asp-for="phoneNumber">Phone Number</label>
+                <input asp-for="phoneNumber" class="form-control" />
+                <span asp-validation-for="phoneNumber" class="text-danger"></span>
+            </div>
 
-        </div>
-    </div>
-    
+            <div class="form-group">
+                <label id="reg" asp-for="email">Email</label>
+                <input value="@User.Identity.Name" asp-for="email" class="form-control" />
+                <span asp-validation-for="email" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+        </form>
+</div>
 
     <script>
-        $(document).ready(function () {
 
-            function getUserInfo(){
-                var email = @User.Identity.Name;
-                console.log(email);
-
-                $.ajax({
-                    type: 'get',
-                    datatype: 'json',
-                    url: "https://localhost:5001/users/" + email,
-                    success: function (results) {
-                    var fName = results['firstName'],
-                    var lName = results['lastName'],
-                    var birth = results['birthDate'],
-                    var phone = results['phoneNumber'],
-                    }
-                })
-
-                console.log(fName);
-                console.log(lName);
-                console.log(birth);
-                console.log(phone);
-
-                if (fName == null) {
-                    fName = "N/A";
-                }
-                if (lName == null) {
-                    lName = "N/A";
-                }
-                if (birth == null) {
-                    birth = "N/A";
-                }
-                if (phone == null) {
-                    phone = "N/A";
-                }
-
-                $("#Name").append(fName + " " + lName);
-                $("#Email").append(email);
-                $("#phoneNum").append(phone);
-                $("#bDate").append(birth);
-           
-            }
-
-            window.onload({
-                getUserInfo();
-            })
-        })
-            
-
-            
+       
     </script>
 </body>
