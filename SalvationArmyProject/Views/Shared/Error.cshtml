@@ -2,9 +2,12 @@
 @{
     ViewData["Title"] = "Error";
 }
-
+    <head>
+        <script src="https://kit.fontawesome.com/ad6a81734d.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="~/css/custom.css" />
+    </head>
 <h1 class="text-danger">Error.</h1>
-<h2 class="text-danger">An error occurred while processing your request.</h2>
+<h2 class="text-danger">We are sorry, but an error has occured.</h2>
 
 @if (Model.ShowRequestId)
 {
@@ -12,6 +15,9 @@
         <strong>Request ID:</strong> <code>@Model.RequestId</code>
     </p>
 }
+
+<p>Please click the button below to be redirected to the home page.</p>
+<a href="~/Home/Index.cshtml">Click me to be redirected</a>
 
 <h3>Development Mode</h3>
 <p>
