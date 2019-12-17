@@ -12,7 +12,6 @@
 	  <EmbeddedResource Remove="images\**" />
 	  <None Remove="images\**" />
 	  <None Remove="SalvationArmyDatabase.db" />
-	  <Content Remove="Views\Home\Admin.cshtml" />
 	  <Content Remove="wwwroot\css\custom.css" />
 	</ItemGroup>
 
