@@ -10,7 +10,7 @@
 
 </head>
 
-<body id="mainTable" class="container">
+<body id="mainTable" class="container scrollable">
     <div class="tab" id="marg">
         <h3 id="admintable">Events</h3>
         <a href="/event/eventaddition" id="newevent" class="btn btn-info">Create Event</a>
@@ -120,15 +120,6 @@
         function accept(buttonId) {
 
             var eventRequestId = $(`#${buttonId}`).attr('data-id')
-            var datatoreturn = {
-                eventRequestFK: eventRequestId, responseStatus: true,
-                eventResponseComment: 'You are Accepted. If you have volunteered for more than 3 days, you must fill out a volunteer registration form. Please do so and bring it by our office so that we can allow you to continue volunteering!'
-            };
-
-            var jsonstringfy = JSON.stringify(datatoreturn)
-
-            console.log(jsonstringfy);
-
             $.ajax({
                 contentType: 'application/json; charset=utf-8',
                 dataType: 'json',
