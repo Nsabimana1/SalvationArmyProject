@@ -216,5 +216,12 @@ namespace SalvationArmyProject.Controllers
             }
             return View(feedback);
         }
+
+        [HttpDelete("/event/delete/{Id}")]
+        public IActionResult DeleteEvent(Guid id)
+        {
+            _iEventRepository.removeEvent(id);
+            return RedirectToAction("admin", "home");
+        }
     }
 }

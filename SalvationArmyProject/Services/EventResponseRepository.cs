@@ -33,6 +33,8 @@ namespace SalvationArmyProject.Services
             throw new NotImplementedException();
         }
 
+        
+
         public void removeEventResponse(Guid id)
         {
             throw new NotImplementedException();

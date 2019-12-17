@@ -43,7 +43,7 @@ namespace SalvationArmyProject.Services
 
         public void updateUser(User user)
         {
-            throw new NotImplementedException();
+            _dBcontext.Users.Update(user);
         }
 
         public User getUserByEmail(string email)

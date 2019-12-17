@@ -15,12 +15,16 @@ namespace SalvationArmyProject.Controllers
         private readonly UserManager<IdentityUser> userManager;
         private readonly SignInManager<IdentityUser> signInManager;
         private IUserInfoRepository _userInfoRepository;
-        public AccountController(UserManager<IdentityUser> userManager, 
-            SignInManager<IdentityUser> signInManager, IUserInfoRepository userInfoRepository)
+        private IEventRequestRepository _iEventRequestRepository;
+        public AccountController(UserManager<IdentityUser> userManager,
+            SignInManager<IdentityUser> signInManager, IUserInfoRepository userInfoRepository,
+            IEventRequestRepository iEventRequestRepository
+            )
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this._userInfoRepository = userInfoRepository;
+            this._iEventRequestRepository = iEventRequestRepository;
         }
 
 
@@ -71,7 +75,7 @@ namespace SalvationArmyProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await signInManager.PasswordSignInAsync(model.Email,model.Password, model.RememberMe, false);
+                var result = await signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
                 if (result.Succeeded) {
                     return RedirectToAction("index", "home");
                 }
@@ -79,9 +83,30 @@ namespace SalvationArmyProject.Controllers
             }
             return View(model);
         }
-        public IActionResult Profile()
+        [HttpGet("/Account/Profile/{email}")]
+        public IActionResult Profile(string email)
         {
-            return View();
+            var user = _userInfoRepository.getUserByEmail(email);
+            IEnumerable<EventResponse> resp = _iEventRequestRepository.getRequestResponsesByUser(user.id);
+            ProfileViewModelReturn model = new ProfileViewModelReturn();
+            model.currentUser = user;
+            model.userResponces = resp;
+            return View(model);
+        }
+
+        [HttpPost("/Account/Profile")]
+        public IActionResult Profile(UserProfileViewModel model){
+            if (ModelState.IsValid)
+            {
+                var user = _userInfoRepository.getUser(model.id);
+                if (user != null) {
+                    _userInfoRepository.updateUser(user);
+                }
+                return RedirectToAction("index", "home");
+            }
+            else {
+                return View(model);
+            }
         }
     }
 }

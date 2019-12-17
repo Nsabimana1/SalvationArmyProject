@@ -1,84 +1,71 @@
+@model ProfileViewModelReturn
 @{
-
+    ViewData["Title"] = "Profile";
 }
+    <div class="container" id="marg">
+        <div class="row">
+            <div class="col-md-6">
+                <form method="post" action="~/Account/Profile">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="form-group">
+                        <input type="hidden" value="@Model.currentUser.id" asp-for="profileViewModel.id" class="form-control" />
+                        <span asp-validation-for="profileViewModel.id" class="text-danger"></span>
+                    </div>
 
-    <head>
-        <script src="https://kit.fontawesome.com/ad6a81734d.js" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="~/css/custom.css" />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    </head>
-<body>
-    <h1>Profile</h1>
-    <div class="container" id="info">
-        <h4>Name:</h4>
-        <div id="Name">
+                    <div class="form-group">
+                        <label id="reg" asp-for="profileViewModel.firstName">First Name</label>
+                        <input value="@Model.currentUser.firstName" asp-for="profileViewModel.firstName" class="form-control" />
+                        <span asp-validation-for="profileViewModel.firstName" class="text-danger"></span>
+                    </div>
 
+                    <div class="form-group">
+                        <label id="reg" asp-for="profileViewModel.lastName">Last Name</label>
+                        <input value="@Model.currentUser.lastName" asp-for="profileViewModel.lastName" class="form-control" />
+                        <span asp-validation-for="profileViewModel.lastName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label id="reg" asp-for="profileViewModel.email">Email</label>
+                        <input value="@Model.currentUser.email" asp-for="profileViewModel.email" class="form-control" />
+                        <span asp-validation-for="profileViewModel.email" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label id="reg" asp-for="currentUser.birthDate">Birth Date</label>
+                        <input type="date" value="@Model.currentUser.birthDate" asp-for="profileViewModel.birthDate" class="form-control" />
+                        <span asp-validation-for="currentUser.birthDate" class="text-danger"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </form>
+            </div>
+            <div class="col-md-2">
+
+            </div>
+            <div class="col-md-4" id="marg">
+                <div id="scrollable">
+                    @foreach (var ev in Model.userResponces)
+                    {
+                        <div class="card mb-2" style="width: 18rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">@ev.EventRequest</h5>
+                                <p class="card-text">@ev.eventResponseComent</p>
+                                <p class="card-text"><small class="text-muted">@ev.eventResponseTime</small></p>
+                                @*<a href="~/event/eventrequest/?id=@ev.eventId" class="btn btn-primary">volunteer</a>*@
+                            </div>
+                        </div>
+                    }
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">Special title treatment</h5>
+                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <h4>Email:</h4>
-        <div id="Email">
 
-        </div>
-        <h4>Phone Number:</h4>
-        <div id="phoneNum">
-
-        </div>
-        <h4>Birth Date:</h4>
-        <div id="bDate">
-
-        </div>
     </div>
     
-
-    <script>
-        $(document).ready(function () {
-
-            function getUserInfo(){
-                var email = @User.Identity.Name;
-                console.log(email);
-
-                $.ajax({
-                    type: 'get',
-                    datatype: 'json',
-                    url: "https://localhost:5001/users/" + email,
-                    success: function (results) {
-                    var fName = results['firstName'],
-                    var lName = results['lastName'],
-                    var birth = results['birthDate'],
-                    var phone = results['phoneNumber'],
-                    }
-                })
-
-                console.log(fName);
-                console.log(lName);
-                console.log(birth);
-                console.log(phone);
-
-                if (fName == null) {
-                    fName = "N/A";
-                }
-                if (lName == null) {
-                    lName = "N/A";
-                }
-                if (birth == null) {
-                    birth = "N/A";
-                }
-                if (phone == null) {
-                    phone = "N/A";
-                }
-
-                $("#Name").append(fName + " " + lName);
-                $("#Email").append(email);
-                $("#phoneNum").append(phone);
-                $("#bDate").append(birth);
-           
-            }
-
-            window.onload({
-                getUserInfo();
-            })
-        })
-            
-
-            
-    </script>
-</body>

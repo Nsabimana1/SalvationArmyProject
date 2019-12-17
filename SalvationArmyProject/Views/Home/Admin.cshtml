@@ -82,7 +82,7 @@
 
                         type: 'get',
                         dataType: "json",
-                        url: "https://localhost:5001/event/all",
+                        url: "https://localhost:44326/event/all",
                     success: function (results) {
                         for (var a = 0; a < results.length; a++){ 
                                
@@ -113,7 +113,7 @@
                     $.ajax({
                         type: 'get',
                         dataType: "json",
-                        url: "https://localhost:5001/eventrequest/all",
+                        url: "https://localhost:44326/eventrequest/all",
                         success: function (results) {
                             for (var a = 0; a < results.length; a++){ 
                                 
@@ -135,7 +135,7 @@
                       $.ajax({
                         type: 'get',
                         dataType: "json",
-                        url: "https://localhost:5001/user/"+id,
+                        url: "https://localhost:44326/user/"+id,
                         success: function (results) {
                             var first = results['firstName'];
                             var last = results['lastName'];
@@ -151,7 +151,7 @@
 
             function accept(event_id) {
                 console.log("work");
-                $.post("https://localhost:5001/event/response", {
+                $.post("https://localhost:44326/event/response", {
                     eventRequestFK: event_id,
                     responseStatus: True,
                     eventRepsonseComment: "You have been Accepted"
