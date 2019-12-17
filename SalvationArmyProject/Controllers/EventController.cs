@@ -163,7 +163,7 @@ namespace SalvationArmyProject.Controllers
                 {
                     eventResponseId = new Guid(),
                     eventRequestFK = eventResponseView.eventRequestFK,
-                    eventResponseComent = eventResponseView.eventResponseComent,
+                    eventResponseComent = eventResponseView.eventResponseComment,
                     eventResponseTime = new DateTime(),
                     responseStatus = eventResponseView.responseStatus
 

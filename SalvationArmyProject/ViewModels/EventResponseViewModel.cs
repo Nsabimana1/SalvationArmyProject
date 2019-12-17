@@ -11,7 +11,7 @@ namespace SalvationArmyProject.ViewModels
         public DateTime eventResponseTime { get; set; }
         [Required]
         public bool responseStatus { get; set; }
-        public string eventResponseComent { get; set; }
+        public string eventResponseComment { get; set; }
         [Required]
         public Guid eventRequestFK { get; set; }
     }
