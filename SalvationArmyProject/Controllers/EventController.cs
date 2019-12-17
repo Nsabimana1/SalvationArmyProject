@@ -136,9 +136,9 @@ namespace SalvationArmyProject.Controllers
                     feedbackId = new Guid(),
                     feedbackContent = feedback.feedbackContent,
                     eventFK = feedback.eventID,
-                    userFK = feedback.userID,
+                    userFK = _iUserInfoRepository.getUserByEmail(feedback.emailId).id,
                     Event = _iEventRepository.getEvent(feedback.eventID),
-                    User = _iUserInfoRepository.getUser(feedback.userID)
+                    User = _iUserInfoRepository.getUserByEmail(feedback.emailId)
                 };
                 this._iFeedbackRepository.addFeedback(feedbackN);
                 return RedirectToAction("feedback", "home");
