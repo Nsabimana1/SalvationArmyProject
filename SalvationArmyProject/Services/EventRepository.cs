@@ -96,6 +96,7 @@ namespace SalvationArmyProject.Services
         {
             var ev = this.getEvent(id);
             _dBcontext.Events.Remove(ev);
+            _dBcontext.SaveChanges();
         }
 
         public void saveAllChanges()
