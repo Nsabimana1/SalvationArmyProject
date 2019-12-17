@@ -220,7 +220,7 @@ namespace SalvationArmyProject.Controllers
         [HttpDelete("/event/delete/{id}")]
         public IActionResult DeleteEvent(Guid id)
         {
-            _iEventRepository.removeEvent(Id);
+            _iEventRepository.removeEvent(id);
             _iEventRepository.saveAllChanges();
             return RedirectToAction("admin", "home");
         }
