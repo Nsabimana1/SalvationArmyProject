@@ -13,10 +13,10 @@
 <body id="mainTable" class="container scrollable">
     <div class="tab" id="marg">
         <h3 id="admintable">Events</h3>
-        <a href="/event/eventaddition" id="newevent" class="btn btn-info">Create Event</a>
+        <buttton href="/event/eventaddition" id="newevent" class="btn btn-info">Create Event</buttton>
     </div>
     <p>
-        <table id ="table" style="width:100%">
+        <table class="table" id="table" style="width:100%">
             <tr>
                 <th>Event Type</th>
                 <th>Date</th>
@@ -67,7 +67,7 @@
                         var tableBody = $('<tbody></tbody>').append(name, buttons);
 
                         var tableHead = $('<tr></tr>').append('<th>Name</th><th>Approve</th>');
-                        var table = $(`<table id="table${a}"></table>`).append(tableHead, tableBody);
+                        var table = $(`<table class="table" id="table${a}"></table>`).append(tableHead, tableBody);
                         var modalBody = $('<div class="modal-body"></div>').append(table);
 
                         var modalTitle = $('<h4 class="modal-title"></h4>').text("Volunteers");
@@ -92,7 +92,7 @@
                             success: function (results) {
 
                                 var name = results['firstName'] + ' ' + results['lastName'];
-                                var trow = $('<tr></tr>').append('<td>' + name + `</td><td><button id="button${i}${a}" onclick="accept('button${i}${a}')" type="button" class="bt btn - info" data-id="` + eventRequestId + `">Accept</button></td>`);
+                                var trow = $('<tr></tr>').append('<td>' + name + `</td><td><button id="button${i}${a}" onclick="accept('button${i}${a}')" type="button" class="bt btn - info close" data-dismiss="modal" data-id="` + eventRequestId + `">Accept</button></td>`);
                                 
                                 $(`#table${a}`).append(trow);  
                             }
