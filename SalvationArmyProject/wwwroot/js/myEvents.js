@@ -6,7 +6,7 @@ $(document).ready(function () {
     $.ajax({
         type: 'GET',
         dataType: "json",
-        url: 'https://localhost:44326/event/userApprovedEvents/' + $('#email').text(),
+        url: 'https://localhost:5001/event/userApprovedEvents/' + $('#email').text(),
         success: function (results) {
             for (var a = 0; a < results.length; a++) {
 
@@ -33,7 +33,7 @@ $(document).ready(function () {
             }
             function modalDivs(time, a, eventId) {
 
-                var submit = $(`<button onclick="submitFeedback('${a}')" data-id="` + eventId + `" data-modal="${a}" id="submitter${a}" type="button" class="btn btn-primary">Submit</button>`);
+                var submit = $(`<button onclick="submitFeedback('${a}')" data-id="` + eventId + `" data-modal="${a}" id="submitter${a}" type="button" class="btn btn-primary close" data-dismiss="modal">Submit</button>`);
                 var modalFooter = $('<div class="modal-footer"></div>').append(submit);
 
                 var input = $(`<textarea id="text${a}"class="form-control"></textarea>`)
@@ -50,8 +50,6 @@ $(document).ready(function () {
                 var modalContent = $('<div class="modal-content"></div>').append(modalHeader, modalBody, modalFooter);
                 var modalDialog = $(`<div class="modal-dialog modal-lg"></div>`).append(modalContent);
                 var modal = $(`<div id="modal${a}" class="modal fade"></div>`).append(modalDialog);
-
-                console.log($(`#modal${a}`));
 
                 $('#mainTable').before(modal);
             }

@@ -92,7 +92,7 @@
                             success: function (results) {
 
                                 var name = results['firstName'] + ' ' + results['lastName'];
-                                var trow = $('<tr></tr>').append('<td>' + name + `</td><td><button id="button${i}${a}" onclick="accept('button${i}${a}')" type="button" class="bt btn - info" data-id="` + eventRequestId + `">Accept</button></td>`);
+                                var trow = $('<tr></tr>').append('<td>' + name + `</td><td><button id="button${i}${a}" onclick="accept('button${i}${a}')" type="button" class="bt btn - info close" data-dismiss="modal" data-id="` + eventRequestId + `">Accept</button></td>`);
                                 
                                 $(`#table${a}`).append(trow);  
                             }
