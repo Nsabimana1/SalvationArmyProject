@@ -217,7 +217,7 @@ namespace SalvationArmyProject.Controllers
             return View(feedback);
         }
 
-        [HttpDelete("/event/delete/{Id}")]
+        [HttpDelete("/event/delete/{id}")]
         public IActionResult DeleteEvent(Guid id)
         {
             _iEventRepository.removeEvent(id);

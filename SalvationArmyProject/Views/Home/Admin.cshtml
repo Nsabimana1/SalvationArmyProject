@@ -19,7 +19,7 @@
         <table id ="table" style="width:100%">
             <tr>
                 <th>Event Type</th>
-                <th>Date/Time</th>
+                <th>Date</th>
                 <th>Duration</th>
                 <th>Description</th>
                 <th></th>
@@ -155,10 +155,10 @@
             var event_Id = $(`#${buttonId}`).attr('data-id')
             console.log(event_Id);
             $.ajax({
-                url: 'https://localhost:5001/event/' + event_Id,
+                url: 'https://localhost:5001/event/delete/' + event_Id,
                 type: 'DELETE',
                 success: function (result) {
-                    console.log()
+                    console.log(result)
                 }
             });
         }
