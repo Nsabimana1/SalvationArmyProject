@@ -14,14 +14,20 @@ namespace SalvationArmyProject.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid feedbackId { get; set; }
 
+        
         public string feedbackContent { get; set; }
 
         [ForeignKey("userFK")]
+        [Required]
         public Guid userFK { get; set; }
+
+        
         public User User { get; set; }
         
         [ForeignKey("eventFK")]
+        [Required]
         public Guid eventFK { get; set; }
+
         public Event Event { get; set; }
     }
 }

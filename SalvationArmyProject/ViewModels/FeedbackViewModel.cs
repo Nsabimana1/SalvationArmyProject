@@ -13,7 +13,7 @@ namespace SalvationArmyProject.ViewModels
         public Guid eventID { get; set; }
 
         [Required]
-        public Guid userID { get; set; }
+        public string emailId { get; set; }
     }
 }
 
