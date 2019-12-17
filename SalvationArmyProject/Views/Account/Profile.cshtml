@@ -8,34 +8,38 @@
                 <form method="post" action="~/Account/Profile">
                     <div asp-validation-summary="All" class="text-danger"></div>
                     <div class="form-group">
-                        <input type="hidden" value="@Model.currentUser.id" asp-for="profileViewModel.id" class="form-control" />
+                        <input type="hidden" value="@Model.currentUser.id" asp-for="@Model.currentUser.id" class="form-control" />
                         <span asp-validation-for="profileViewModel.id" class="text-danger"></span>
                     </div>
 
                     <div class="form-group">
-                        <label id="reg" asp-for="profileViewModel.firstName">First Name</label>
-                        <input value="@Model.currentUser.firstName" asp-for="profileViewModel.firstName" class="form-control" />
-                        <span asp-validation-for="profileViewModel.firstName" class="text-danger"></span>
+                        <label id="reg" asp-for="@Model.currentUser.firstName">First Name</label>
+                        <input value="@Model.currentUser.firstName" asp-for="@Model.currentUser.firstName" class="form-control" />
+                        <span asp-validation-for="@Model.currentUser.firstName" class="text-danger"></span>
                     </div>
 
                     <div class="form-group">
-                        <label id="reg" asp-for="profileViewModel.lastName">Last Name</label>
-                        <input value="@Model.currentUser.lastName" asp-for="profileViewModel.lastName" class="form-control" />
-                        <span asp-validation-for="profileViewModel.lastName" class="text-danger"></span>
+                        <label id="reg" asp-for="@Model.currentUser.lastName">Last Name</label>
+                        <input value="@Model.currentUser.lastName" asp-for="@Model.currentUser.lastName" class="form-control" />
+                        <span asp-validation-for="@Model.currentUser.lastName" class="text-danger"></span>
                     </div>
 
                     <div class="form-group">
-                        <label id="reg" asp-for="profileViewModel.email">Email</label>
-                        <input value="@Model.currentUser.email" asp-for="profileViewModel.email" class="form-control" />
-                        <span asp-validation-for="profileViewModel.email" class="text-danger"></span>
+                        <label id="reg" asp-for="@Model.currentUser.email">Email</label>
+                        <input value="@Model.currentUser.email" asp-for="@Model.currentUser.email" class="form-control" />
+                        <span asp-validation-for="@Model.currentUser.email" class="text-danger"></span>
                     </div>
 
                     <div class="form-group">
-                        <label id="reg" asp-for="currentUser.birthDate">Birth Date</label>
-                        <input type="date" value="@Model.currentUser.birthDate" asp-for="profileViewModel.birthDate" class="form-control" />
-                        <span asp-validation-for="currentUser.birthDate" class="text-danger"></span>
+                        <label id="reg" asp-for="@Model.currentUser.birthDate">Birth Date</label>
+                        <input type="date" value="@Model.currentUser.birthDate" asp-for="@Model.currentUser.birthDate" class="form-control" />
+                        <span asp-validation-for="@Model.currentUser.birthDate" class="text-danger"></span>
                     </div>
-
+                    <div class="form-group">
+                        @*<label id="reg" asp-for="@Model.userResponces"></label>*@
+                        <input type="hidden" value="@Model.userResponces"  asp-for="@Model.userResponces" class="form-control" />
+                        <span asp-validation-for="@Model.userResponces" class="text-danger"></span>
+                    </div>
                     <button type="submit" class="btn btn-primary">Update</button>
                 </form>
             </div>

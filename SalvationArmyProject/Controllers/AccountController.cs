@@ -95,12 +95,18 @@ namespace SalvationArmyProject.Controllers
         }
 
         [HttpPost("/Account/Profile")]
-        public IActionResult Profile([FromForm] UserProfileViewModel model){
+        public IActionResult Profile([FromForm] ProfileViewModelReturn model){
             if (ModelState.IsValid)
             {
-                var user = _userInfoRepository.getUser(model.id);
+                var user = _userInfoRepository.getUser(model.currentUser.id);
                 if (user != null) {
                     _userInfoRepository.updateUser(user);
+                    user.id = model.currentUser.id;
+                    user.firstName = model.currentUser.firstName;
+                    user.lastName = model.currentUser.lastName;
+                    user.email = model.currentUser.email;
+                    user.birthDate = model.currentUser.birthDate;
+                    _userInfoRepository.SaveAllNewChanges();
                 }
                 return RedirectToAction("index", "home");
             }

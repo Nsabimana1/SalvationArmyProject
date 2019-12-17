@@ -1,12 +1,12 @@
 ﻿var email = $('#email').text()
 $(document).ready(function () {
     
-    var location = 'https://localhost:5001/event/userApprovedEvents/' + email;
+    var location = 'https://localhost:44326/event/userApprovedEvents/' + email;
     console.log(location);
     $.ajax({
         type: 'GET',
         dataType: "json",
-        url: 'https://localhost:5001/event/userApprovedEvents/' + $('#email').text(),
+        url: 'https://localhost:44326/event/userApprovedEvents/' + $('#email').text(),
         success: function (results) {
             for (var a = 0; a < results.length; a++) {
 
@@ -58,7 +58,7 @@ $(document).ready(function () {
     //$('#submitter').click(function () {
     //    console.log('hi');
     //    //$.ajax({
-    //    //    url: 'https://localhost:5001/event/feedbackPost',
+    //    //    url: 'https://localhost:44326/event/feedbackPost',
     //    //    type: 'post',
     //    //    data: {
     //    //        eventFK: 
@@ -77,7 +77,7 @@ function submitFeedback(textId) {
         accept: 'application/json',
         header: 'application/json',
         type: 'POST',
-        url: "https://localhost:5001/event/feedbackPost",
+        url: "https://localhost:44326/event/feedbackPost",
         data: JSON.stringify({
             feedbackContent: feedback,
             eventFK: eventId,
