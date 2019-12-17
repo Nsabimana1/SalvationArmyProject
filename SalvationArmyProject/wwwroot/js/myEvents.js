@@ -1,6 +1,10 @@
-﻿$(document).ready(function () {
+﻿var email = $('#email').text()
+$(document).ready(function () {
+    
+    var location = 'https://localhost:5001/event/userApprovedEvents/' + email;
+    console.log(location);
     $.ajax({
-        type: 'get',
+        type: 'GET',
         dataType: "json",
         url: 'https://localhost:44326/event/userApprovedEvents/' + $('#email').text(),
         success: function (results) {
@@ -8,12 +12,17 @@
 
                 var i = results[a];
 
+                if (i == null) {
+                    continue;
+                }
+
                 var type = i['eventName'];
                 var time = i['eventDateTime'];
                 var dur = (i['eventDuration']);
                 var desc = i['eventDescription'];
+                var eventId = i['eventId'];
 
-                modalDivs(time, a);
+                modalDivs(time, a, eventId);
 
 
                 var feed = `<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal${a}"> Submit Feedback </button>`;
@@ -22,12 +31,12 @@
                 $('.table').append(toAppend);
 
             }
-            function modalDivs(time, a) {
+            function modalDivs(time, a, eventId) {
 
-                var submit = $('<button id="submitter" type="button" class="btn btn-primary">Submit</button>');
+                var submit = $(`<button onclick="submitFeedback('${a}')" data-id="` + eventId + `" data-modal="${a}" id="submitter${a}" type="button" class="btn btn-primary">Submit</button>`);
                 var modalFooter = $('<div class="modal-footer"></div>').append(submit);
 
-                var input = $('<textarea class="form-control"></textarea>')
+                var input = $(`<textarea id="text${a}"class="form-control"></textarea>`)
                 var formFor = $('<label></label>').append('name');
                 var formGroup = $('<div class="form-group"></div>').append(formFor, input);
                 var form = $('<form></form>').append(formGroup);
@@ -48,15 +57,41 @@
             }
         }
     });
-    $('#submitter').click(function () {
-        console.log('hi');
-        //$.ajax({
-        //    url: 'https://localhost:5001/event/feedbackPost',
-        //    type: 'post',
-        //    data: {
-        //        eventFK: 
-        //    }
+    //$('#submitter').click(function () {
+    //    console.log('hi');
+    //    //$.ajax({
+    //    //    url: 'https://localhost:5001/event/feedbackPost',
+    //    //    type: 'post',
+    //    //    data: {
+    //    //        eventFK: 
+    //    //    }
 
-        //}):
-    });
+    //    //}):
+    //});
+    
 });
+function submitFeedback(textId) {
+    var feedback = $(`#text${textId}`).val();
+    var eventId = $(`#submitter${textId}`).attr('data-id');
+    $.ajax({
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        accept: 'application/json',
+        header: 'application/json',
+        type: 'POST',
+        url: "https://localhost:5001/event/feedbackPost",
+        data: JSON.stringify({
+            feedbackContent: feedback,
+            eventFK: eventId,
+            emailId: email,
+
+        }),
+        success: function (result) {
+            console.log(result);
+        },
+        error: function (result) {
+            console.log(result);
+        }
+    });
+
+}
